@@ -12,11 +12,9 @@ scene: !include scenes.yaml
 # Shell command to start kiosk mode
 shell_command:
   start_kiosk: chromium-browser --noerrdialogs --disable-infobars --kiosk http://192.168.68.105:8123
-  
   vlc_status: 'echo "status" | nc 192.168.68.112 4212 > /config/vlc_status.txt'
   restart_vlc: 'echo "add https://http-live.sr.se/p4goteborg-mp3-192" | nc 192.168.68.112 4212'
 
-  
 input_text:
   aktiv_radiokanal:
     name: "Aktiv Radiokanal"

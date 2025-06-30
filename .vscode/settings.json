@@ -22,8 +22,10 @@
     "redhat.telemetry.enabled": false,
     
     "homeassistant.longLivedAccessToken": "",
-    "homeassistant.hostUrl": "",
+    "homeassistant.hostUrl": "http://192.168.68.105:8123",
     "homeassistant.ignoreCertificates": false,
+    "homeassistant.enableCodeActions": true,
+    "homeassistant.enableSnippets": true,
     
     "[home-assistant]": {
         "editor.defaultFormatter": "keesschollaart.vscode-home-assistant",
@@ -47,6 +49,14 @@
         ".storage": true,
         "tts": true,
         "image": true
+    },
+    
+    "files.watcherExclude": {
+        "**/*.db": true,
+        "**/*.log*": true,
+        "**/tts/**": true,
+        "**/image/**": true,
+        "**/.storage/**": true
     },
     
     "problems.decorations.enabled": false

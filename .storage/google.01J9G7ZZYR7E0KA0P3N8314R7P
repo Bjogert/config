@@ -2123,7 +2123,7 @@
               "reminders": null
             }
           },
-          "sync_token": "CID67fCFmI4DEID67fCFmI4DGAEg0dDnxAIo0dDnxAI=",
+          "sync_token": "CMCDzLqjmY4DEMCDzLqjmY4DGAEg0dDnxAIo0dDnxAI=",
           "sync_token_version": 2
         }
       }
@@ -4104,7 +4104,7 @@
               "reminders": null
             }
           },
-          "sync_token": "CIDHn7Tsl44DEIDHn7Tsl44DGAEg0dDnxAIo0dDnxAI=",
+          "sync_token": "CMDQ_f2JmY4DEMDQ_f2JmY4DGAEg0dDnxAIo0dDnxAI=",
           "sync_token_version": 2
         }
       }
@@ -14890,9 +14890,189 @@
                 "use_default": false,
                 "overrides": []
               }
+            },
+            "_68rjae1ic5i66b9o65gmab9k75h3ebb165j3cb9m6lh36d3664q3echl6k": {
+              "id": "_68rjae1ic5i66b9o65gmab9k75h3ebb165j3cb9m6lh36d3664q3echl6k",
+              "ical_uuid": "27582adc-81ae-49b7-a1f6-65b34f147255",
+              "summary": "VIOLEN stängt: Nyårsdagen",
+              "start": {
+                "date": "2026-01-01",
+                "date_time": null,
+                "timezone": null
+              },
+              "end": {
+                "date": "2026-01-02",
+                "date_time": null,
+                "timezone": null
+              },
+              "description": null,
+              "location": null,
+              "transparency": "opaque",
+              "status": "confirmed",
+              "event_type": "default",
+              "visibility": "default",
+              "attendees": [],
+              "attendees_omitted": false,
+              "recurrence": [],
+              "recurring_event_id": null,
+              "original_start_time": null,
+              "reminders": {
+                "use_default": false,
+                "overrides": []
+              }
+            },
+            "_6dh64d1kcoojcbb36oojeb9k6gq62bb270s6abb170q36e9lcdh3acpm64": {
+              "id": "_6dh64d1kcoojcbb36oojeb9k6gq62bb270s6abb170q36e9lcdh3acpm64",
+              "ical_uuid": "3bb44f16-c617-444a-b88e-a84395cb5361",
+              "summary": "VIOLEN stängt: Annandag jul",
+              "start": {
+                "date": "2025-12-26",
+                "date_time": null,
+                "timezone": null
+              },
+              "end": {
+                "date": "2025-12-27",
+                "date_time": null,
+                "timezone": null
+              },
+              "description": null,
+              "location": null,
+              "transparency": "opaque",
+              "status": "confirmed",
+              "event_type": "default",
+              "visibility": "default",
+              "attendees": [],
+              "attendees_omitted": false,
+              "recurrence": [],
+              "recurring_event_id": null,
+              "original_start_time": null,
+              "reminders": {
+                "use_default": false,
+                "overrides": []
+              }
+            },
+            "_75j34oj16tgjibb670o34b9kccp6cbb265h3cb9j74p30o9j6pi3cchn64": {
+              "id": "_75j34oj16tgjibb670o34b9kccp6cbb265h3cb9j74p30o9j6pi3cchn64",
+              "ical_uuid": "9f2ba7a9-f802-4c2f-b1b6-3920a36d6271",
+              "summary": "VIOLEN stängt: Trettondagen",
+              "start": {
+                "date": "2026-01-06",
+                "date_time": null,
+                "timezone": null
+              },
+              "end": {
+                "date": "2026-01-07",
+                "date_time": null,
+                "timezone": null
+              },
+              "description": null,
+              "location": null,
+              "transparency": "opaque",
+              "status": "confirmed",
+              "event_type": "default",
+              "visibility": "default",
+              "attendees": [],
+              "attendees_omitted": false,
+              "recurrence": [],
+              "recurring_event_id": null,
+              "original_start_time": null,
+              "reminders": {
+                "use_default": false,
+                "overrides": []
+              }
+            },
+            "_c4o32c1g6hj32b9n64p30b9k60pjgbb2cdh3eb9n69i36c9l6go6aopm60": {
+              "id": "_c4o32c1g6hj32b9n64p30b9k60pjgbb2cdh3eb9n69i36c9l6go6aopm60",
+              "ical_uuid": "a01004f1-7120-4038-bcb7-72d31540ec60",
+              "summary": "VIOLEN stängt: Nyårsafton",
+              "start": {
+                "date": "2025-12-31",
+                "date_time": null,
+                "timezone": null
+              },
+              "end": {
+                "date": "2026-01-01",
+                "date_time": null,
+                "timezone": null
+              },
+              "description": null,
+              "location": null,
+              "transparency": "opaque",
+              "status": "confirmed",
+              "event_type": "default",
+              "visibility": "default",
+              "attendees": [],
+              "attendees_omitted": false,
+              "recurrence": [],
+              "recurring_event_id": null,
+              "original_start_time": null,
+              "reminders": {
+                "use_default": false,
+                "overrides": []
+              }
+            },
+            "_c8smad1k6sqj2bb3ccq36b9k6sr30bb1c9hjibb668o3ecr66ss34phmcg": {
+              "id": "_c8smad1k6sqj2bb3ccq36b9k6sr30bb1c9hjibb668o3ecr66ss34phmcg",
+              "ical_uuid": "b9e44751-cc43-4760-abc9-f2073f782f6d",
+              "summary": "VIOLEN stängt: Juldagen",
+              "start": {
+                "date": "2025-12-25",
+                "date_time": null,
+                "timezone": null
+              },
+              "end": {
+                "date": "2025-12-26",
+                "date_time": null,
+                "timezone": null
+              },
+              "description": null,
+              "location": null,
+              "transparency": "opaque",
+              "status": "confirmed",
+              "event_type": "default",
+              "visibility": "default",
+              "attendees": [],
+              "attendees_omitted": false,
+              "recurrence": [],
+              "recurring_event_id": null,
+              "original_start_time": null,
+              "reminders": {
+                "use_default": false,
+                "overrides": []
+              }
+            },
+            "_cgrj6e1j75hm2b9hcks66b9kc4o3gbb26go3eb9j64p6ap336gq34oj564": {
+              "id": "_cgrj6e1j75hm2b9hcks66b9kc4o3gbb26go3eb9j64p6ap336gq34oj564",
+              "ical_uuid": "d73839ca-1e8c-4a08-b407-312edc442be1",
+              "summary": "VIOLEN stängt: Julafton",
+              "start": {
+                "date": "2025-12-24",
+                "date_time": null,
+                "timezone": null
+              },
+              "end": {
+                "date": "2025-12-25",
+                "date_time": null,
+                "timezone": null
+              },
+              "description": "Julafton",
+              "location": null,
+              "transparency": "opaque",
+              "status": "confirmed",
+              "event_type": "default",
+              "visibility": "default",
+              "attendees": [],
+              "attendees_omitted": false,
+              "recurrence": [],
+              "recurring_event_id": null,
+              "original_start_time": null,
+              "reminders": {
+                "use_default": false,
+                "overrides": []
+              }
             }
           },
-          "sync_token": "CO_U_syhmI4DEO_U_syhmI4DGAEg0dDnxAIo0dDnxAI=",
+          "sync_token": "CJ-RkNunmY4DEJ-RkNunmY4DGAEg0dDnxAIo0dDnxAI=",
           "sync_token_version": 2
         }
       }
@@ -15884,33 +16064,6 @@
               },
               "end": {
                 "date": "2029-12-24",
-                "date_time": null,
-                "timezone": null
-              },
-              "description": "Helgdag\nOm du vill dölja helgdagar går du till Google Kalender-inställningarna > Helgdagar i Sverige",
-              "location": null,
-              "transparency": "transparent",
-              "status": "confirmed",
-              "event_type": "default",
-              "visibility": "public",
-              "attendees": [],
-              "attendees_omitted": false,
-              "recurrence": [],
-              "recurring_event_id": null,
-              "original_start_time": null,
-              "reminders": null
-            },
-            "20250330_beb4fp4d5fpjsbj23uueudg538": {
-              "id": "20250330_beb4fp4d5fpjsbj23uueudg538",
-              "ical_uuid": "20250330_beb4fp4d5fpjsbj23uueudg538@google.com",
-              "summary": "Sommartid",
-              "start": {
-                "date": "2025-03-30",
-                "date_time": null,
-                "timezone": null
-              },
-              "end": {
-                "date": "2025-03-31",
                 "date_time": null,
                 "timezone": null
               },
@@ -19654,7 +19807,7 @@
               "reminders": null
             }
           },
-          "sync_token": "CLDIqO3G1IoDELDIqO3G1IoDGAEggunB8QIogunB8QI=",
+          "sync_token": "CLDIqO3G1IoDELDIqO3G1IoDGAEg48X48QIo48X48QI=",
           "sync_token_version": 2
         }
       }

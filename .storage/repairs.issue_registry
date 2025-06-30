@@ -115,6 +115,20 @@
         "domain": "hacs",
         "is_persistent": false,
         "issue_id": "restart_required_194140521_tags/v2.4.0"
+      },
+      {
+        "created": "2025-06-30T13:42:22.083162+00:00",
+        "dismissed_version": null,
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_camera_mjpeg"
+      },
+      {
+        "created": "2025-06-30T13:55:10.255752+00:00",
+        "dismissed_version": null,
+        "domain": "sensor",
+        "is_persistent": false,
+        "issue_id": "units_changed_sensor.roberts_telefon_active_notification_count"
       }
     ]
   }
