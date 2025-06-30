@@ -21,8 +21,7 @@ tts/
 .DS_Store
 Thumbs.db
 
-# IDE Files
-.vscode/
+# IDE Files - but keep VS Code settings for workspace
 .idea/
 
 # Image cache

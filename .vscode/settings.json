@@ -1,5 +1,53 @@
 {
     "files.associations": {
-        "*.yaml": "home-assistant"
-    }
+        "*.yaml": "home-assistant",
+        "*.yml": "home-assistant"
+    },
+    "yaml.schemas": {},
+    "yaml.customTags": [
+        "!input scalar",
+        "!input sequence", 
+        "!input mapping",
+        "!include scalar",
+        "!include_dir_list sequence",
+        "!include_dir_merge_list sequence",
+        "!include_dir_merge_named mapping", 
+        "!include_dir_named mapping",
+        "!secret scalar"
+    ],
+    "yaml.validate": false,
+    "yaml.completion": false,
+    "yaml.schemaStore.enable": false,
+    "yaml.format.enable": false,
+    "redhat.telemetry.enabled": false,
+    
+    "homeassistant.longLivedAccessToken": "",
+    "homeassistant.hostUrl": "",
+    "homeassistant.ignoreCertificates": false,
+    
+    "[home-assistant]": {
+        "editor.defaultFormatter": "keesschollaart.vscode-home-assistant",
+        "editor.formatOnSave": false,
+        "yaml.validate": false
+    },
+    
+    "[yaml]": {
+        "yaml.validate": false,
+        "editor.defaultFormatter": "keesschollaart.vscode-home-assistant"
+    },
+    
+    "homeassistant.pathToPythonExecutable": "python3",
+    
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*.db": true,
+        "**/*.log": true,
+        ".storage": true,
+        "tts": true,
+        "image": true
+    },
+    
+    "problems.decorations.enabled": false
 }
