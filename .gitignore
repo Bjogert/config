@@ -1,0 +1,35 @@
+# Home Assistant Database Files
+*.db
+*.db-shm
+*.db-wal
+
+# Home Assistant Logs
+*.log
+*.log.*
+
+# TTS Cache
+tts/
+
+# Storage directory (contains runtime state)
+.storage/
+
+# Temporary files
+*.tmp
+*.bak
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE Files
+.vscode/
+.idea/
+
+# Image cache
+image/
+
+# Backup files
+*.backup
+
+# Core dumps
+core.*
