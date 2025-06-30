@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "id": "5e685fa965d54b7294f925076910a7ef",
+        "url": "/hacsfiles/atomic-calendar-revive/atomic-calendar-revive.js?hacstag=2465497471000",
+        "type": "module"
+      },
+      {
+        "id": "da4b4105a4f44f50bdb94cb4ea69c19d",
+        "url": "/hacsfiles/simple-clock-card/simple-clock-card.js?hacstag=34193126618",
+        "type": "module"
+      },
+      {
+        "id": "a1089476cec54f9bba209b4bd8114a6d",
+        "url": "/hacsfiles/lovelace-digital-clock/digital-clock.js?hacstag=373832981124",
+        "type": "module"
+      },
+      {
+        "id": "67bd007b98204426a4dc1016457f5bfd",
+        "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325412",
+        "type": "module"
+      },
+      {
+        "id": "b1a8adc918fe4e85982ff934d2bfb8ed",
+        "url": "/hacsfiles/toggle-control-button-row/toggle-control-button-row.js?hacstag=32603392131",
+        "type": "module"
+      },
+      {
+        "id": "0976b874aa20421a83c7d0c161afca22",
+        "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866246",
+        "type": "module"
+      },
+      {
+        "id": "36d673cce6784c12b57dff4ebb5ab9b3",
+        "url": "/hacsfiles/lovelace-wallpanel/wallpanel.js?hacstag=3095064164541",
+        "type": "module"
+      },
+      {
+        "id": "2a2d2ba5ba204c5493cc74f2c5f39f92",
+        "url": "/hacsfiles/kiosk-mode/kiosk-mode.js?hacstag=497319128701",
+        "type": "module"
+      },
+      {
+        "id": "f2c0db04b31949198b0bfe40adf1ba80",
+        "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620130",
+        "type": "module"
+      },
+      {
+        "id": "e8e85b7596ea463d83075d75df4d864e",
+        "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js?hacstag=1448997001741",
+        "type": "module"
+      },
+      {
+        "id": "0004242d11e84467bf244b5345a66138",
+        "url": "/hacsfiles/stack-in-card/stack-in-card.js?hacstag=248954055020",
+        "type": "module"
+      },
+      {
+        "id": "486cc9012e8a4b63a0d0662a32820fcb",
+        "url": "/hacsfiles/apexcharts-card/apexcharts-card.js?hacstag=331701152212",
+        "type": "module"
+      },
+      {
+        "id": "c291a936b42e4ac4a018d6168941b5ac",
+        "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524344",
+        "type": "module"
+      },
+      {
+        "id": "8893f1524c7b47a983e10095b5131848",
+        "url": "/hacsfiles/swiss-army-knife-card/swiss-army-knife-card.js?hacstag=214786112251",
+        "type": "module"
+      },
+      {
+        "id": "f628b7178e9d4843916ffbdc85e8c847",
+        "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js?hacstag=142051833101",
+        "type": "module"
+      },
+      {
+        "id": "e4bd02474b41432d90bb2e89c4d04bf8",
+        "url": "/hacsfiles/slider-button-card/slider-button-card.js?hacstag=4987940331130",
+        "type": "module"
+      },
+      {
+        "id": "94c1d07b9979471980b3506b16ccdca1",
+        "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js?hacstag=178921037451",
+        "type": "module"
+      },
+      {
+        "id": "b3d1157604e641138d30c43955f45db2",
+        "url": "/hacsfiles/lovelace-template-entity-row/template-entity-row.js?hacstag=231674882141",
+        "type": "module"
+      },
+      {
+        "id": "da3c56e10bfa4ae3bc3f91c55ba0a53a",
+        "url": "/hacsfiles/config-template-card/config-template-card.js?hacstag=172177543136",
+        "type": "module"
+      },
+      {
+        "id": "ca62f8bef0f4423caeaf9fe40dd962c0",
+        "url": "/hacsfiles/shopping-list-card/shopping-list-card.js",
+        "type": "module"
+      },
+      {
+        "id": "a7b2955ba2f343aeb493a1aa12caad5f",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375440",
+        "type": "module"
+      },
+      {
+        "id": "45f9a69e8e9048a392a3d075c950916c",
+        "url": "/hacsfiles/hass-bha-icons/hass-bha-icons.js?hacstag=17980857624693",
+        "type": "module"
+      },
+      {
+        "id": "ce101f2164194651a7cf4f854e5edafa",
+        "url": "/hacsfiles/lovelace-vertical-slider-cover-card/vertical-slider-cover-card.js?hacstag=276636213016",
+        "type": "module"
+      },
+      {
+        "id": "24ca466b6f604d73b5cbd4021336fa83",
+        "url": "/hacsfiles/lovelace-big-slider-card/big-slider-card.js?hacstag=332589148115",
+        "type": "module"
+      }
+    ]
+  }
+}

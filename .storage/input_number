@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "input_number",
+  "data": {
+    "items": [
+      {
+        "id": "vlc_volume",
+        "min": 0.0,
+        "max": 1.0,
+        "name": "VLC Volume",
+        "icon": "mdi:volume-high",
+        "step": 0.01,
+        "unit_of_measurement": "input_number.vlc_volum",
+        "mode": "slider"
+      }
+    ]
+  }
+}

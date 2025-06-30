@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "minor_version": 2,
+  "key": "repairs.issue_registry",
+  "data": {
+    "issues": [
+      {
+        "created": "2024-10-05T20:15:04.663715+00:00",
+        "dismissed_version": null,
+        "domain": "hassio",
+        "is_persistent": false,
+        "issue_id": "unsupported_system_apparmor"
+      },
+      {
+        "created": "2024-10-05T21:02:14.488876+00:00",
+        "dismissed_version": null,
+        "domain": "hassio",
+        "is_persistent": false,
+        "issue_id": "unsupported_system_cgroup_version"
+      },
+      {
+        "created": "2024-10-09T20:09:40.194542+00:00",
+        "dismissed_version": "2024.10.1",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_cover_mqtt"
+      },
+      {
+        "created": "2024-10-12T20:59:56.126613+00:00",
+        "dismissed_version": "2025.5.2",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_switch_mqtt"
+      },
+      {
+        "created": "2024-10-12T21:13:34.599366+00:00",
+        "dismissed_version": "2024.10.2",
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "payload_template_deprecation_chickendoor/control"
+      },
+      {
+        "created": "2024-10-12T21:41:42.176421+00:00",
+        "dismissed_version": "2024.10.2",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_sensor_mqtt"
+      },
+      {
+        "created": "2024-11-16T04:52:41.901621+00:00",
+        "dismissed_version": null,
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "config_entry_reauth_esphome_01JC6CMMQRD21N6VV3B5J10QR9"
+      },
+      {
+        "created": "2024-11-17T16:39:28.465513+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "-0x39f8cfd998b58c88"
+      },
+      {
+        "created": "2024-11-17T16:45:52.461227+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "-0x75e15a9843f1807f"
+      },
+      {
+        "created": "2025-01-31T21:21:13.871137+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_194140521_tags/v2.3.3"
+      },
+      {
+        "created": "2025-02-03T11:47:08.861862+00:00",
+        "dismissed_version": null,
+        "domain": "hassio",
+        "is_persistent": false,
+        "issue_id": "3a30abbdf8924164834ac46ec1028b96"
+      },
+      {
+        "created": "2025-04-04T04:04:09.078725+00:00",
+        "dismissed_version": "2025.4.0",
+        "domain": "hue",
+        "is_persistent": false,
+        "issue_id": "deprecated_effect_none"
+      },
+      {
+        "created": "2025-05-23T16:36:24.291149+00:00",
+        "dismissed_version": "2025.5.2",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_binary_sensor_mqtt"
+      },
+      {
+        "created": "2025-05-24T11:23:55.992523+00:00",
+        "dismissed_version": "2025.5.2",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_button_mqtt"
+      },
+      {
+        "created": "2025-05-24T11:23:55.993102+00:00",
+        "dismissed_version": "2025.5.2",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "platform_integration_no_support_number_mqtt"
+      },
+      {
+        "created": "2025-06-13T13:18:25.596196+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_194140521_tags/v2.4.0"
+      }
+    ]
+  }
+}

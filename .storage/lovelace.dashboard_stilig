@@ -1,0 +1,4634 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_stilig",
+  "data": {
+    "config": {
+      "title": "Main-Page",
+      "kiosk_mode": {
+        "kiosk": true
+      },
+      "views": [
+        {
+          "title": "Hem",
+          "icon": "mdi:home",
+          "cards": [],
+          "type": "sections",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/temperatur"
+                  },
+                  "name": "Temperatur",
+                  "icon": "mdi:temperature-celsius",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "25px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/6"
+                  },
+                  "name": "Radio",
+                  "icon": "mdi:radio",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "35px"
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:television-classic",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "name": "TV",
+                  "entity": "light.on_off_plug_1",
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "media_player.select_source",
+                    "target": {}
+                  },
+                  "icon_height": "80px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/11"
+                  },
+                  "name": "Belysning",
+                  "icon": "mdi:lightbulb",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.ljuskronan",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "mdi:chandelier",
+                  "show_state": false
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.matbord",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "bha:ceiling-lamp",
+                  "show_state": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "name": "Släck ↔ Tänd",
+                  "icon": "mdi:lightbulb-night",
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.vardagsrum_mys_toggle"
+                  },
+                  "icon_height": "25px",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "show_state": false,
+                  "entity": "light.farmors_lampa"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/10"
+                  },
+                  "name": "Kalender",
+                  "icon": "mdi:calendar-month-outline",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/7"
+                  },
+                  "name": "Annat",
+                  "icon": "mdi:location-enter",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/12"
+                  },
+                  "name": "Inköpslista",
+                  "icon": "mdi:clipboard-list-outline",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "square": false,
+              "type": "grid",
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "column_span": 4,
+                  "name": "Storarummet",
+                  "entity": "sensor.esp32_temperature_3",
+                  "show_icon": false,
+                  "show_name": true,
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "custom_fields": {
+                    "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_3']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_3']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 6px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"n r\""
+                      },
+                      {
+                        "grid-template-columns": "150px auto"
+                      },
+                      {
+                        "align-items": "center"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "padding": "0px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "grid-area": "n"
+                      },
+                      {
+                        "font-size": "21px"
+                      },
+                      {
+                        "transform": "translateY(30px)"
+                      },
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "margin-left": "20px"
+                      }
+                    ],
+                    "custom_fields": {
+                      "right_values": [
+                        {
+                          "grid-area": "r"
+                        },
+                        {
+                          "justify-self": "end"
+                        },
+                        {
+                          "margin-right": "6px"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "column_span": 4,
+                  "name": "Sovrummet",
+                  "entity": "sensor.esp32_temperature_4",
+                  "show_icon": false,
+                  "show_name": true,
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "custom_fields": {
+                    "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_4']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_4']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 6px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"n r\""
+                      },
+                      {
+                        "grid-template-columns": "160px auto"
+                      },
+                      {
+                        "align-items": "center"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "padding": "1px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "grid-area": "n"
+                      },
+                      {
+                        "font-size": "21px"
+                      },
+                      {
+                        "transform": "translateY(30px)"
+                      },
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "margin-left": "20px"
+                      }
+                    ],
+                    "custom_fields": {
+                      "right_values": [
+                        {
+                          "grid-area": "r"
+                        },
+                        {
+                          "justify-self": "end"
+                        },
+                        {
+                          "margin-right": "6px"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "column_span": 4,
+                  "name": "Altanen",
+                  "entity": "sensor.esp32_temperature_2",
+                  "show_icon": false,
+                  "show_name": true,
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "custom_fields": {
+                    "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_2']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_2']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 0px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"n r\""
+                      },
+                      {
+                        "grid-template-columns": "180px auto"
+                      },
+                      {
+                        "align-items": "center"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "padding": "1px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "grid-area": "n"
+                      },
+                      {
+                        "font-size": "21px"
+                      },
+                      {
+                        "transform": "translateY(30px)"
+                      },
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "margin-left": "20px"
+                      }
+                    ],
+                    "custom_fields": {
+                      "right_values": [
+                        {
+                          "grid-area": "r"
+                        },
+                        {
+                          "justify-self": "end"
+                        },
+                        {
+                          "margin-right": "6px"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "column_span": 4,
+                  "name": "Hönshuset",
+                  "entity": "sensor.esp32_temperature_1",
+                  "show_icon": false,
+                  "show_name": true,
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "custom_fields": {
+                    "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_1']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_1']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 6px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"n r\""
+                      },
+                      {
+                        "grid-template-columns": "160px auto"
+                      },
+                      {
+                        "align-items": "center"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "padding": "1px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "grid-area": "n"
+                      },
+                      {
+                        "font-size": "21px"
+                      },
+                      {
+                        "transform": "translateY(30px)"
+                      },
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "margin-left": "20px"
+                      }
+                    ],
+                    "custom_fields": {
+                      "right_values": [
+                        {
+                          "grid-area": "r"
+                        },
+                        {
+                          "justify-self": "end"
+                        },
+                        {
+                          "margin-right": "6px"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "column_span": 4,
+                  "name": "Badtunnan",
+                  "entity": "sensor.esp32_temperature_7",
+                  "show_icon": false,
+                  "show_name": true,
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/9"
+                  },
+                  "custom_fields": {
+                    "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_7']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n    </div>\n  `;\n]]]\n"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"n r\""
+                      },
+                      {
+                        "grid-template-columns": "160px auto"
+                      },
+                      {
+                        "align-items": "center"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "padding": "1px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "grid-area": "n"
+                      },
+                      {
+                        "font-size": "21px"
+                      },
+                      {
+                        "transform": "translateY(30px)"
+                      },
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "margin-left": "20px"
+                      }
+                    ],
+                    "custom_fields": {
+                      "right_values": [
+                        {
+                          "grid-area": "r"
+                        },
+                        {
+                          "justify-self": "end"
+                        },
+                        {
+                          "margin-right": "6px"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "grid",
+                  "column_span": 4,
+                  "columns": 4,
+                  "square": false,
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "entity": "scene.tant_dag",
+                      "extra_entities": [
+                        "input_text.last_active_scene"
+                      ],
+                      "icon": "mdi:weather-sunny",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "scene.turn_on",
+                        "service_data": {
+                          "entity_id": "scene.tant_dag"
+                        }
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      },
+                      "state": [
+                        {
+                          "operator": "template",
+                          "value": "[[[ return states['input_text.last_active_scene'].state === 'tant_dag'; ]]]\n",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "orange"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "entity": "scene.lagom_mysigt",
+                      "extra_entities": [
+                        "input_text.last_active_scene"
+                      ],
+                      "icon": "mdi:weather-sunset",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "scene.turn_on",
+                        "service_data": {
+                          "entity_id": "scene.lagom_mysigt"
+                        }
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      },
+                      "state": [
+                        {
+                          "operator": "template",
+                          "value": "[[[ return states['input_text.last_active_scene'].state === 'lagom_mysigt'; ]]]\n",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "orange"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "entity": "scene.fredagsmys",
+                      "extra_entities": [
+                        "input_text.last_active_scene"
+                      ],
+                      "icon": "mdi:moon-waxing-crescent",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "scene.turn_on",
+                        "service_data": {
+                          "entity_id": "scene.fredagsmys"
+                        }
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      },
+                      "state": [
+                        {
+                          "operator": "template",
+                          "value": "[[[ return states['input_text.last_active_scene'].state === 'fredagsmys'; ]]]\n",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "orange"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "icon": "mdi:image-frame",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "/dashboard-stilig/3"
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:simple-clock-card",
+                  "column_span": 4,
+                  "use_military": true,
+                  "hide_seconds": true,
+                  "bold_clock": false,
+                  "font_size": "1.5rem",
+                  "paddingLeft_size": "0px",
+                  "paddingRight_size": "0px",
+                  "paddingTop_size": "0px",
+                  "paddingBottom_size": "0px"
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Radio Play",
+                  "icon": "mdi:play-circle-outline",
+                  "show_name": false,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_senaste_radio"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "0px"
+                      },
+                      {
+                        "background-color": "var(--card-background-color)"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      },
+                      {
+                        "height": "42px"
+                      },
+                      {
+                        "min-height": "42px"
+                      },
+                      {
+                        "max-height": "42px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "color": "[[[\n  // Orange if active, gray if not\n  return (states['input_text.aktiv_radiokanal'].state !== 'TYST' && states['input_text.aktiv_radiokanal'].state !== '')\n    ? 'rgba(255,140,0,1)'\n    : '#888888';\n]]]\n"
+                      },
+                      {
+                        "width": "30px"
+                      },
+                      {
+                        "height": "30px"
+                      },
+                      {
+                        "font-size": "30px"
+                      },
+                      {
+                        "line-height": "30px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  },
+                  "icon_height": "20px",
+                  "style": "ha-icon {\n  width: 30px !important;\n  height: 30px !important;\n  font-size: 30px !important;\n  line-height: 30px !important;\n}\nha-card {\n  min-height: 42px !important;\n  max-height: 42px !important;\n  height: 42px !important;\n}\n",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Radio Stop",
+                  "icon": "mdi:stop-circle-outline",
+                  "show_name": false,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.stop_radio"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "0px"
+                      },
+                      {
+                        "background-color": "var(--card-background-color)"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      },
+                      {
+                        "height": "42px"
+                      },
+                      {
+                        "min-height": "42px"
+                      },
+                      {
+                        "max-height": "42px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "color": "gray"
+                      },
+                      {
+                        "width": "30px"
+                      },
+                      {
+                        "height": "30px"
+                      },
+                      {
+                        "font-size": "30px"
+                      },
+                      {
+                        "line-height": "30px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  },
+                  "icon_height": "20px",
+                  "style": "ha-icon {\n  width: 30px !important;\n  height: 30px !important;\n  font-size: 30px !important;\n  line-height: 30px !important;\n}\nha-card {\n  min-height: 42px !important;\n  max-height: 42px !important;\n  height: 42px !important;\n}\n",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  }
+                },
+                {
+                  "type": "custom:slider-entity-row",
+                  "entity": "input_number.vlc_volume",
+                  "name": "Volume",
+                  "icon": "mdi:volume-high",
+                  "hide_state": true,
+                  "full_row": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": null
+                  }
+                }
+              ]
+            }
+          ],
+          "badges": []
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Kalender",
+          "path": "kalender",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:atomic-calendar-revive",
+                  "enableModeChange": true,
+                  "entities": [
+                    {
+                      "entity": "update.atomic_calendar_revive_update",
+                      "icon": ""
+                    },
+                    {
+                      "entity": "calendar.fodelsedagar",
+                      "name": "Födelsedagar"
+                    },
+                    {
+                      "entity": "calendar.https_home_tempusinfo_se_tempushome_icalservlet_id_c89c47ba7e1e42599ca24c5157f6fa18_s_9",
+                      "name": "Https://home.tempusinfo.se/tempushome/icalservlet?id=c89c47ba7e1e42599ca24c5157f6fa18&s=9"
+                    },
+                    {
+                      "entity": "calendar.familj",
+                      "name": "Familj"
+                    },
+                    {
+                      "entity": "calendar.privat_nojen",
+                      "name": "Privat & nöjen"
+                    },
+                    {
+                      "entity": "calendar.veckonummer",
+                      "name": "Veckonummer"
+                    },
+                    {
+                      "entity": "calendar.helgdagar_i_sverige",
+                      "name": "Helgdagar i sverige"
+                    }
+                  ],
+                  "defaultMode": "Event",
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 7
+                  },
+                  "maxDaysToShow": 3
+                },
+                {
+                  "type": "heading",
+                  "heading_style": "title",
+                  "grid_options": {
+                    "rows": 1,
+                    "columns": 12
+                  }
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:atomic-calendar-revive",
+                  "enableModeChange": true,
+                  "entities": [
+                    {
+                      "entity": "update.atomic_calendar_revive_update",
+                      "icon": ""
+                    },
+                    {
+                      "entity": "calendar.fodelsedagar",
+                      "name": "Födelsedagar"
+                    },
+                    {
+                      "entity": "calendar.familj",
+                      "name": "Familj"
+                    }
+                  ],
+                  "defaultMode": "Calendar",
+                  "grid_options": {
+                    "rows": 6.5,
+                    "columns": 12
+                  },
+                  "hideDuplicates": true,
+                  "allDayBottom": true,
+                  "showCurrentEventLine": false,
+                  "showMonth": false,
+                  "showNoEventsForToday": false,
+                  "calShowDescription": false,
+                  "showLastCalendarWeek": false,
+                  "disableCalEventLink": false,
+                  "dimFinishedEvents": true,
+                  "showLocation": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "grid_options": {
+                    "rows": null,
+                    "columns": 6
+                  },
+                  "icon_height": "80px"
+                },
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 10,
+          "title": "Belysning",
+          "path": "belysning",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.farmors_lampa",
+                  "name": "Farmors Lampa",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-dual",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.on_off_plug_1_2",
+                  "name": "Tavelbelysningen",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-dual",
+                    "use_state_color": false,
+                    "tap_action": {
+                      "action": "more-info"
+                    },
+                    "show": true
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": false,
+                    "show_track": false,
+                    "use_percentage_bg_opacity": false,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.sovrummet",
+                  "name": "Globen",
+                  "icon": {
+                    "icon": "mdi:globe-model",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "attribute": "brightness",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.braslampan_light",
+                  "name": "Braslampan",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-outline",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.extended_color_light_1_2",
+                  "name": "Gröna Lampan",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-outline",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.ljuskronan",
+                  "name": "Ljuskronan",
+                  "icon": {
+                    "icon": "mdi:chandelier",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": false,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.matbord",
+                  "name": "Matbsalen",
+                  "icon": {
+                    "icon": "mdi:globe-light",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "attribute": "brightness",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1.3
+                  }
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.on_off_plug_2",
+                  "name": "Växtbelysning",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-dual",
+                    "use_state_color": false,
+                    "tap_action": {
+                      "action": "more-info"
+                    },
+                    "show": true
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": false,
+                    "show_track": false,
+                    "use_percentage_bg_opacity": false,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "style": ":host {\n  --paper-item-icon-color: orange !important;\n  --paper-item-icon-active-color: orange !important;\n  --paper-item-icon: orange !important;\n}\n",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1.3
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.utelampan",
+                  "name": "Utelampan",
+                  "icon": {
+                    "icon": "mdi:outdoor-lamp",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "attribute": "brightness",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "icon_height": "90px",
+                  "grid_options": {
+                    "rows": 2,
+                    "columns": 9
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading_style": "title",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 6
+                  }
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [],
+              "column_span": 1
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 10,
+          "path": "",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "picture",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "grid_options": {
+                    "rows": 11,
+                    "columns": "full"
+                  },
+                  "image": "/api/image/serve/ac3ba71f84a371608368b5da13efd170/512x512"
+                },
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                }
+              ],
+              "column_span": 2
+            }
+          ],
+          "title": "screen_saver",
+          "cards": []
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Inköpslista",
+          "path": "inkopslista",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "todo-list",
+                  "entity": "todo.inkop",
+                  "title": "Inköpslista",
+                  "grid_options": {
+                    "columns": 18,
+                    "rows": 7
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "grid_options": {
+                    "rows": null,
+                    "columns": 6
+                  },
+                  "icon_height": "80px"
+                },
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                }
+              ],
+              "column_span": 2
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Musik_2",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "name": "Julmusik",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Julmusik",
+                      "media_content_id": "https://icecast.walmradio.com:8443/christmas"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] &&\n         states['input_text.aktiv_radiokanal'].state === \"Julmusik\"  // Fixed case sensitivity\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange when active\n    : \"var(--card-background-color)\";  // Standard gray otherwise\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Classic Rock 70s 80s 90s",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Classic Rock 70s 80s 90s",
+                      "media_content_id": "https://cast1.torontocast.com:4610/stream"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Classic Rock 70s 80s 90s\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Ljusgul bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Klassisk Musik",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Klassisk Musik",
+                      "media_content_id": "http://ice-the.musicradio.com/ClassicFMMP3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "13px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Klassisk Musik\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Ibiza Deep House",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Ibiza Deep House",
+                      "media_content_id": "https://stream-156.zeno.fm/lwv6zqgtv1dtv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJsd3Y2enFndHYxZHR2IiwiaG9zdCI6InN0cmVhbS0xNTYuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6Im9LdFRValAwUW02VVRxRDYzdFlvQ3ciLCJpYXQiOjE3MzkyMzc1MzEsImV4cCI6MTczOTIzNzU5MX0.R3fCNP25qXWupAdbIa1dJdPL6sRUiY05jhagVdUZQYU"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Ibiza Deep House\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Ambient Sleeping Pill",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Ambient Sleeping Pill",
+                      "media_content_id": "http://radio.stereoscenic.com/asp-h"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Ambient Sleeping Pill\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Golden Memories",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Golden Memories",
+                      "media_content_id": "https://stream-153.zeno.fm/xg7mcgf1bf9uv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ4ZzdtY2dmMWJmOXV2IiwiaG9zdCI6InN0cmVhbS0xNTMuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6Ik1Hb2owdzJVUVhHS3h3S3NsR1c3ZmciLCJpYXQiOjE3MzkyNzg3NzYsImV4cCI6MTczOTI3ODgzNn0.DCazXOg_4QwDk3xTK0LfhH6oW0Y6KmDrM7TeyxbCRaw"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Golden Memories\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Fun Kids",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Fun Kids",
+                      "media_content_id": "https://listen-funkids.sharp-stream.com/funkids.mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Fun Kids\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "grid_options": {
+                    "rows": 2,
+                    "columns": 4
+                  },
+                  "icon_height": "80px"
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Radio Start/Paus",
+                  "icon": "[[[\n  return states['input_text.aktiv_radiokanal'].state === \"TYST\"\n    ? \"mdi:emoticon-silent-outline\"  // 🔇 Gubbe med tyst mun\n    : \"mdi:pause-circle-outline\";  // ⏸️ Paus-knapp när radion är igång\n]]]\n",
+                  "show_name": false,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "[[[\n  return states['input_text.aktiv_radiokanal'].state === \"TYST\"\n    ? \"script.starta_senaste_radio\"\n    : \"script.stop_radio\";\n]]]\n"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "color": "gray"
+                      }
+                    ]
+                  },
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 2
+                  },
+                  "icon_height": "80px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/6"
+                  },
+                  "icon": "mdi:backburger",
+                  "grid_options": {
+                    "rows": 1,
+                    "columns": 2
+                  },
+                  "icon_height": "90px"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "name": "Abiding Radio - Kids",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Abiding Radio - Kids",
+                      "media_content_id": "https://streams.abidingradio.com:7810/1"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Abiding Radio - Kids\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "1980s Zoom",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "1980s Zoom",
+                      "media_content_id": "http://18213.live.streamtheworld.com/SAM03AAC226_SC"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"1980s Zoom\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "1LIVE",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "1LIVE",
+                      "media_content_id": "http://f131.rndfnk.com/ard/wdr/1live/live/mp3/128/stream.mp3?cid=01FBRZTS1K1TCD4KA2YZ1ND8X3&sid=2tjhyZzkoCuEqqYuUgLlXxe3740&token=B1YfyeOBI2zER5Q1Sm51r7P5rbyqd9htVFNFPygLGOg&tvf=BOKe7C7lKBhmMTMxLnJuZGZuay5jb20"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"1LIVE\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Chocolate FM",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Chocolate FM",
+                      "media_content_id": "http://streaming5.elitecomunicacion.es:8082/live.mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Chocolate FM\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Love Radio Manila",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Love Radio Manila",
+                      "media_content_id": "https://28153.live.streamtheworld.com:443/LOVERADIO_MNL.mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Love Radio Manila\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Gothic on Radio",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Gothic on Radio",
+                      "media_content_id": "https://0n-gothic.radionetz.de/0n-gothic.mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Gothic on Radio\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Sunda Radio",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Sunda Radio",
+                      "media_content_id": "https://sundaradio.com/live/sundaradio"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Sunda Radio\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Dance Wave Retro!",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "Dance Wave Retro!",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Punk",
+                      "media_content_id": "http://stream3.dancewave.online:8080/retrodance.mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Dance Wave Retro!\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:slider-entity-row",
+                  "entity": "input_number.vlc_volume",
+                  "name": "Volume",
+                  "icon": "mdi:volume-high",
+                  "hide_state": true,
+                  "full_row": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  }
+                }
+              ],
+              "column_span": 1
+            }
+          ],
+          "cards": []
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Musik",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "name": "P4 Göteborg",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "P4 Göteborg",
+                      "media_content_id": "https://http-live.sr.se/p4goteborg-mp3-192"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] &&\n         states['input_text.aktiv_radiokanal'].state === \"P4 Göteborg\"  // Fixed case sensitivity\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange when active\n    : \"var(--card-background-color)\";  // Standard gray otherwise\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "P3",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "P3",
+                      "media_content_id": "https://http-live.sr.se/p3-mp3-192"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"P3\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Ljusgul bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Star FM",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Star FM",
+                      "media_content_id": "http://fm05-ice.stream.khz.se/fm05_mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "13px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Star FM\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Mix Megapol",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Mix Megapol",
+                      "media_content_id": "https://live-bauerse-fm.sharp-stream.com/mixmegapol_instream_se_mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Mix Megapol\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "RIX FM",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "RIX FM",
+                      "media_content_id": "https://fm01-ice.stream.khz.se/fm01_mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"RIX FM\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Classic Vinyl",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Classic Vinyl",
+                      "media_content_id": "https://icecast.walmradio.com:8443/classic"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Classic Vinyl\"\n    ? \"rgba(255, 140, 0, 0.5)\"  // Orange bakgrund när aktiv\n    : \"var(--card-background-color)\";  // Standardfärg annars\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Nostalgie Extra (What a Feeling)",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Nostalgie Extra (What a Feeling)",
+                      "media_content_id": "https://27913.live.streamtheworld.com:443/NOSTALGIEWAFEXTRA.mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Nostalgie Extra (What a Feeling)\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.restart_vlc_playback",
+                    "target": {}
+                  },
+                  "name": "Restart VLC",
+                  "icon": "mdi:restart",
+                  "grid_options": {
+                    "rows": 1,
+                    "columns": 2
+                  },
+                  "icon_height": "90px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "grid_options": {
+                    "rows": 2,
+                    "columns": 4
+                  },
+                  "icon_height": "80px"
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Radio Start/Paus",
+                  "icon": "[[[\n  return states['input_text.aktiv_radiokanal'].state === \"TYST\"\n    ? \"mdi:emoticon-silent-outline\"  // 🔇 Gubbe med tyst mun\n    : \"mdi:pause-circle-outline\";  // ⏸️ Paus-knapp när radion är igång\n]]]\n",
+                  "show_name": false,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "[[[\n  return states['input_text.aktiv_radiokanal'].state === \"TYST\"\n    ? \"script.starta_senaste_radio\"\n    : \"script.stop_radio\";\n]]]\n"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "color": "gray"
+                      }
+                    ]
+                  },
+                  "icon_height": "100px",
+                  "aspect_ratio": "1 / 0.75",
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 2
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/5"
+                  },
+                  "icon": "mdi:page-next-outline",
+                  "grid_options": {
+                    "rows": 1,
+                    "columns": 2
+                  },
+                  "icon_height": "90px"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "name": "Groove Salad",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Groove Salad",
+                      "media_content_id": "https://ice6.somafm.com/groovesalad-128-mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Groove Salad\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Chill",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Chill",
+                      "media_content_id": "https://stream.liferadio.at/chillout/mp3-192/stream.liferadio.at/"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Chill\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Soul & Jazz",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Soul & Jazz",
+                      "media_content_id": "http://icecast.omroep.nl/radio6-bb-mp3"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Soul & Jazz\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Classical Pan Flute",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Classical Pan Flute",
+                      "media_content_id": "https://stream1-epic-classical.radiohost.de/classical-pan-flute?ref=liveradio"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Classical Pan Flute\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Rock",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Rock",
+                      "media_content_id": "http://ice55.securenetsystems.net/DASH14"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Rock\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Japan Hits",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Japan Hits",
+                      "media_content_id": "https://cast1.torontocast.com/JapanHits"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Japan Hits\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "90s HipHop & Rap",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "90s HipHop & Rap",
+                      "media_content_id": "http://streams.90s90s.de/hiphop/mp3-192/streams.90s90s.de/"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"90s HipHop & Rap\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "name": "Punk",
+                  "icon": "mdi:radio",
+                  "show_name": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.starta_radio",
+                    "service_data": {
+                      "kanal_namn": "Punk",
+                      "media_content_id": "https://punkirratia.net:8443/punk"
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "17.5px"
+                      },
+                      {
+                        "background-color": "[[[\n  return states['input_text.aktiv_radiokanal'] && states['input_text.aktiv_radiokanal'].state === \"Punk\"\n    ? \"rgba(255, 140, 0, 0.5)\"\n    : \"var(--card-background-color)\";\n]]]\n"
+                      },
+                      {
+                        "border": "1px solid #444444"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "text-align": "center"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-weight": "normal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:slider-entity-row",
+                  "entity": "input_number.vlc_volume",
+                  "name": "Volume",
+                  "icon": "mdi:volume-high",
+                  "hide_state": true,
+                  "full_row": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  }
+                }
+              ],
+              "column_span": 1
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 2,
+          "path": "",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "name": "Tillbaka",
+                  "icon": "mdi:keyboard-return",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 1
+                  },
+                  "show_state": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": false,
+                  "type": "button",
+                  "show_state": false,
+                  "name": "Exit Kiosk",
+                  "icon": "mdi:exit-to-app",
+                  "tap_action": {
+                    "action": "url",
+                    "url_path": "http://192.168.68.105:8123/dashboard-stilig/0?disable_km"
+                  },
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:layout-card",
+                  "layout_type": "grid",
+                  "layout": {
+                    "grid-template-columns": "2.9fr 1fr",
+                    "grid-gap": "0px"
+                  },
+                  "cards": [
+                    {
+                      "type": "vertical-stack",
+                      "cards": [
+                        {
+                          "type": "entities",
+                          "show_header_toggle": false,
+                          "entities": [
+                            {
+                              "entity": "sensor.underbaren_status",
+                              "name": "Status",
+                              "icon": "mdi:elevator"
+                            },
+                            {
+                              "entity": "binary_sensor.underbaren_limit_switch",
+                              "name": "Gränslägesbrytare",
+                              "icon": "mdi:door"
+                            },
+                            {
+                              "entity": "light.on_off_plug_2",
+                              "secondary_info": "last-changed",
+                              "name": "UnderBaren Strömförsörjning",
+                              "icon": "mdi:power"
+                            }
+                          ],
+                          "state_color": true,
+                          "title": "UnderBaren"
+                        },
+                        {
+                          "type": "entities",
+                          "show_header_toggle": false,
+                          "entities": [
+                            {
+                              "entity": "input_number.beer_elevator_speed",
+                              "name": "Hastighet "
+                            },
+                            {
+                              "entity": "input_number.beer_elevator_acceleration",
+                              "name": "Acceleration"
+                            },
+                            {
+                              "entity": "input_number.beer_elevator_extra_steps_up",
+                              "name": "+ Uppåt"
+                            },
+                            {
+                              "entity": "input_number.beer_elevator_extra_steps_down",
+                              "name": "+ Nedåt"
+                            }
+                          ],
+                          "state_color": false
+                        }
+                      ]
+                    },
+                    {
+                      "type": "vertical-stack",
+                      "cards": [
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Stäng",
+                          "icon": "mdi:arrow-down-bold-circle",
+                          "tap_action": {
+                            "action": "none"
+                          },
+                          "hold_action": {
+                            "action": "call-service",
+                            "service": "mqtt.publish",
+                            "service_data": {
+                              "topic": "beer_elevator/command",
+                              "payload": "close"
+                            }
+                          },
+                          "icon_height": "130px"
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Öppna",
+                          "icon": "mdi:arrow-up-bold-circle",
+                          "tap_action": {
+                            "action": "none"
+                          },
+                          "hold_action": {
+                            "action": "call-service",
+                            "service": "mqtt.publish",
+                            "service_data": {
+                              "topic": "beer_elevator/command",
+                              "payload": "open"
+                            }
+                          },
+                          "icon_height": "130px"
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Nollställ",
+                          "icon": "mdi:home-export-outline",
+                          "tap_action": {
+                            "action": "none"
+                          },
+                          "hold_action": {
+                            "action": "call-service",
+                            "service": "button.press",
+                            "target": {
+                              "entity_id": "button.beer_elevator_set_home"
+                            }
+                          },
+                          "show_state": false,
+                          "icon_height": "127px"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:layout-card",
+                  "layout_type": "grid",
+                  "layout": {
+                    "grid-template-columns": "2.9fr 1fr",
+                    "grid-gap": "0px"
+                  },
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "title": "Ankluckan",
+                      "show_header_toggle": false,
+                      "entities": [
+                        {
+                          "entity": "number.duck_door_rotation_count",
+                          "name": "Seconds to run"
+                        },
+                        {
+                          "entity": "sensor.duck_door_position",
+                          "name": "Door Position",
+                          "icon": "mdi:gate"
+                        },
+                        {
+                          "entity": "sensor.duck_door_status",
+                          "name": "Current Status"
+                        },
+                        {
+                          "entity": "binary_sensor.duck_door_online",
+                          "name": "Connection Status"
+                        },
+                        {
+                          "entity": "button.close_duck_door"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "vertical-stack",
+                      "cards": [
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "icon": "mdi:step-backward-2",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "/lovelace/0"
+                          },
+                          "hold_action": {
+                            "action": "none"
+                          },
+                          "icon_height": "67px",
+                          "name": "Tebaka"
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Anka Stäng",
+                          "icon": "mdi:arrow-down-bold-circle",
+                          "tap_action": {
+                            "action": "none"
+                          },
+                          "hold_action": {
+                            "action": "call-service",
+                            "service": "button.press",
+                            "target": {
+                              "entity_id": "button.close_duck_door"
+                            }
+                          },
+                          "icon_height": "60px"
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Stäng Hönshuset",
+                          "icon": "mdi:door-open",
+                          "entity": "switch.chickendoor_control",
+                          "tap_action": {
+                            "action": "none"
+                          },
+                          "hold_action": {
+                            "action": "toggle"
+                          },
+                          "icon_height": "60px"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "column_span": 1
+            }
+          ],
+          "title": "Extra",
+          "cards": [],
+          "header": {
+            "layout": "center",
+            "badges_position": "bottom",
+            "badges_wrap": "scroll"
+          },
+          "badges": []
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Temperatur",
+          "path": "temperatur",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "entity",
+                      "entity": "sensor.esp32_humidity_4",
+                      "name": "Luftfuktighet"
+                    },
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.esp32_temperature_4",
+                      "name": "Sovrummet",
+                      "min": 10,
+                      "max": 40,
+                      "severity": {
+                        "green": 18,
+                        "yellow": 28,
+                        "red": 35
+                      },
+                      "needle": true,
+                      "show_value": true,
+                      "unit": "°C"
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  }
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "entity",
+                      "entity": "sensor.esp32_humidity_2",
+                      "name": "Luftfuktighet"
+                    },
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.esp32_temperature_2",
+                      "name": "Altanen",
+                      "min": 0,
+                      "max": 40,
+                      "severity": {
+                        "green": 15,
+                        "yellow": 28,
+                        "red": 35
+                      },
+                      "needle": true,
+                      "show_value": true,
+                      "unit": "°C"
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  }
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "entity",
+                      "entity": "sensor.esp32_humidity_1",
+                      "name": "Luftfuktighet",
+                      "state_color": false
+                    },
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.esp32_temperature_1",
+                      "name": "Hönshuset",
+                      "min": -10,
+                      "max": 40,
+                      "severity": {
+                        "green": 8,
+                        "yellow": 25,
+                        "red": 35
+                      },
+                      "needle": true,
+                      "show_value": true,
+                      "unit": "°C"
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  }
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.esp32_temperature_6",
+                      "name": "Badtunnan",
+                      "min": -15,
+                      "max": 60,
+                      "severity": {
+                        "green": 38,
+                        "yellow": 20,
+                        "red": 40
+                      },
+                      "needle": true,
+                      "show_value": true,
+                      "unit": "°C"
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": "auto"
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "grid_options": {
+                    "rows": null,
+                    "columns": 6
+                  },
+                  "icon_height": "80px"
+                }
+              ],
+              "column_span": 2
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "BadtunnaTemp",
+          "path": "badtunnatemp",
+          "icon": "mdi:pool-thermometer",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/0"
+                  },
+                  "icon": "mdi:keyboard-return",
+                  "icon_height": "90px",
+                  "grid_options": {
+                    "rows": 2,
+                    "columns": 9
+                  }
+                },
+                {
+                  "square": false,
+                  "type": "grid",
+                  "cards": [
+                    {
+                      "square": true,
+                      "type": "grid",
+                      "cards": [
+                        {
+                          "type": "grid",
+                          "columns": 1,
+                          "square": false,
+                          "cards": [
+                            {
+                              "type": "gauge",
+                              "entity": "sensor.esp32_temperature_7",
+                              "name": "Badtunnan",
+                              "min": -15,
+                              "max": 60,
+                              "severity": {
+                                "green": 38,
+                                "yellow": 20,
+                                "red": 40
+                              },
+                              "needle": true,
+                              "show_value": true,
+                              "unit": "°C",
+                              "card_mod": {
+                                "style": "ha-card {\n  transform: scale(1.5);\n  transform-origin: center bottom;  /* Scale from the bottom */\n  margin-top: 150px;                /* Adjust this value to lower the card */\n}\n"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "columns": 1
+                    }
+                  ],
+                  "grid_options": {
+                    "rows": 4,
+                    "columns": 12
+                  },
+                  "columns": 1
+                }
+              ],
+              "column_span": 2
+            },
+            {
+              "type": "grid",
+              "cards": [],
+              "column_span": 1
+            }
+          ],
+          "header": {
+            "layout": "responsive",
+            "badges_position": "bottom"
+          }
+        },
+        {
+          "title": "HemCal",
+          "icon": "",
+          "cards": [],
+          "type": "sections",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig"
+                  },
+                  "name": "Temperatur",
+                  "icon": "mdi:temperature-celsius",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/6"
+                  },
+                  "name": "Radio",
+                  "icon": "mdi:radio",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:television-classic",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px",
+                  "name": "TV",
+                  "entity": "light.on_off_plug_1",
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "media_player.select_source",
+                    "target": {}
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/hem-light"
+                  },
+                  "name": "Belysning",
+                  "icon": "mdi:lightbulb",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.ljuskronan",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "mdi:chandelier",
+                  "show_state": false
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.matbord",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "bha:ceiling-lamp-round",
+                  "show_state": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "name": "Släck ↔ Tänd",
+                  "icon": "mdi:lightbulb-night",
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.vardagsrum_mys_toggle"
+                  },
+                  "icon_height": "25px",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "show_state": false,
+                  "entity": "light.farmors_lampa"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/kalender"
+                  },
+                  "name": "Kalender",
+                  "icon": "mdi:calendar-month-outline",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/7"
+                  },
+                  "name": "Annat",
+                  "icon": "mdi:location-enter",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/hem-imkop"
+                  },
+                  "name": "Inköpslista",
+                  "icon": "mdi:clipboard-list-outline",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:atomic-calendar-revive",
+                  "enableModeChange": true,
+                  "entities": [
+                    {
+                      "entity": "update.atomic_calendar_revive_update",
+                      "icon": ""
+                    },
+                    {
+                      "entity": "calendar.fodelsedagar",
+                      "name": "Födelsedagar",
+                      "icon": "mdi:cake-variant"
+                    },
+                    {
+                      "entity": "calendar.familj",
+                      "name": "Familj",
+                      "icon": "mdi:cow"
+                    },
+                    {
+                      "entity": "calendar.arbete",
+                      "name": "Arbete",
+                      "icon": "mdi:account-hard-hat-outline"
+                    },
+                    {
+                      "entity": "calendar.https_home_tempusinfo_se_tempushome_icalservlet_id_c89c47ba7e1e42599ca24c5157f6fa18_s_9",
+                      "name": "Https://home.tempusinfo.se/tempushome/icalservlet?id=c89c47ba7e1e42599ca24c5157f6fa18&s=9",
+                      "icon": "mdi:google-downasaur"
+                    },
+                    {
+                      "entity": "calendar.privat_nojen",
+                      "name": "Privat & nöjen",
+                      "icon": "mdi:skateboarding"
+                    }
+                  ],
+                  "defaultMode": "Calendar",
+                  "grid_options": {
+                    "rows": 6,
+                    "columns": 12
+                  },
+                  "hideDuplicates": true,
+                  "allDayBottom": true,
+                  "showCurrentEventLine": false,
+                  "showMonth": false,
+                  "showNoEventsForToday": false,
+                  "calShowDescription": false,
+                  "showLastCalendarWeek": false,
+                  "disableCalEventLink": false,
+                  "dimFinishedEvents": true,
+                  "showLocation": false,
+                  "showDeclined": false,
+                  "hideFinishedEvents": true,
+                  "showWeekNumber": true,
+                  "cardHeight": "100%",
+                  "showDate": false,
+                  "showLoader": true,
+                  "showRelativeTime": true,
+                  "showMultiDayEventParts": false,
+                  "showMultiDay": false,
+                  "compactMode": false,
+                  "showHiddenText": false,
+                  "showCalendarName": true,
+                  "showEventDate": true,
+                  "showDatePerEvent": false,
+                  "showTimeRemaining": false,
+                  "showEventIcon": true,
+                  "showAllDayEvents": true
+                },
+                {
+                  "type": "custom:atomic-calendar-revive",
+                  "enableModeChange": true,
+                  "entities": [
+                    {
+                      "entity": "update.atomic_calendar_revive_update",
+                      "icon": ""
+                    },
+                    {
+                      "entity": "calendar.fodelsedagar",
+                      "name": "Födelsedagar"
+                    },
+                    {
+                      "entity": "calendar.https_home_tempusinfo_se_tempushome_icalservlet_id_c89c47ba7e1e42599ca24c5157f6fa18_s_9",
+                      "name": "Https://home.tempusinfo.se/tempushome/icalservlet?id=c89c47ba7e1e42599ca24c5157f6fa18&s=9"
+                    },
+                    {
+                      "entity": "calendar.familj",
+                      "name": "Familj"
+                    }
+                  ],
+                  "defaultMode": "Event",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 2
+                  },
+                  "maxDaysToShow": 1,
+                  "showMonth": false,
+                  "showDescription": false,
+                  "disableEventLink": false,
+                  "disableLocationLink": false,
+                  "showNoEventsForToday": false,
+                  "showFullDayProgress": false,
+                  "showEventIcon": false,
+                  "showCalendarName": false,
+                  "showWeekNumber": false,
+                  "showDatePerEvent": false,
+                  "showEventDate": false,
+                  "showTimeRemaining": false,
+                  "hoursOnSameLine": true,
+                  "showMultiDay": false,
+                  "compactMode": false
+                },
+                {
+                  "type": "clock",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "grid",
+                  "column_span": 4,
+                  "columns": 4,
+                  "square": false,
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "entity": "scene.tant_dag",
+                      "extra_entities": [
+                        "input_text.last_active_scene"
+                      ],
+                      "icon": "mdi:weather-sunny",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "scene.turn_on",
+                        "service_data": {
+                          "entity_id": "scene.tant_dag"
+                        }
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      },
+                      "state": [
+                        {
+                          "operator": "template",
+                          "value": "[[[ return states['input_text.last_active_scene'].state === 'tant_dag'; ]]]\n",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "orange"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "entity": "scene.lagom_mysigt",
+                      "extra_entities": [
+                        "input_text.last_active_scene"
+                      ],
+                      "icon": "mdi:weather-sunset",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "scene.turn_on",
+                        "service_data": {
+                          "entity_id": "scene.lagom_mysigt"
+                        }
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      },
+                      "state": [
+                        {
+                          "operator": "template",
+                          "value": "[[[ return states['input_text.last_active_scene'].state === 'lagom_mysigt'; ]]]\n",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "orange"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "entity": "scene.fredagsmys",
+                      "extra_entities": [
+                        "input_text.last_active_scene"
+                      ],
+                      "icon": "mdi:moon-waxing-crescent",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "scene.turn_on",
+                        "service_data": {
+                          "entity_id": "scene.fredagsmys"
+                        }
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      },
+                      "state": [
+                        {
+                          "operator": "template",
+                          "value": "[[[ return states['input_text.last_active_scene'].state === 'fredagsmys'; ]]]\n",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "orange"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 1,
+                      "icon": "mdi:image-frame",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "/dashboard-stilig/3"
+                      },
+                      "show_icon": true,
+                      "show_name": false,
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "rgb(120, 144, 156)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "column_span": 1
+            }
+          ],
+          "badges": [],
+          "max_columns": 4
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "hem_light",
+          "path": "hem-light",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig"
+                  },
+                  "name": "Temperatur",
+                  "icon": "mdi:temperature-celsius",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/6"
+                  },
+                  "name": "Radio",
+                  "icon": "mdi:radio",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:television-classic",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px",
+                  "name": "TV",
+                  "entity": "light.on_off_plug_1",
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "media_player.select_source",
+                    "target": {}
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/belysning"
+                  },
+                  "name": "Belysning",
+                  "icon": "mdi:lightbulb",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.ljuskronan",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "mdi:chandelier",
+                  "show_state": false
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.matbord",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "bha:ceiling-lamp-round",
+                  "show_state": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "name": "Släck ↔ Tänd",
+                  "icon": "mdi:lightbulb-night",
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.vardagsrum_mys_toggle"
+                  },
+                  "icon_height": "25px",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "show_state": false,
+                  "entity": "light.farmors_lampa"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/10"
+                  },
+                  "name": "Kalender",
+                  "icon": "mdi:calendar-month-outline",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/7"
+                  },
+                  "name": "Annat",
+                  "icon": "mdi:location-enter",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/hem-imkop"
+                  },
+                  "name": "Inköpslista",
+                  "icon": "mdi:clipboard-list-outline",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.farmors_lampa",
+                  "name": "Farmors Lampa",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-dual",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.on_off_plug_1_2",
+                  "name": "Tavelbelysningen",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-dual",
+                    "use_state_color": false,
+                    "tap_action": {
+                      "action": "more-info"
+                    },
+                    "show": true
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": false,
+                    "show_track": false,
+                    "use_percentage_bg_opacity": false,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.sovrummet",
+                  "name": "Globen",
+                  "icon": {
+                    "icon": "mdi:globe-model",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "attribute": "brightness",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.braslampan_light",
+                  "name": "Braslampan",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-outline",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.extended_color_light_1_2",
+                  "name": "Gröna Lampan",
+                  "icon": {
+                    "icon": "mdi:floor-lamp-outline",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.ljuskronan",
+                  "name": "Ljuskronan",
+                  "icon": {
+                    "icon": "mdi:chandelier",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": false,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": true,
+                  "compact": true,
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.matbord",
+                  "name": "Matbsalen",
+                  "icon": {
+                    "icon": "mdi:globe-light",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "attribute": "brightness",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "custom:slider-button-card",
+                  "entity": "light.utelampan",
+                  "name": "Utelampan",
+                  "icon": {
+                    "icon": "mdi:outdoor-lamp",
+                    "use_state_color": true,
+                    "tap_action": {
+                      "action": "more-info"
+                    }
+                  },
+                  "slider": {
+                    "direction": "left-right",
+                    "background": "gradient",
+                    "use_state_color": true,
+                    "show_track": true,
+                    "use_percentage_bg_opacity": true,
+                    "toggle_on_click": false,
+                    "force_square": false
+                  },
+                  "action_button": {
+                    "mode": "toggle",
+                    "show": true,
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  "show_name": true,
+                  "show_state": true,
+                  "show_attribute": false,
+                  "compact": true,
+                  "attribute": "brightness",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "hem_imköp",
+          "path": "hem-imkop",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig"
+                  },
+                  "name": "Temperatur",
+                  "icon": "mdi:temperature-celsius",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/6"
+                  },
+                  "name": "Radio",
+                  "icon": "mdi:radio",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:television-classic",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px",
+                  "name": "TV",
+                  "entity": "light.on_off_plug_1",
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "media_player.select_source",
+                    "target": {}
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/hem-light"
+                  },
+                  "name": "Belysning",
+                  "icon": "mdi:lightbulb",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.ljuskronan",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "mdi:chandelier",
+                  "show_state": false
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.matbord",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "bha:ceiling-lamp-round",
+                  "show_state": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "name": "Släck ↔ Tänd",
+                  "icon": "mdi:lightbulb-night",
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.vardagsrum_mys_toggle"
+                  },
+                  "icon_height": "25px",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "show_state": false,
+                  "entity": "light.farmors_lampa"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/10"
+                  },
+                  "name": "Kalender",
+                  "icon": "mdi:calendar-month-outline",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/7"
+                  },
+                  "name": "Annat",
+                  "icon": "mdi:location-enter",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/inkopslista"
+                  },
+                  "name": "Inköpslista",
+                  "icon": "mdi:clipboard-list-outline",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "display_order": "duedate_asc",
+                  "type": "todo-list",
+                  "entity": "todo.inkop",
+                  "title": "Inköpslista",
+                  "grid_options": {
+                    "rows": 9.5
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sections",
+          "max_columns": 4,
+          "title": "Underbaren",
+          "path": "underbaren",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "title": "🛗 Beer Elevator Status",
+                      "show_header_toggle": false,
+                      "entities": [
+                        {
+                          "entity": "sensor.beer_elevator_position",
+                          "name": "Hissläge (0 = stängd, 1 = öppen)"
+                        },
+                        {
+                          "entity": "binary_sensor.beer_elevator_limit_switch",
+                          "name": "Limit Switch",
+                          "icon": "mdi:door"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Öppna",
+                          "icon": "mdi:arrow-up-bold-circle",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "mqtt.publish",
+                            "service_data": {
+                              "topic": "beer_elevator/command",
+                              "payload": "open"
+                            }
+                          },
+                          "show_state": false
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "name": "Stäng",
+                          "icon": "mdi:arrow-down-bold-circle",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "mqtt.publish",
+                            "service_data": {
+                              "topic": "beer_elevator/command",
+                              "payload": "close"
+                            }
+                          }
+                        },
+                        {
+                          "show_name": true,
+                          "show_icon": true,
+                          "type": "button",
+                          "entity": "button.beer_elevator_set_home",
+                          "name": "Nollställ hem",
+                          "icon": "mdi:home-export-outline",
+                          "tap_action": {
+                            "action": "toggle"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "entities",
+                      "title": "⚙️ Inställningar",
+                      "show_header_toggle": false,
+                      "entities": [
+                        {
+                          "entity": "input_number.beer_elevator_speed",
+                          "name": "Hastighet (steps/sec)"
+                        },
+                        {
+                          "entity": "input_number.beer_elevator_acceleration",
+                          "name": "Acceleration (steps/s²)"
+                        },
+                        {
+                          "entity": "input_number.beer_elevator_extra_steps_up",
+                          "name": "Extra Steg Uppåt"
+                        },
+                        {
+                          "entity": "input_number.beer_elevator_extra_steps_down",
+                          "name": "Extra Steg Nedåt"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

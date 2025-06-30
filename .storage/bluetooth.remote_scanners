@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "bluetooth.remote_scanners",
+  "data": {
+    "A0:A3:B3:AA:A5:A8": {
+      "connectable": true,
+      "expire_seconds": 195.0,
+      "discovered_device_advertisement_datas": {
+        "54:3A:D6:70:FB:7D": {
+          "device": {
+            "address": "54:3A:D6:70:FB:7D",
+            "name": "[TV] Glennart",
+            "rssi": -77,
+            "details": {
+              "source": "A0:A3:B3:AA:A5:A8",
+              "address_type": 0
+            }
+          },
+          "advertisement_data": {
+            "local_name": "[TV] Glennart",
+            "manufacturer_data": {
+              "117": "420401206f210f0022013701010001000000000000000004"
+            },
+            "service_data": {},
+            "service_uuids": [],
+            "rssi": -77,
+            "tx_power": -127,
+            "platform_data": []
+          }
+        },
+        "60:46:B1:2B:19:F7": {
+          "device": {
+            "address": "60:46:B1:2B:19:F7",
+            "name": null,
+            "rssi": -88,
+            "details": {
+              "source": "A0:A3:B3:AA:A5:A8",
+              "address_type": 1
+            }
+          },
+          "advertisement_data": {
+            "local_name": null,
+            "manufacturer_data": {
+              "76": "10050a1c4e574b"
+            },
+            "service_data": {},
+            "service_uuids": [],
+            "rssi": -88,
+            "tx_power": 6,
+            "platform_data": []
+          }
+        },
+        "5A:66:AF:3C:DB:58": {
+          "device": {
+            "address": "5A:66:AF:3C:DB:58",
+            "name": null,
+            "rssi": -72,
+            "details": {
+              "source": "A0:A3:B3:AA:A5:A8",
+              "address_type": 1
+            }
+          },
+          "advertisement_data": {
+            "local_name": null,
+            "manufacturer_data": {},
+            "service_data": {
+              "0000fef3-0000-1000-8000-00805f9b34fb": "4a17234f4a495211326e1cb2e6be3951a600152da82fc80ee8b843"
+            },
+            "service_uuids": [
+              "0000fef3-0000-1000-8000-00805f9b34fb"
+            ],
+            "rssi": -72,
+            "tx_power": -127,
+            "platform_data": []
+          }
+        },
+        "13:1E:67:E6:6F:26": {
+          "device": {
+            "address": "13:1E:67:E6:6F:26",
+            "name": null,
+            "rssi": -46,
+            "details": {
+              "source": "A0:A3:B3:AA:A5:A8",
+              "address_type": 1
+            }
+          },
+          "advertisement_data": {
+            "local_name": null,
+            "manufacturer_data": {
+              "6": "010920220252947f64ed7a7e80dc762f23e59e5904b09cd3d4d2cd"
+            },
+            "service_data": {},
+            "service_uuids": [],
+            "rssi": -46,
+            "tx_power": -127,
+            "platform_data": []
+          }
+        },
+        "F9:7E:00:C1:8D:42": {
+          "device": {
+            "address": "F9:7E:00:C1:8D:42",
+            "name": null,
+            "rssi": -88,
+            "details": {
+              "source": "A0:A3:B3:AA:A5:A8",
+              "address_type": 1
+            }
+          },
+          "advertisement_data": {
+            "local_name": null,
+            "manufacturer_data": {
+              "76": "12020001"
+            },
+            "service_data": {},
+            "service_uuids": [],
+            "rssi": -88,
+            "tx_power": -127,
+            "platform_data": []
+          }
+        },
+        "62:29:E3:E5:3D:05": {
+          "device": {
+            "address": "62:29:E3:E5:3D:05",
+            "name": null,
+            "rssi": -71,
+            "details": {
+              "source": "A0:A3:B3:AA:A5:A8",
+              "address_type": 1
+            }
+          },
+          "advertisement_data": {
+            "local_name": null,
+            "manufacturer_data": {},
+            "service_data": {
+              "0000fef3-0000-1000-8000-00805f9b34fb": "4a17234f4a495211326e1cb2e6be3951a600152da82fc80ee8b843"
+            },
+            "service_uuids": [
+              "0000fef3-0000-1000-8000-00805f9b34fb"
+            ],
+            "rssi": -71,
+            "tx_power": -127,
+            "platform_data": []
+          }
+        }
+      },
+      "discovered_device_timestamps": {
+        "54:3A:D6:70:FB:7D": 1731687478.3445818,
+        "60:46:B1:2B:19:F7": 1731687478.248582,
+        "5A:66:AF:3C:DB:58": 1731687429.4045844,
+        "13:1E:67:E6:6F:26": 1731687478.764582,
+        "F9:7E:00:C1:8D:42": 1731687474.7645822,
+        "62:29:E3:E5:3D:05": 1731687477.7365818
+      }
+    }
+  }
+}

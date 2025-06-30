@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "minor_version": 8,
+  "key": "core.area_registry",
+  "data": {
+    "areas": [
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "kitchen",
+        "labels": [],
+        "name": "Köket",
+        "picture": null,
+        "created_at": "2024-10-05T20:32:05.247375+00:00",
+        "modified_at": "2024-11-03T20:59:35.161947+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "ute",
+        "labels": [],
+        "name": "Utomhus",
+        "picture": null,
+        "created_at": "2024-10-05T21:13:18.594941+00:00",
+        "modified_at": "2024-11-03T20:59:06.168406+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "honshus",
+        "labels": [],
+        "name": "Hönshus",
+        "picture": null,
+        "created_at": "2024-10-05T21:13:18.596998+00:00",
+        "modified_at": "2024-10-05T21:13:18.597000+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "sovrum",
+        "labels": [],
+        "name": "Sovrum",
+        "picture": null,
+        "created_at": "2024-10-05T21:13:18.597495+00:00",
+        "modified_at": "2024-10-05T21:13:18.597496+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": "mdi:greenhouse",
+        "id": "house",
+        "labels": [],
+        "name": "House",
+        "picture": null,
+        "created_at": "2024-10-05T21:56:11.552527+00:00",
+        "modified_at": "2024-10-05T21:56:11.552532+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "vardagsrum",
+        "labels": [],
+        "name": "Vardagsrum",
+        "picture": null,
+        "created_at": "2024-10-26T13:13:52.399244+00:00",
+        "modified_at": "2024-10-26T13:13:52.399246+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "matbord",
+        "labels": [],
+        "name": "Matbord",
+        "picture": null,
+        "created_at": "2024-11-07T12:29:30.859664+00:00",
+        "modified_at": "2024-11-07T12:29:30.859669+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "utelampan",
+        "labels": [],
+        "name": "Utelampan",
+        "picture": null,
+        "created_at": "2024-12-21T14:29:38.518783+00:00",
+        "modified_at": "2024-12-21T14:29:38.518786+00:00",
+        "humidity_entity_id": null,
+        "temperature_entity_id": null
+      }
+    ]
+  }
+}

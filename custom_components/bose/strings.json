@@ -1,0 +1,42 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Device is already configured"
+    },
+    "error": {
+      "info_failed": "Connection to device made, but failed to fetch speaker info. Check your logs for more information.",
+      "auth_failed": "Could not authenticate with your BOSE account. Check your username and password.",
+      "connect_failed": "Could not connect to the speaker. Check if the speaker is powered on, connected and the IP address is correct."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "mail": "BOSE Account E-Mail Address",
+          "password": "BOSE Account Password",
+          "device": "Select your BOSE device",
+          "manual_ip": "Enter the IP address of your BOSE device"
+        }
+      }
+    }
+  },
+  "services": {
+    "send_custom_request": {
+      "name": "Send Custom Request",
+      "description": "Send a direct request to a Bose speaker.",
+      "fields": {
+        "resource": {
+          "name": "Resource",
+          "description": "The API resource path to request (e.g., `/system/info`)."
+        },
+        "method": {
+          "name": "HTTP Method",
+          "description": "The HTTP method to use (GET, POST, PUT, DELETE)."
+        },
+        "body": {
+          "name": "Request Body",
+          "description": "Optional JSON body for the request (used for POST and PUT)."
+        }
+      }
+    }
+  }
+}

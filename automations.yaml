@@ -1,0 +1,586 @@
+- id: '1728191012280'
+  alias: Sol Av
+  description: ''
+  triggers:
+  - event: sunrise
+    trigger: sun
+  conditions: []
+  actions:
+  - target:
+      entity_id:
+      - light.utelampan
+    action: light.turn_off
+    data: {}
+  mode: single
+- id: '1728191068268'
+  alias: Sol På
+  description: ''
+  triggers:
+  - event: sunset
+    trigger: sun
+  conditions: []
+  actions:
+  - target:
+      entity_id:
+      - light.utelampan
+    action: light.turn_on
+    data:
+      kelvin: 2853
+      brightness_pct: 100
+  mode: single
+- id: close_chickendoor_sundown
+  alias: "\U0001F414 Chickendoor Close at Sundown"
+  description: Automatically runs the chickendoor program at sundown.
+  triggers:
+  - event: sunset
+    offset: +00:15:00
+    trigger: sun
+  conditions: []
+  actions:
+  - target:
+      entity_id: switch.chickendoor_control
+    action: switch.turn_on
+    data: {}
+  mode: single
+- id: '1729273270186'
+  alias: Badtunnan är varm
+  description: Skickar meddelanden när badtunnan är varm.
+  triggers:
+  - entity_id: sensor.hot_tub_temperature
+    above: 37.5
+    for: 00:03:00
+    trigger: numeric_state
+  conditions:
+  - condition: template
+    value_template: '{{ states(''sensor.hot_tub_temperature'')|float > 37.5 }}'
+  actions:
+  - data:
+      message: Dags att hoppa i badet!
+      title: Badi Baaadi!!
+    action: notify.mobile_app_julias_telefon
+  - data:
+      message: Badtunnan är varm!!
+      title: Hoppa i badet!
+    action: notify.mobile_app_telefonen
+  mode: single
+- id: '1729416452692'
+  alias: Försök att stänga hönshuset
+  triggers:
+  - entity_id: automation.chickendoor_close_at_sundown
+    to: 'on'
+    trigger: state
+  actions:
+  - wait_for_trigger:
+    - topic: chickendoor/status
+      payload: door closed
+      trigger: mqtt
+    timeout: 00:05:00
+    continue_on_timeout: true
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger is not none }}'
+      sequence:
+      - data:
+          message: Hönshuset har stängt.
+        action: notify.mobile_app_telefonen
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger is none }}'
+      sequence:
+      - data:
+          message: 'Fel: Hönshuset stängdes inte!'
+        action: notify.mobile_app_telefonen
+  mode: single
+- id: '1730535760731'
+  alias: Tända Knapp
+  description: ''
+  triggers:
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: initial_press
+    subtype: 1
+    unique_id: cf724da9-036a-4ec1-bb48-250c79248d14
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.lagom_mysigt
+  mode: single
+- id: '1730535913789'
+  alias: Släcka Storarummet Knapp
+  description: ''
+  triggers:
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: initial_press
+    subtype: 4
+    unique_id: 22313c92-ae51-4398-8a41-e3790011f018
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - light.tanda_vanligt
+      - light.matbord_2
+  mode: single
+- id: '1730560201543'
+  alias: 'Toggle ljuskronan '
+  description: ''
+  triggers:
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: initial_press
+    subtype: 2
+    unique_id: e277d690-3ad3-4738-84c2-d4190455a104
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.ljuskronan
+  mode: single
+- id: '1730562730263'
+  alias: dimma upp ljuskrona
+  description: ''
+  triggers:
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: repeat
+    subtype: 2
+    unique_id: e277d690-3ad3-4738-84c2-d4190455a104
+    trigger: device
+  conditions: []
+  actions:
+  - device_id: 042d892f7a1e7637a12eb2045b5efa8c
+    domain: light
+    entity_id: 88f0e5ef974fbf09d7b1cb95173a9441
+    type: brightness_increase
+  - device_id: 1bbe6695104cda77b6ccb7767d0c88d6
+    domain: light
+    entity_id: a713564676bc5461293337591024a640
+    type: brightness_increase
+  - device_id: b64493b31278cec93d7d31365a62f80e
+    domain: light
+    entity_id: da12083168168a0f3f9669494b301208
+    type: brightness_increase
+  - device_id: cf8fb5171f99172f7068a1af8b260615
+    domain: light
+    entity_id: 0d71065f01967117aedd27919bad9b40
+    type: brightness_increase
+  - device_id: 6ba4d80f68829043c542b695e60eeb8d
+    domain: light
+    entity_id: 3c60a7692bd198866c1f8ea9a12177be
+    type: brightness_increase
+  mode: single
+- id: '1730563069743'
+  alias: Knapp Matbord Lampa
+  description: ''
+  triggers:
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: initial_press
+    subtype: 3
+    unique_id: 67bf598f-1178-490d-855f-847451af5ed6
+    trigger: device
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: repeat
+    subtype: 3
+    unique_id: 67bf598f-1178-490d-855f-847451af5ed6
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.matbord
+  mode: single
+- id: '1734790373118'
+  alias: Mysbelysning
+  description: Toggle cozy lighting mode for watching movies or relaxing.
+  triggers:
+  - command:
+    - Jag kollar på TV
+    - Jag kollar på film
+    - Gör det lite mysigare i Vardagsrummet
+    - Gör det lite mysigare i Storarummet
+    - Det är en störig reflection i tv´n
+    - Det är dags för mys
+    - mysbelysning
+    - fredagsmys
+    - nu ska vi mysa lite
+    - Mys
+    - Jag ska kolla  på TV
+    - Jag ska kolla  på film
+    - vi ska kolla  på TV
+    - vi ska kolla  på fim
+    - film time
+    - filmdags
+    trigger: conversation
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.on_off_plug_1_2
+        state: 'off'
+      sequence:
+      - target:
+          entity_id:
+          - light.on_off_plug_1_2
+          - light.farmors_lampa
+        action: light.turn_on
+        data: {}
+    - conditions:
+      - condition: state
+        entity_id: light.on_off_plug_1_2
+        state: 'on'
+      sequence:
+      - target:
+          entity_id:
+          - light.on_off_plug_1_2
+          - light.farmors_lampa
+        action: light.turn_off
+        data: {}
+- id: '1735757259377'
+  alias: Tänd belysning i vardagsrummet kl 07
+  description: Turn on living room lighting at 07:00 with conditions for darkness
+    or daylight, only if you are in the home zone.
+  triggers:
+  - at: 07:00:00
+    trigger: time
+  conditions:
+  - condition: zone
+    entity_id: person.wiesel
+    zone: zone.home
+  actions:
+  - choose:
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: sun
+          before: sunrise
+        - condition: sun
+          after: sunset
+      sequence:
+      - target:
+          entity_id: scene.lagom_mysigt
+        action: scene.turn_on
+    - conditions:
+      - condition: sun
+        after: sunrise
+        before: sunset
+      sequence:
+      - target:
+          entity_id: scene.tant_dag
+        action: scene.turn_on
+  mode: single
+- id: '1735857336394'
+  alias: Tända Knapp - Long Press
+  description: Activate 'lagom mysigt' on long press.
+  triggers:
+  - device_id: e79842dedc51d54a05755c9e99255027
+    domain: hue
+    type: long_press
+    subtype: 1
+    unique_id: cf724da9-036a-4ec1-bb48-250c79248d15
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    data:
+      transition: 3
+    target:
+      entity_id: scene.tant_dag
+  mode: single
+- id: '1736089877913'
+  alias: Activate Lagom Mysigt After Sundown
+  description: Turns on scene.lagom_mysigt after sundown if scene.tant_dag is active.
+  triggers:
+  - event: sunset
+    trigger: sun
+  conditions:
+  - condition: state
+    entity_id: scene.tant_dag
+    state: 'on'
+  actions:
+  - target:
+      entity_id: scene.lagom_mysigt
+    action: scene.turn_on
+  mode: single
+- id: '1736837691791'
+  alias: Växtljus på kl 08
+  description: ''
+  triggers:
+  - trigger: time
+    at: 07:00:00
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.on_off_plug_2
+  mode: single
+- id: '1736882212502'
+  alias: Växtljus av 20:00
+  description: ''
+  triggers:
+  - trigger: time
+    at: '20:00:00'
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.on_off_plug_2
+  mode: single
+- id: '1738834919357'
+  alias: Adjust VLC Volume
+  description: ''
+  triggers:
+  - entity_id: input_number.vlc_volume
+    trigger: state
+  actions:
+  - target:
+      entity_id: media_player.vlc_telnet
+    data:
+      volume_level: '{{ states(''input_number.vlc_volume'') | float }}'
+    action: media_player.volume_set
+  mode: single
+- id: '1739013104752'
+  alias: Track Last Activated Scene
+  triggers:
+  - event_type: call_service
+    event_data:
+      domain: scene
+      service: turn_on
+    trigger: event
+  actions:
+  - target:
+      entity_id: input_text.last_active_scene
+    data:
+      value: '{{ trigger.event.data.service_data.entity_id.split(''.'')[1] }}'
+    action: input_text.set_value
+  mode: single
+- id: '1743797920755'
+  alias: Spela P4 Göteborg kl 06 på vardagar
+  description: ''
+  triggers:
+  - at: 06:00:00
+    trigger: time
+  conditions:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  actions:
+  - data:
+      entity_id: media_player.vlc_telnet
+      volume_level: 0.22
+    action: media_player.volume_set
+  - data:
+      kanal_namn: P4 Göteborg
+      media_content_id: https://http-live.sr.se/p4goteborg-mp3-192
+    action: script.starta_radio
+  mode: single
+- id: '1747062259790'
+  alias: Uppdatera hissens hastighet
+  description: Skickar nytt motorSpeed till ESP32 via MQTT
+  triggers:
+  - entity_id: input_number.beer_elevator_speed
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      topic: beer_elevator/config/speed
+      payload: '{{ states(''input_number.beer_elevator_speed'') | int }}'
+    action: mqtt.publish
+  mode: single
+- id: '1747062275232'
+  alias: Uppdatera totala steg
+  description: Skickar nytt totalSteps till ESP32 via MQTT
+  triggers:
+  - entity_id: input_number.beer_elevator_total_steps
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      topic: beer_elevator/config/steps
+      payload: '{{ states(''input_number.beer_elevator_total_steps'') | int }}'
+    action: mqtt.publish
+  mode: single
+- id: '1747062290705'
+  alias: Uppdatera extra steg
+  description: Skickar nytt extraSteps till ESP32 via MQTT
+  triggers:
+  - entity_id: input_number.beer_elevator_extra_steps
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      topic: beer_elevator/config/extra_steps
+      payload: '{{ states(''input_number.beer_elevator_extra_steps'') | int }}'
+    action: mqtt.publish
+  mode: single
+- id: '1747062764810'
+  alias: Beräkna och skicka totala steg med offset
+  description: Använder offset-värdet för att räkna ut totala steg från 35083
+  triggers:
+  - entity_id: input_number.beer_elevator_offset
+    trigger: state
+  conditions: []
+  actions:
+  - variables:
+      total: '{{ 35083 + (states(''input_number.beer_elevator_offset'') | int) }}'
+  - data:
+      topic: beer_elevator/config/steps
+      payload: '{{ total }}'
+    action: mqtt.publish
+  mode: single
+- id: '1747074152038'
+  alias: Uppdatera hissacceleration
+  description: Skickar det nya accel-värdet till ESP32 via MQTT
+  triggers:
+  - entity_id: input_number.beer_elevator_acceleration
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      topic: beer_elevator/config/acceleration
+      payload: '{{ states(''input_number.beer_elevator_acceleration'') | int }}'
+    action: mqtt.publish
+  mode: single
+- id: '1747079959141'
+  alias: Uppdatera Extra Steg Uppåt
+  description: ''
+  triggers:
+  - entity_id: input_number.beer_elevator_extra_steps_up
+    trigger: state
+  actions:
+  - data:
+      topic: beer_elevator/config/extra_steps_up
+      payload: '{{ states(''input_number.beer_elevator_extra_steps_up'') | int }}'
+    action: mqtt.publish
+  mode: single
+- id: '1747079974479'
+  alias: Uppdatera Extra Steg Nedåt
+  description: ''
+  triggers:
+  - entity_id: input_number.beer_elevator_extra_steps_down
+    trigger: state
+  actions:
+  - data:
+      topic: beer_elevator/config/extra_steps_down
+      payload: '{{ states(''input_number.beer_elevator_extra_steps_down'') | int }}'
+    action: mqtt.publish
+  mode: single
+- id: '1748016333344'
+  alias: Open Duck Door at Sunrise
+  description: ''
+  triggers:
+  - event: sunrise
+    offset: -00:30:00
+    trigger: sun
+  conditions: []
+  actions:
+  - data:
+      topic: duck/door/command
+      payload: clockwise
+    action: mqtt.publish
+  mode: single
+- id: '1748016366837'
+  alias: Close Duck Door at Sunset
+  description: ''
+  triggers:
+  - event: sunset
+    offset: +01:00:00
+    trigger: sun
+  conditions: []
+  actions:
+  - data:
+      topic: duck/door/command
+      payload: counterclockwise
+    action: mqtt.publish
+  mode: single
+- id: '1748016432843'
+  alias: "\U0001F986 Notis när Duck Door stängs"
+  description: Skickar en notis när duck door når limit-switch (stängd position).
+  triggers:
+  - entity_id: binary_sensor.duck_door_position
+    to: 'off'
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      message: Ankorna hade varit i säkerhet nu.. om de var kvar...
+    action: notify.mobile_app_telefonen
+  mode: single
+- id: '1748182423860'
+  alias: Duck Door Closed Detection
+  description: Sets the door state to closed when limit switch is triggered
+  triggers:
+  - topic: duck/door/status
+    payload: limit_reached
+    trigger: mqtt
+  conditions: []
+  actions:
+  - data: {}
+    target:
+      entity_id: input_boolean.duck_door_is_open
+    action: input_boolean.turn_off
+  - data:
+      value: Stängd
+    target:
+      entity_id: input_text.duck_door_position_text
+    action: input_text.set_value
+  mode: single
+- id: '1748182448670'
+  alias: Duck Door Opening Detection
+  description: Sets the door state to open when opening starts
+  triggers:
+  - topic: duck/door/status
+    payload: rotating_cw
+    trigger: mqtt
+  conditions: []
+  actions:
+  - data: {}
+    target:
+      entity_id: input_boolean.duck_door_is_open
+    action: input_boolean.turn_on
+  - data:
+      value: Öppen
+    target:
+      entity_id: input_text.duck_door_position_text
+    action: input_text.set_value
+  mode: single
+- id: '1748798806300'
+  alias: "\U0001F414 Notis när hönshuset är stängt (offline-trigger)"
+  description: 'Skickar en notis när ESP32 publicerar "offline" på chickendoor/status,
+    vilket indikerar att dörren just stängts.
+
+    '
+  triggers:
+  - topic: chickendoor/status
+    payload: offline
+    trigger: mqtt
+  conditions: []
+  actions:
+  - data:
+      message: "\U0001F414 Hönsen är i säkerhet!"
+    action: notify.mobile_app_telefonen
+  mode: single

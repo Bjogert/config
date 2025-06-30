@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "minor_version": 7,
+  "key": "backup",
+  "data": {
+    "backups": [
+      {
+        "backup_id": "5269d25a",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "ad69d201",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "cd429cc5",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "8000f7b6",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "bc795b3d",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "9867423a",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "f20a0faf",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "62b5f4ef",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "003b4978",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "c39d3f95",
+        "failed_addons": [],
+        "failed_agent_ids": [
+          "google_drive.robert_wiesel_gmail_com"
+        ],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "a788ce59",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      }
+    ],
+    "config": {
+      "agents": {},
+      "automatic_backups_configured": true,
+      "create_backup": {
+        "agent_ids": [
+          "hassio.local",
+          "cloud.cloud",
+          "google_drive.robert_wiesel_gmail_com"
+        ],
+        "include_addons": [],
+        "include_all_addons": true,
+        "include_database": true,
+        "include_folders": [
+          "media",
+          "share"
+        ],
+        "name": null,
+        "password": "TNFT-ANQ1-H5E9-6ZBC-9F9B-IT4T-HXEO"
+      },
+      "last_attempted_automatic_backup": "2025-06-30T05:05:16.002268+02:00",
+      "last_completed_automatic_backup": "2025-06-30T05:18:06.965134+02:00",
+      "retention": {
+        "copies": 3,
+        "days": null
+      },
+      "schedule": {
+        "days": [],
+        "recurrence": "daily",
+        "state": "never",
+        "time": null
+      }
+    }
+  }
+}

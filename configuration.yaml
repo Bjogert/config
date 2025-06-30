@@ -1,0 +1,373 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml  # Automations are handled in automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Shell command to start kiosk mode
+shell_command:
+  start_kiosk: chromium-browser --noerrdialogs --disable-infobars --kiosk http://192.168.68.105:8123
+  
+  vlc_status: 'echo "status" | nc 192.168.68.112 4212 > /config/vlc_status.txt'
+  restart_vlc: 'echo "add https://http-live.sr.se/p4goteborg-mp3-192" | nc 192.168.68.112 4212'
+
+  
+input_text:
+  aktiv_radiokanal:
+    name: "Aktiv Radiokanal"
+    initial: ""
+  senaste_radiourl:
+    name: "Senaste Radiourl"
+    initial: ""
+
+
+input_number:
+  beer_elevator_speed:
+    name: Hisshastighet
+    initial: 575
+    min: 100
+    max: 2000
+    step: 10
+    mode: box
+    unit_of_measurement: "steps/sec"
+    
+  beer_elevator_acceleration:
+    name: Hissacceleration
+    initial: 120
+    min: 10
+    max: 1000
+    step: 10
+    mode: box
+    unit_of_measurement: "steps/s²"
+
+  beer_elevator_extra_steps_up:
+    name: Extra Steg Uppåt
+    initial: 50
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "steps"
+    
+
+  beer_elevator_extra_steps_down:
+    name: Extra Steg Nedåt
+    initial: 100
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "steps"
+    
+    
+# Text-to-Speech settings
+tts:
+  - platform: google_translate
+    language: "sv"  # Or use "sv" for Swedish
+    cache: true
+    cache_dir: /config/tts
+    time_memory: 300
+
+homeassistant:
+  customize:
+    sensor.hot_tub_temperature:
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    sensor.esp32_temperature_1:
+      friendly_name: "Hönshuset"
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    sensor.esp32_humidity_1:
+      friendly_name: "Luftfuktighet 1"
+      state_class: measurement
+      unit_of_measurement: "%"
+      device_class: humidity
+
+    sensor.esp32_temperature_2:
+      friendly_name: "Altanen"
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    sensor.esp32_humidity_2:
+      friendly_name: "Luftfuktighet 2"
+      state_class: measurement
+      unit_of_measurement: "%"
+      device_class: humidity
+
+    sensor.esp32_temperature_3:
+      friendly_name: "Storarummet"
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    sensor.esp32_humidity_3:
+      friendly_name: "Luftfuktighet 3"
+      state_class: measurement
+      unit_of_measurement: "%"
+      device_class: humidity
+
+    sensor.esp32_temperature_4:
+      friendly_name: "Sovrummet"
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    sensor.esp32_humidity_4:
+      friendly_name: "Luftfuktighet 4"
+      state_class: measurement
+      unit_of_measurement: "%"
+      device_class: humidity
+
+    sensor.esp32_humidity_5:
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+      
+
+# Input Booleans to track button press
+input_boolean:
+  confirmation_active:
+    name: Chickendoor Confirmation Active
+    initial: off
+  chickendoor_pressed:
+    name: Chickendoor Button Pressed
+    initial: off
+    
+
+  duck_door_is_open:
+    name: "Duck Door Is Open"
+    icon: mdi:gate    
+    
+
+# Combined MQTT configuration
+mqtt:
+  switch:
+    - name: "Chickendoor Control"
+      state_topic: "chickendoor/status"
+      command_topic: "chickendoor/control"
+      payload_on: "close"
+      payload_off: "close"
+      state_on: "door closed"
+      state_off: "door opened"
+      
+    - name: "Underbaren"
+      command_topic: "beer_elevator/command"
+      payload_on: "Up"
+      payload_off: "Down"
+      optimistic: false
+      retain: false
+      
+  button:
+    - unique_id: duck_door_open
+      name: "Open Duck Door"
+      command_topic: "duck/door/command"
+      payload_press: "clockwise"
+      qos: 1
+
+    - unique_id: duck_door_close
+      name: "Close Duck Door"
+      command_topic: "duck/door/command"
+      payload_press: "counterclockwise"
+      qos: 1
+      
+      
+    - unique_id: beer_elevator_set_home
+      name: "Nollställ Hemläge"
+      command_topic: "beer_elevator/set_home"
+      payload_press: "1"
+      qos: 0      
+  
+
+      
+  number:
+    - unique_id: duck_door_rotation_count
+      name: "Duck Door Rotation Count"
+      state_topic:   "duck/door/rotation_count"
+      command_topic: "duck/door/rotation_count/set"
+      min: 1
+      max: 50
+      step: 1
+      mode: box
+      unit_of_measurement: "revs"
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available:   "online"
+      payload_not_available: "offline"      
+
+      
+  sensor:
+    - name: "ESP32 Temperature 1"
+      state_topic: "home/esp32_1/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 1"
+      state_topic: "home/esp32_1/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Temperature 2"
+      state_topic: "home/esp32_2/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 2"
+      state_topic: "home/esp32_2/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Temperature 3"
+      state_topic: "home/esp32_3/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 3"
+      state_topic: "home/esp32_3/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Temperature 4"
+      state_topic: "home/esp32_4/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 4"
+      state_topic: "home/esp32_4/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+      
+    - name: "ESP32 Temperature 5"
+      state_topic: "home/esp32_5/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+      
+    - name: "ESP32 Temperature 7"
+      state_topic: "home/esp32_7/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+      
+    - name: "Beer Elevator Position"
+      state_topic: "beer_elevator/position"
+      value_template: "{{ value }}"
+      icon: mdi:elevator
+
+    - name: "Beer Elevator State"
+      state_topic: "beer_elevator/state"
+      icon: mdi:elevator
+
+    - name: "Beer Elevator Acceleration (ACK)"
+      state_topic: "beer_elevator/config/acceleration"
+      unit_of_measurement: "steps/s²"
+      
+    
+    - unique_id: duck_door_status
+      name: "Duck Door Status"
+      state_topic: "duck/door/status"
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"   
+  
+    - name: "Chickendoor Status"
+      state_topic: "chickendoor/status"      
+  
+  binary_sensor:
+    - name: Duck Door Online
+      unique_id: duck_door_online
+      state_topic: "duck/door/availability"
+      payload_on:  "online"
+      payload_off: "offline"
+      device_class: connectivity
+      qos: 1
+
+    - name: Beer Elevator Moving
+      unique_id: beer_elevator_moving
+      state_topic: "beer_elevator/state"
+      payload_on: "moving_up"
+      payload_off: "idle"
+      device_class: moving
+      off_delay: 5
+  
+    - name: Beer Elevator Limit Switch
+      unique_id: beer_elevator_limit
+      state_topic: "beer_elevator/limit_switch"
+      payload_on: "down"
+      payload_off: "up"
+      device_class: door
+
+
+
+template:
+  # the Wi-Fi status sensor you already added
+  - sensor:
+      - name: Duck Door Connection
+        unique_id: duck_door_connection
+        state: >
+          {{ 'Connected' if is_state('binary_sensor.duck_door_online','on')
+             else 'Disconnected' }}
+
+  # Duck-Door-position template binary-sensor
+  - binary_sensor:
+      - name: Duck Door Position
+        unique_id: duck_door_position
+        device_class: door
+        state: >
+          {% if is_state('sensor.duck_door_status', 'limit_reached') %}
+            off
+          {% elif is_state('button.duck_door_close', 'on') %}
+            on
+          {% elif is_state('button.duck_door_open', 'on') %}
+            on
+          {% else %}
+            {{ is_state('sensor.duck_door_status', 'rotating_cw') }}
+          {% endif %}
+          
+ 
+      - name: "UnderBaren Limit Switch"
+        unique_id: underbaren_limit_switch
+        device_class: door
+        state: >
+          {{ is_state('binary_sensor.beer_elevator_limit_switch', 'off') }}         
+          
+      
+      

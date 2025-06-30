@@ -1,0 +1,69 @@
+substitutions:
+  name: esphome-web-cd26c8
+  friendly_name: Temperatur.1
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  min_version: 2024.6.0
+  name_add_mac_suffix: false
+  project:
+    name: esphome.web
+    version: dev
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+# Allow Over-The-Air updates
+ota:
+  - platform: esphome
+
+# Allow provisioning Wi-Fi via serial
+improv_serial:
+
+wifi:
+  ssid: "Uppfinningar"
+  password: "SamMoa123"
+  manual_ip:
+    static_ip: 192.168.68.104  # Example static IP outside DHCP range
+    gateway: 192.168.68.1
+    subnet: 255.255.252.0
+
+  ap:
+    ssid: "${friendly_name} Fallback Hotspot"
+    password: "fallback1234"
+
+
+# Captive portal for Wi-Fi setup
+captive_portal:
+
+dashboard_import:
+  package_import_url: github://esphome/example-configs/esphome-web/esp32.yaml@main
+  import_full_config: true
+
+# Sets up Bluetooth LE (Only on ESP32) to allow provisioning
+esp32_improv:
+  authorizer: none
+
+# Web server for local access
+web_server:
+
+sensor:
+  - platform: dht
+    pin: 4  # Replace with the actual GPIO you're using
+    model: DHT11
+    temperature:
+      name: "Uterummet temp"
+    humidity:
+      name: "Uterummer luftfuktighet"
+    update_interval: 60s
+
+

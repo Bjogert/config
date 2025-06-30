@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "input_button",
+  "data": {
+    "items": [
+      {
+        "id": "dimming_active",
+        "name": "Dimming Active"
+      },
+      {
+        "id": "return_to_screensaver",
+        "name": "Return to Screensaver"
+      }
+    ]
+  }
+}

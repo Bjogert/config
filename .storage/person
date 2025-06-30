@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "id": "wiesel",
+        "name": "Robert Wiesel",
+        "user_id": "f3d3b825b0534bb29a89092d00dcfa3c",
+        "device_trackers": [
+          "device_tracker.telefon",
+          "device_tracker.telefonen"
+        ],
+        "picture": "/api/image/serve/ab2da8796709fd38719ee74764b7b784/512x512"
+      },
+      {
+        "id": "julia",
+        "name": "Julia",
+        "device_trackers": [
+          "device_tracker.julias_telefon",
+          "device_tracker.telefon"
+        ],
+        "user_id": "dea50bae88004a418484a6a7ca339253",
+        "picture": "/api/image/serve/27c17ca6178b179ba63e18551ff59e95/512x512"
+      },
+      {
+        "id": "oled",
+        "name": "Oled",
+        "device_trackers": [],
+        "user_id": "437693b214e34c7085930ceb7efb4780",
+        "picture": null
+      }
+    ]
+  }
+}

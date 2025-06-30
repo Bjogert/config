@@ -1,0 +1,232 @@
+#   IIIIIII   DDDDDDD     X     X
+#      I      D      D     X   X
+#      I      D       D     X X     Theme for Home Assistant
+#      I      D       D      X              v1.1.1
+#      I      D       D     X X           by veniplex
+#      I      D      D     X   X
+#   IIIIIII   DDDDDDD     X     X
+
+IDX:
+  ### Colors ###
+  # Primary
+  medium-slate-blue: rgb(129, 98, 226)
+  # Accent
+  tropical-indigo: rgb(175, 138, 251)
+  # Grays & Whites
+  black: rgb(16, 21, 29)
+  rich-black: rgb(23, 31, 43)
+  charcoal: rgb(51, 62, 79)
+  paynes-gray: rgb(93, 106, 125)
+  cadet-gray: rgb(149, 161, 177)
+  alice-blue: rgb(231, 235, 242)
+  ghost-white: rgb(244, 247, 253)
+  white: rgb(255, 255, 255)
+  # Error
+  cardinal: rgb(193, 49, 59)
+  light-red: rgb(250, 123, 124)
+  # Warning
+  copper: rgb(193, 111, 35)
+  # Success
+  dark-spring-green: rgb(0, 123, 73)
+  mint: rgb(45, 190, 132)
+  # Info
+  blue-ncs: rgb(0, 138, 201)
+
+  ### Fonts ###
+  primary-font-family: "JetBrains Mono" # needs to be imported manually
+
+  ### DEFAULTS FOR BOTH MODES ###
+  accent-color: var(--tropical-indigo)
+  # Text
+  text-primary-color: var(--white)
+  disabled-text-color: var(--cadet-gray)
+  # Header
+  app-header-selection-bar-color: var(--medium-slate-blue)
+  # State Color
+  state-inactive-color: var(--cadet-gray)
+  state-binary_sensor-active-color: var(--mint)
+  state-climate-heat-cool-color: var(--mint)
+  state-light-active-color: var(--mint)
+  state-sun-above_horizon-color: var(--copper)
+  state-switch-active-color: var(--mint)
+  # Error, Warning, Success, Info
+  warning-color: var(--copper)
+  sucess-color: var(--mint)
+  info-color: var(--blue-ncs)
+  # Labels & Badges
+  label-badge-red: var(--error-color)
+  label-badge-blue: var(--info-color)
+  label-badge-green: var(--success-color)
+  label-badge-yellow: var(--warning-color)
+  label-badge-grey: var(--cadet-gray)
+
+  ### Xiaomi Vacuum Map Card ###
+  map-card-primary-color: var(--primary-color)
+  map-card-primary-text-color: var(--white)
+  map-card-secondary-text-color: var(--primary-text-color)
+  map-card-tertiary-text-color: var(--primary-text-color)
+  #map-card-disabled-text-color:
+  map-card-zoomer-background: rgb(19, 87, 148) # default Xiaomi Map Extractor background color
+  map-card-big-radius: 10px
+  map-card-small-radius: 10px
+  #map-card-predefined-point-icon-wrapper-size:
+  #map-card-predefined-point-icon-size:
+  #map-card-predefined-point-icon-color:
+  #map-card-predefined-point-icon-color-selected:
+  #map-card-predefined-point-icon-background-color:
+  #map-card-predefined-point-icon-background-color-selected:
+  #map-card-predefined-point-label-color:
+  #map-card-predefined-point-label-color-selected:
+  #map-card-predefined-point-label-font-size:
+  map-card-manual-point-radius: 5px
+  map-card-manual-point-line-color: var(--medium-slate-blue)
+  map-card-manual-point-fill-color: var(--tropical-indigo)
+  map-card-manual-point-line-width: 2px
+  #map-card-manual-path-point-radius:
+  #map-card-manual-path-point-line-color:
+  #map-card-manual-path-point-fill-color:
+  #map-card-manual-path-point-line-width:
+  #map-card-manual-path-line-color:
+  #map-card-manual-path-line-width:
+  #map-card-predefined-rectangle-line-width:
+  #map-card-predefined-rectangle-line-color:
+  #map-card-predefined-rectangle-fill-color:
+  #map-card-predefined-rectangle-line-color-selected:
+  #map-card-predefined-rectangle-fill-color-selected:
+  #map-card-predefined-rectangle-line-segment-line:
+  #map-card-predefined-rectangle-line-segment-gap:
+  #map-card-predefined-rectangle-icon-wrapper-size:
+  #map-card-predefined-rectangle-icon-size:
+  #map-card-predefined-rectangle-icon-color:
+  #map-card-predefined-rectangle-icon-color-selected:
+  #map-card-predefined-rectangle-icon-background-color:
+  #map-card-predefined-rectangle-icon-background-color-selected:
+  #map-card-predefined-rectangle-label-color:
+  #map-card-predefined-rectangle-label-color-selected:
+  #map-card-predefined-rectangle-label-font-size:
+  map-card-manual-rectangle-line-width: 2px
+  map-card-manual-rectangle-line-color: var(--primary-color)
+  map-card-manual-rectangle-fill-color: rgba(175, 138, 251, 0.2)
+  map-card-manual-rectangle-line-color-selected: var(--primary-color)
+  #map-card-manual-rectangle-fill-color-selected:
+  #map-card-manual-rectangle-line-segment-line:
+  map-card-manual-rectangle-line-segment-gap: 6
+  map-card-manual-rectangle-description-color: var(--map-card-primary-text-color)
+  #map-card-manual-rectangle-description-font-size:
+  #map-card-manual-rectangle-description-offset-x:
+  #map-card-manual-rectangle-description-offset-y:
+  #map-card-manual-rectangle-delete-circle-radius:
+  map-card-manual-rectangle-delete-circle-line-color: var(--cardinal)
+  map-card-manual-rectangle-delete-circle-fill-color: var(--cardinal)
+  map-card-manual-rectangle-delete-circle-line-color-selected: var(--cardinal)
+  map-card-manual-rectangle-delete-circle-fill-color-selected: var(--cardinal)
+  map-card-manual-rectangle-delete-circle-line-width: 1px
+  map-card-manual-rectangle-delete-icon-color: var(--white)
+  map-card-manual-rectangle-delete-icon-color-selected: var(--white)
+  #map-card-manual-rectangle-resize-circle-radius:
+  map-card-manual-rectangle-resize-circle-line-color: var(--primary-color)
+  map-card-manual-rectangle-resize-circle-fill-color: var(--primary-color)
+  map-card-manual-rectangle-resize-circle-line-color-selected: var(--primary-color)
+  map-card-manual-rectangle-resize-circle-fill-color-selected: var(--primary-color)
+  map-card-manual-rectangle-resize-circle-line-width: 1px
+  map-card-manual-rectangle-resize-icon-color: var(--white)
+  map-card-manual-rectangle-resize-icon-color-selected: var(--white)
+  #map-card-room-outline-line-color:
+  #map-card-room-outline-line-width:
+  #map-card-room-outline-line-segment-line:
+  #map-card-room-outline-line-segment-gap:
+  #map-card-room-outline-fill-color:
+  #map-card-room-outline-line-color-selected:
+  #map-card-room-outline-fill-color-selected:
+  #map-card-room-icon-wrapper-size:
+  #map-card-room-icon-size:
+  #map-card-room-icon-color:
+  #map-card-room-icon-color-selected:
+  #map-card-room-icon-background-color:
+  #map-card-room-icon-background-color-selected:
+  #map-card-room-label-color:
+  #map-card-room-label-color-selected:
+  #map-card-room-label-font-size:
+  #map-card-toast-successful-icon-color:
+  #map-card-toast-unsuccessful-icon-color:
+  #map-card-transitions-duration:
+  ##############################
+
+  modes:
+    ### Light Mode ###
+    light:
+      primary-color: var(--medium-slate-blue)
+      primary-background-color: var(--white)
+      secondary-background-color: var(--alice-blue)
+      divider-color: var(--alice-blue)
+      # Text
+      primary-text-color: var(--charcoal)
+      secondary-text-color: var(--paynes-gray)
+      # Header
+      app-header-background-color: var(--ghost-white)
+      app-header-text-color: var(--charcoal)
+      # Sidebar
+      sidebar-background-color: var(--ghost-white)
+      sidebar-icon-color: var(--charcoal)
+      sidebar-text-color: var(--charcoal)
+      sidebar-selected-icon-color: var(--medium-slate-blue)
+      sidebar-selected-text-color: var(--medium-slate-blue)
+      # State Color
+      state-icon-color: var(--charcoal)
+      state-active-color: var(--mint)
+      # Cards
+      card-background-color: var(--ghost-white)
+      # State Color
+      state-unavailable-color: var(--cardinal)
+      state-icon-error-color: var(--cardinal)
+      # Error, Warning, Success, Info
+      error-color: var(--cardinal)
+      # Labels & Badges
+      input-label-ink-color: var(--medium-slate-blue)
+
+      ### Xiaomi Vacuum Map Card ###
+      map-card-secondary-color: var(--alice-blue)
+      map-card-tertiary-color: var(--alice-blue)
+      map-card-ripple-color: var(--tropical-indigo)
+      ##############################
+
+    ### Dark Mode ###
+    dark:
+      primary-color: var(--tropical-indigo)
+      primary-background-color: var(--rich-black)
+      secondary-background-color: var(--black)
+      divider-color: var(--charcoal)
+      # Text
+      primary-text-color: var(--alice-blue)
+      secondary-text-color: var(--cadet-gray)
+      # Header
+      app-header-background-color: var(--black)
+      app-header-text-color: var(--white)
+      # Sidebar
+      sidebar-background-color: var(--black)
+      sidebar-icon-color: var(--alice-blue)
+      sidebar-text-color: var(--alice-blue)
+      sidebar-selected-icon-color: var(--tropical-indigo)
+      sidebar-selected-text-color: var(--tropical-indigo)
+      # State Color
+      state-icon-color: var(--alice-blue)
+      state-active-color: var(--mint)
+      # Cards
+      card-background-color: var(--black)
+      # State Color
+      state-unavailable-color: var(--light-red)
+      state-icon-error-color: var(--light-red)
+      # Error, Warning, Success, Info
+      error-color: var(--light-red)
+      # Labels & Badges
+      input-label-ink-color: var(--tropical-indigo)
+
+      ### Xiaomi Vacuum Map Card ###
+      map-card-secondary-color: var(--charcoal)
+      map-card-tertiary-color: var(--charcoal)
+      map-card-ripple-color: var(--medium-slate-blue)
+      ##############################
+
+      ### Mushroom Cards ###
+      rgb-primary-text-color: 255, 255, 255 # Fixes #1: Background color of inactive buttons
+      ######################

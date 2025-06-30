@@ -1,0 +1,23 @@
+esphome:
+  name: esp32-bluetooth-proxy
+  friendly_name: Bluetooth Proxy
+
+esp32:
+  board: wemos_d1_mini32
+  framework:
+    type: arduino
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+logger:
+
+api:
+  encryption:
+    key: aEkxB+TynYxZ0gpRu+pjVC83GmwoUufnyfWSI+54Wuc=
+
+ota:
+  platform: esphome
+
+bluetooth_proxy:

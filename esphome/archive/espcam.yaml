@@ -1,0 +1,71 @@
+esphome:
+  name: espcam
+  friendly_name: EspCam
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "1zSD8aorj3uApr7LZDymX909NjyMa3otpPJBR8IElv0="
+
+ota:
+  - platform: esphome
+    password: "8bb8010f6c616e91a32b4dff34a047d3"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Espcam Fallback Hotspot"
+    password: "jkMg3YlUv1Rq"
+
+captive_portal:
+    # Enable captive portal
+
+# Web server for streaming
+web_server:
+  port: 80
+
+# Camera configuration for ESP32-CAM
+esp32_camera:
+  name: "EspCam"
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+
+  # Optional image settings
+  max_framerate: 12 fps
+  resolution: 640x480 # Adjust as needed
+  jpeg_quality: 15  # Adjust for image quality (lower is higher quality)
+
+  # Flip and mirror settings
+  vertical_flip: false    # Flip image vertically
+  horizontal_mirror: false  # Mirror image horizontally
+
+output:
+  - platform: gpio
+    pin: GPIO4 
+    id: gpio_4
+
+light:
+  - platform: binary
+    output: gpio_4
+    name: "Flashlight"
+    

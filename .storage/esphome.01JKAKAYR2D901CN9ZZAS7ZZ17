@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01JKAKAYR2D901CN9ZZAS7ZZ17",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "esp32-s3-box-3-641368",
+      "friendly_name": "ESP32 S3 Box 3 641368",
+      "mac_address": "84:FC:E6:64:13:68",
+      "compilation_time": "May 22 2025, 23:46:37",
+      "model": "esp32s3box",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.5.0",
+      "project_name": "esphome.voice-assistant",
+      "project_version": "25.5.1",
+      "webserver_port": 80,
+      "legacy_voice_assistant_version": 1,
+      "voice_assistant_feature_flags": 61,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": ""
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "light": [
+      {
+        "object_id": "screen",
+        "key": 804877345,
+        "name": "Screen",
+        "unique_id": "esp32-s3-box-3-641368lightscreen",
+        "disabled_by_default": false,
+        "icon": "mdi:television",
+        "entity_category": 1,
+        "supported_color_modes": [
+          3
+        ],
+        "min_mireds": 0.0,
+        "max_mireds": 0.0,
+        "effects": [],
+        "legacy_supports_brightness": true,
+        "legacy_supports_rgb": false,
+        "legacy_supports_white_value": false,
+        "legacy_supports_color_temperature": false
+      }
+    ],
+    "binary_sensor": [],
+    "select": [
+      {
+        "object_id": "wake_word_engine_location",
+        "key": 2954423713,
+        "name": "Wake word engine location",
+        "unique_id": "esp32-s3-box-3-641368selectwake_word_engine_location",
+        "disabled_by_default": false,
+        "icon": "mdi:account-voice",
+        "entity_category": 1,
+        "options": [
+          "In Home Assistant",
+          "On device"
+        ]
+      }
+    ],
+    "media_player": [
+      {
+        "object_id": "esp32_s3_box_3_641368",
+        "key": 3474298344,
+        "name": "",
+        "unique_id": "esp32-s3-box-3-641368media_playeresp32_s3_box_3_641368",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "supports_pause": false,
+        "supported_formats": [
+          {
+            "format": "flac",
+            "sample_rate": 48000,
+            "num_channels": 1,
+            "purpose": 1,
+            "sample_bytes": 2
+          },
+          {
+            "format": "flac",
+            "sample_rate": 48000,
+            "num_channels": 1,
+            "purpose": 0,
+            "sample_bytes": 2
+          }
+        ]
+      }
+    ],
+    "update": [
+      {
+        "object_id": "firmware",
+        "key": 2978842618,
+        "name": "Firmware",
+        "unique_id": "esp32-s3-box-3-641368updatefirmware",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 1,
+        "device_class": ""
+      }
+    ],
+    "switch": [
+      {
+        "object_id": "speaker_enable",
+        "key": 538180766,
+        "name": "Speaker Enable",
+        "unique_id": "esp32-s3-box-3-641368switchspeaker_enable",
+        "disabled_by_default": true,
+        "icon": "",
+        "entity_category": 1,
+        "assumed_state": false,
+        "device_class": ""
+      },
+      {
+        "object_id": "mute",
+        "key": 2974103762,
+        "name": "Mute",
+        "unique_id": "esp32-s3-box-3-641368switchmute",
+        "disabled_by_default": false,
+        "icon": "mdi:microphone-off",
+        "entity_category": 1,
+        "assumed_state": false,
+        "device_class": ""
+      }
+    ]
+  }
+}

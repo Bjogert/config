@@ -1,0 +1,123 @@
+open_keyboard:
+  alias: Open Keyboard
+  sequence:
+  - action: shell_command.open_keyboard
+  mode: single
+  description: ''
+stop_radio:
+  alias: Stoppa radio
+  sequence:
+  - target:
+      entity_id: media_player.vlc_telnet
+    action: media_player.media_stop
+  - target:
+      entity_id: input_text.aktiv_radiokanal
+    data:
+      value: TYST
+    action: input_text.set_value
+  mode: single
+  icon: mdi:stop
+starta_radio:
+  alias: Starta radio
+  fields:
+    media_content_id:
+      description: The URL of the radio stream
+      example: https://http-live.sr.se/p4goteborg-mp3-192
+    kanal_namn:
+      description: Friendly name of the channel
+      example: P4 Göteborg
+  sequence:
+  - target:
+      entity_id: media_player.vlc_telnet
+    data:
+      media_content_id: '{{ media_content_id }}'
+      media_content_type: audio/mpeg
+    action: media_player.play_media
+  - target:
+      entity_id: input_text.aktiv_radiokanal
+    data:
+      value: '{{ kanal_namn }}'
+    action: input_text.set_value
+  - target:
+      entity_id: input_text.senaste_radiourl
+    data:
+      value: '{{ media_content_id }}'
+    action: input_text.set_value
+  mode: single
+  icon: mdi:radio
+starta_senaste_radio:
+  alias: Starta senaste radio
+  sequence:
+  - variables:
+      senaste_kanal: '{{ states(''input_text.aktiv_radiokanal'') }}'
+      senaste_url: '{{ states(''input_text.senaste_radiourl'') }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ senaste_url != '''' and senaste_url != None and senaste_url
+          != ''TYST'' }}'
+      sequence:
+      - target:
+          entity_id: media_player.vlc_telnet
+        data:
+          media_content_id: '{{ senaste_url }}'
+          media_content_type: audio/mpeg
+        action: media_player.play_media
+      - target:
+          entity_id: input_text.aktiv_radiokanal
+        data:
+          value: '{{ ''Senaste radio'' if senaste_kanal == ''TYST'' else senaste_kanal
+            }}'
+        action: input_text.set_value
+restart_vlc_playback:
+  alias: Restart VLC Playback
+  sequence:
+  - action: shell_command.restart_vlc
+  mode: single
+vardagsrum_mys_toggle:
+  alias: Vardagsrum Mys‑Toggle
+  mode: single
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.alla_lampor
+        state: 'on'
+      sequence:
+      - target:
+          entity_id: light.alla_lampor
+        action: light.turn_off
+      - target:
+          entity_id: input_text.last_active_scene
+        data:
+          value: 'off'
+        action: input_text.set_value
+    default:
+    - target:
+        entity_id: scene.lagom_mysigt
+      action: scene.turn_on
+    - target:
+        entity_id: input_text.last_active_scene
+      data:
+        value: lagom_mysigt
+      action: input_text.set_value
+stang_underbaren:
+  alias: Kör ner Underbaren
+  sequence:
+  - data:
+      topic: beer_elevator/command
+      payload: down
+    action: mqtt.publish
+  icon: mdi:arrow-down-box
+  mode: single
+  description: "Stäng underbaren \n\nJulia kommer! "
+kor_upp_underbaren:
+  alias: Kör upp Underbaren
+  sequence:
+  - data:
+      topic: beer_elevator/command
+      payload: up
+    action: mqtt.publish
+  icon: mdi:arrow-up-box
+  mode: single
+  description: "Öppna underbaren \n\nJag vill ha öl. \n\nJag är törstig. \n\nÖöööl!!! "

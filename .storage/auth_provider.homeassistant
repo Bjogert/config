@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "auth_provider.homeassistant",
+  "data": {
+    "users": [
+      {
+        "username": "wiesel",
+        "password": "JDJiJDEyJHh1NFlVenJwc2l2R2lpTmx0SllQQU9NSUFra3JFeTdkdEx4L2l6YnFhcmZ2OFpWNzFUR2dt"
+      },
+      {
+        "username": "julia",
+        "password": "JDJiJDEyJEhWLjRHM1EuTGRLODY3V1hiLldQd09SZVRaWG84MWZjTHlpUUJJVW5EVlFsQS9XVGdyUnZt"
+      },
+      {
+        "username": "oled",
+        "password": "JDJiJDEyJFowVy4ydDhOLkNpZFlDb0Q5RDlOWWU2MEJEQUdNcmZZMEEuZk9haXh0bzVHVjU5dk45TU02"
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "input_text",
+  "data": {
+    "items": [
+      {
+        "id": "to_do_list",
+        "name": "To-Do-List",
+        "icon": "mdi:list-box",
+        "min": 0,
+        "max": 100,
+        "mode": "text"
+      },
+      {
+        "id": "aktiv_radiokanal",
+        "name": "Aktiv radiokanal",
+        "mode": "text",
+        "min": 0,
+        "max": 100
+      },
+      {
+        "id": "last_active_scene",
+        "name": "last_active_scene",
+        "mode": "text",
+        "max": 100,
+        "min": 0
+      }
+    ]
+  }
+}

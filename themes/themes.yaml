@@ -1,0 +1,81 @@
+my_custom_theme:
+  # Main colors
+  primary-color: "#3498db"                      # Main theme color
+  accent-color: "#e74c3c"                       # Accent color
+
+  # Background colors
+  background-color: "#1e1e1e"                   # Overall dark background
+  primary-background-color: "#1e1e1e"           # Background for dark mode
+  secondary-background-color: "#2c2c2c"         # Slightly lighter for contrast
+
+  # Card colors and styles (preserving transparency)
+  card-background-color: "rgba(40, 40, 40, 0.65)"     # Transparent card background for enhanced contrast
+  paper-card-background-color: "rgba(40, 40, 40, 0.9)" # Card background with low transparency
+  ha-card-border-radius: "10px"                        # Rounded card corners
+  ha-card-box-shadow: "0px 0px 15px rgba(0, 0, 0, 0.5)" # Soft shadow for depth
+  card-text-color: "#ffffff"                           # Ensures text inside cards is white
+  paper-card-header-color: "#ffffff"                   # Ensures card headers have white text
+
+  # Text colors
+  primary-text-color: "#ffffff"                 # Primary bright text
+  secondary-text-color: "#ababab"               # Slightly softer gray for secondary text
+  text-primary-color: "#ffffff"                 # Main text color
+  text-secondary-color: "#f5f5f5"               # Secondary text, slightly dimmed
+  text-light-primary-color: "#ffffff"           # For dark backgrounds
+  text-dark-primary-color: "#000000"            # For light backgrounds
+  disabled-color: "rgba(255, 255, 255, 0.7)"    # More visible for disabled text
+  divider-color: "rgba(255, 255, 255, 0.3)"     # Subtle divider for contrast
+
+  # Sidebar and header colors
+  sidebar-icon-color: "#ffffff"                 # White for icons
+  sidebar-selected-icon-color: "#3498db"        # Selected icon color
+  sidebar-text-color: "#ffffff"                 # Sidebar text color for readability
+  sidebar-selected-text-color: "#3498db"        # Selected sidebar text color
+
+  # Header style (to hide or make transparent)
+  app-header-background-color: "rgba(40, 40, 40, 0.4)"  # Low transparency for header
+  app-header-height: "0px"                              # Sets height to 0 to hide header
+
+  # Input and dropdown specific adjustments
+  paper-dialog-background-color: "#1e1e1e"              # Background for dialogs (like edit/config pages)
+  paper-input-container-color: "#ffffff"                # Ensures input text is bright
+  paper-input-container-input-color: "#ffffff"          # Bright input text color
+  paper-input-container-focus-color: "#3498db"          # Focus color for input fields
+  paper-item-icon-color: "#ffffff"                      # Icons in items in editable areas
+  paper-item-selected-background-color: "#2c2c2c"       # Background for selected items in editable pages
+
+  # Opaque backgrounds specifically for dropdowns and inputs
+  primary-placeholder-color: "#ababab"                  # Lighter gray placeholder text
+  paper-dropdown-menu-color: "#ababab"                  # Lighter gray for unselected dropdown text
+  paper-dropdown-menu-input-color: "#ababab"            # Lighter gray for initially displayed dropdown text
+  paper-dropdown-menu-selection-background-color: "#2c2c2c" # Opaque background for selected dropdown item
+  paper-listbox-background-color: "#2c2c2c"             # Opaque background for dropdown list
+  paper-dropdown-menu-disabled-color: "rgba(255, 255, 255, 0.7)" # Color for disabled dropdown text
+
+  # Ensuring opaque fill color for input areas if related to dropdowns
+  input-fill-color: "#2c2c2c"                           # Solid background for input areas and dropdowns
+  paper-input-container-background-color: "#2c2c2c"     # Solid background for input container areas
+
+  # Text and icon color adjustments for dropdown elements
+  paper-listbox-color: "#ffffff"                        # White text color in dropdown list
+  paper-listbox-selected-color: "#3498db"               # Selected text color in dropdown list
+  paper-grey-200: "#282828"                             # Background color for dropdown hover effects
+  paper-grey-50: "#ababab"                              # Text color for hover effects in dropdowns
+
+  # Stronger overrides for text in editor view
+  markdown-code-color: "#ffffff"                        # Code blocks in editors
+  markdown-code-background-color: "#2c2c2c"             # Background for code blocks
+  input-placeholder-color: "#ababab"                    # Placeholder text color in inputs
+  input-text-color: "#ffffff"                           # Input text color
+
+  # Toggle button colors
+  paper-toggle-button-checked-button-color: "#3498db"
+  paper-toggle-button-checked-bar-color: "#3498db"
+  paper-toggle-button-unchecked-button-color: "#ffffff"
+  paper-toggle-button-unchecked-bar-color: "#ffffff"
+
+  # Additional text color variables
+  material-primary-text-color: "#ffffff"
+  material-secondary-text-color: "#ababab"
+  label-badge-text-color: "#ffffff"
+  label-badge-background-color: "#2c2c2c"

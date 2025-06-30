@@ -1,0 +1,15 @@
+{
+    "body": {
+        "contact": [
+            "mailto:robert.wiesel@gmail.com"
+        ],
+        "key": {
+            "e": "AQAB",
+            "kty": "RSA",
+            "n": "w860ZCD04t4najUNak5JE32MWgPN9AFgODY94Ul235Bt7NwhbjkXQ1s7f8cFoCeyED7lAegX68LEupxpYzGcoGfRHsAJh2kxVBQUSM2O5feH96tlbB0ss3_ffo6KaLdgMHy0npjwSYE9THdzCJQc1ZpxEb4ya9tAPB1ANcgg5PXLMjdZt_ZPBHofAhiZlPfB84h1bcDV2JWaRZlvKOOGq2Kgfn_y5HwtysReXymQyx3B1ld_8yY7Es6Jh6q_mer9-ncb2rKvTW_ZXa3d9MlDHnZKa-xFTHz-ThaHK1zAK391wDmLT4emNNl52EDJpPwn60JG-KHgFM6p206Us-k6kQ"
+        },
+        "status": "valid"
+    },
+    "terms_of_service": "https://letsencrypt.org/documents/LE-SA-v1.4-April-3-2024.pdf",
+    "uri": "https://acme-v02.api.letsencrypt.org/acme/acct/1987763487"
+}

@@ -1,0 +1,712 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Hem",
+          "icon": "mdi:home",
+          "cards": [],
+          "type": "sections",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/temperatur"
+                  },
+                  "name": "Temperatur",
+                  "icon": "mdi:temperature-celsius",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/6"
+                  },
+                  "name": "Radio",
+                  "icon": "mdi:radio",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon": "mdi:television-classic",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px",
+                  "name": "TV",
+                  "entity": "light.on_off_plug_1",
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "media_player.select_source",
+                    "target": {}
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/belysning"
+                  },
+                  "name": "Belysning",
+                  "icon": "mdi:lightbulb",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.ljuskronan",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "mdi:chandelier",
+                  "show_state": false
+                },
+                {
+                  "show_name": false,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "entity": "light.matbord",
+                  "name": "Tänd & Släck",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "60px",
+                  "icon": "",
+                  "show_state": false
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "name": "Släck ↔ Tänd",
+                  "icon": "mdi:lightbulb-night",
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.vardagsrum_mys_toggle"
+                  },
+                  "icon_height": "25px",
+                  "grid_options": {
+                    "columns": 6,
+                    "rows": "auto"
+                  },
+                  "show_state": false,
+                  "entity": "light.farmors_lampa"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/kalender"
+                  },
+                  "name": "Kalender",
+                  "icon": "mdi:calendar-month-outline",
+                  "grid_options": {
+                    "columns": 12,
+                    "rows": null
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/7"
+                  },
+                  "name": "Annat",
+                  "icon": "mdi:location-enter",
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/dashboard-stilig/inkopslista"
+                  },
+                  "name": "Inköpslista",
+                  "icon": "mdi:clipboard-list-outline",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": "auto"
+                  },
+                  "icon_height": "23px"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "square": false,
+                  "type": "grid",
+                  "columns": 1,
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 4,
+                      "name": "Storarummet",
+                      "entity": "sensor.esp32_temperature_3",
+                      "show_icon": false,
+                      "show_name": true,
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "custom_fields": {
+                        "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_3']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_3']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 6px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                      },
+                      "styles": {
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"n r\""
+                          },
+                          {
+                            "grid-template-columns": "150px auto"
+                          },
+                          {
+                            "align-items": "center"
+                          }
+                        ],
+                        "card": [
+                          {
+                            "padding": "0px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "grid-area": "n"
+                          },
+                          {
+                            "font-size": "21px"
+                          },
+                          {
+                            "transform": "translateY(30px)"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "margin-left": "20px"
+                          }
+                        ],
+                        "custom_fields": {
+                          "right_values": [
+                            {
+                              "grid-area": "r"
+                            },
+                            {
+                              "justify-self": "end"
+                            },
+                            {
+                              "margin-right": "6px"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 4,
+                      "name": "Sovrummet",
+                      "entity": "sensor.esp32_temperature_4",
+                      "show_icon": false,
+                      "show_name": true,
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "custom_fields": {
+                        "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_4']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_4']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 6px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                      },
+                      "styles": {
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"n r\""
+                          },
+                          {
+                            "grid-template-columns": "160px auto"
+                          },
+                          {
+                            "align-items": "center"
+                          }
+                        ],
+                        "card": [
+                          {
+                            "padding": "1px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "grid-area": "n"
+                          },
+                          {
+                            "font-size": "21px"
+                          },
+                          {
+                            "transform": "translateY(30px)"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "margin-left": "20px"
+                          }
+                        ],
+                        "custom_fields": {
+                          "right_values": [
+                            {
+                              "grid-area": "r"
+                            },
+                            {
+                              "justify-self": "end"
+                            },
+                            {
+                              "margin-right": "6px"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 4,
+                      "name": "Altanen",
+                      "entity": "sensor.esp32_temperature_2",
+                      "show_icon": false,
+                      "show_name": true,
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "custom_fields": {
+                        "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_2']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_2']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 0px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                      },
+                      "styles": {
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"n r\""
+                          },
+                          {
+                            "grid-template-columns": "180px auto"
+                          },
+                          {
+                            "align-items": "center"
+                          }
+                        ],
+                        "card": [
+                          {
+                            "padding": "1px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "grid-area": "n"
+                          },
+                          {
+                            "font-size": "21px"
+                          },
+                          {
+                            "transform": "translateY(30px)"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "margin-left": "20px"
+                          }
+                        ],
+                        "custom_fields": {
+                          "right_values": [
+                            {
+                              "grid-area": "r"
+                            },
+                            {
+                              "justify-self": "end"
+                            },
+                            {
+                              "margin-right": "6px"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 4,
+                      "name": "Hönshuset",
+                      "entity": "sensor.esp32_temperature_1",
+                      "show_icon": false,
+                      "show_name": true,
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "custom_fields": {
+                        "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_1']?.state ?? \"0\";\n  const hum  = states['sensor.esp32_humidity_1']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n      <span style=\"font-size: 14px; margin-left: 6px; position: relative; top: -3px;\">${hum}%</span>\n    </div>\n  `;\n]]]\n"
+                      },
+                      "styles": {
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"n r\""
+                          },
+                          {
+                            "grid-template-columns": "160px auto"
+                          },
+                          {
+                            "align-items": "center"
+                          }
+                        ],
+                        "card": [
+                          {
+                            "padding": "1px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "grid-area": "n"
+                          },
+                          {
+                            "font-size": "21px"
+                          },
+                          {
+                            "transform": "translateY(30px)"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "margin-left": "20px"
+                          }
+                        ],
+                        "custom_fields": {
+                          "right_values": [
+                            {
+                              "grid-area": "r"
+                            },
+                            {
+                              "justify-self": "end"
+                            },
+                            {
+                              "margin-right": "6px"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "column_span": 4,
+                      "name": "Badtunnan",
+                      "entity": "sensor.esp32_temperature_7",
+                      "show_icon": false,
+                      "show_name": true,
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "/dashboard-stilig/9"
+                      },
+                      "custom_fields": {
+                        "right_values": "[[[\n  const temp = states['sensor.esp32_temperature_7']?.state ?? \"0\";\n  return `\n    <div style=\"text-align: right;\">\n      <span style=\"font-size: 34px; font-weight: bold;\">${temp}°C</span>\n    </div>\n  `;\n]]]\n"
+                      },
+                      "styles": {
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"n r\""
+                          },
+                          {
+                            "grid-template-columns": "160px auto"
+                          },
+                          {
+                            "align-items": "center"
+                          }
+                        ],
+                        "card": [
+                          {
+                            "padding": "1px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "grid-area": "n"
+                          },
+                          {
+                            "font-size": "21px"
+                          },
+                          {
+                            "transform": "translateY(30px)"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "margin-left": "20px"
+                          }
+                        ],
+                        "custom_fields": {
+                          "right_values": [
+                            {
+                              "grid-area": "r"
+                            },
+                            {
+                              "justify-self": "end"
+                            },
+                            {
+                              "margin-right": "6px"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "grid",
+                      "column_span": 4,
+                      "columns": 4,
+                      "square": false,
+                      "cards": [
+                        {
+                          "type": "custom:button-card",
+                          "column_span": 1,
+                          "entity": "scene.tant_dag",
+                          "extra_entities": [
+                            "input_text.last_active_scene"
+                          ],
+                          "icon": "mdi:weather-sunny",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "scene.turn_on",
+                            "service_data": {
+                              "entity_id": "scene.tant_dag"
+                            }
+                          },
+                          "show_icon": true,
+                          "show_name": false,
+                          "show_state": false,
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px"
+                              },
+                              {
+                                "padding": "10px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "rgb(120, 144, 156)"
+                              }
+                            ]
+                          },
+                          "state": [
+                            {
+                              "operator": "template",
+                              "value": "[[[ return states['input_text.last_active_scene'].state === 'tant_dag'; ]]]\n",
+                              "styles": {
+                                "icon": [
+                                  {
+                                    "color": "orange"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "column_span": 1,
+                          "entity": "scene.lagom_mysigt",
+                          "extra_entities": [
+                            "input_text.last_active_scene"
+                          ],
+                          "icon": "mdi:weather-sunset",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "scene.turn_on",
+                            "service_data": {
+                              "entity_id": "scene.lagom_mysigt"
+                            }
+                          },
+                          "show_icon": true,
+                          "show_name": false,
+                          "show_state": false,
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px"
+                              },
+                              {
+                                "padding": "10px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "rgb(120, 144, 156)"
+                              }
+                            ]
+                          },
+                          "state": [
+                            {
+                              "operator": "template",
+                              "value": "[[[ return states['input_text.last_active_scene'].state === 'lagom_mysigt'; ]]]\n",
+                              "styles": {
+                                "icon": [
+                                  {
+                                    "color": "orange"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "column_span": 1,
+                          "entity": "scene.fredagsmys",
+                          "extra_entities": [
+                            "input_text.last_active_scene"
+                          ],
+                          "icon": "mdi:moon-waxing-crescent",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "scene.turn_on",
+                            "service_data": {
+                              "entity_id": "scene.fredagsmys"
+                            }
+                          },
+                          "show_icon": true,
+                          "show_name": false,
+                          "show_state": false,
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px"
+                              },
+                              {
+                                "padding": "10px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "rgb(120, 144, 156)"
+                              }
+                            ]
+                          },
+                          "state": [
+                            {
+                              "operator": "template",
+                              "value": "[[[ return states['input_text.last_active_scene'].state === 'fredagsmys'; ]]]\n",
+                              "styles": {
+                                "icon": [
+                                  {
+                                    "color": "orange"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "column_span": 1,
+                          "icon": "mdi:image-frame",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "/dashboard-stilig/3"
+                          },
+                          "show_icon": true,
+                          "show_name": false,
+                          "show_state": false,
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px"
+                              },
+                              {
+                                "padding": "10px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "rgb(120, 144, 156)"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:simple-clock-card",
+                      "column_span": 4,
+                      "use_military": true,
+                      "hide_seconds": true,
+                      "bold_clock": false,
+                      "font_size": "2rem",
+                      "paddingLeft_size": "0px",
+                      "paddingRight_size": "0px",
+                      "paddingTop_size": "0px",
+                      "paddingBottom_size": "0px"
+                    }
+                  ]
+                }
+              ],
+              "column_span": 1
+            }
+          ],
+          "badges": []
+        }
+      ]
+    }
+  }
+}

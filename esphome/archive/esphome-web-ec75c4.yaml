@@ -1,0 +1,55 @@
+esphome:
+  name: esp32-cam
+  platform: ESP32
+  board: esp32dev  
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  reboot_timeout: 0s
+
+# Over-the-Air updates
+ota:
+  platform: esphome
+
+# Web server
+web_server:
+  port: 80
+
+# Wi-Fi configuration
+wifi:
+  ssid: "Vilda Webben extended"
+  password: "SamMoa123"
+  use_address: 192.168.68.120
+
+# Enable captive portal
+captive_portal:
+
+# Camera configuration
+esp32_camera:
+  name: "My ESP32-CAM"
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+
+# Flashlight configuration
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: gpio_4
+
+# Flashlight as a light entity
+light:
+  - platform: binary
+    output: gpio_4
+    name: "Flashlight"

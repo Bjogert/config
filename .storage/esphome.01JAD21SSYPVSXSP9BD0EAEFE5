@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01JAD21SSYPVSXSP9BD0EAEFE5",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "esphome-web-1a820a",
+      "friendly_name": "badtemperatur",
+      "mac_address": "2C:F4:32:1A:82:0A",
+      "compilation_time": "Oct 17 2024, 12:49:07",
+      "model": "esp01_1m",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2024.10.0",
+      "project_name": "esphome.web",
+      "project_version": "dev",
+      "webserver_port": 80,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": ""
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "update": []
+  }
+}
