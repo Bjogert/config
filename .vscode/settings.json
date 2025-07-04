@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "*.yaml": "home-assistant",
-        "*.yml": "home-assistant"
+        "*.yml": "home-assistant",
+        ".yamllint.yml": "yaml"
     },
     "yaml.schemas": {},
     "yaml.customTags": [
@@ -39,6 +40,10 @@
     },
     
     "homeassistant.pathToPythonExecutable": "python3",
+    "homeassistant.files.exclude": [
+        ".yamllint.yml",
+        "www/community/swiss-army-knife-card/**"
+    ],
     
     "files.exclude": {
         "**/.git": true,
@@ -48,7 +53,8 @@
         "**/*.log": true,
         ".storage": true,
         "tts": true,
-        "image": true
+        "image": true,
+        ".yamllint.yml": true
     },
     
     "files.watcherExclude": {
@@ -56,7 +62,8 @@
         "**/*.log*": true,
         "**/tts/**": true,
         "**/image/**": true,
-        "**/.storage/**": true
+        "**/.storage/**": true,
+        "**/www/community/**": true
     },
     
     "problems.decorations.enabled": false

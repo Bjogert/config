@@ -1,25 +1,23 @@
-# YAML Language Server Configuration for Home Assistant
-# 
-# This file defines custom YAML tags used by Home Assistant
-# to prevent "Unresolved tag" warnings in VS Code
+# YAML Linter Configuration for Home Assistant
+# This file configures yamllint for Home Assistant YAML files
 
-yaml:
-  customTags:
-    - "!input scalar"
-    - "!input sequence" 
-    - "!input mapping"
-    - "!include scalar"
-    - "!include_dir_list sequence"
-    - "!include_dir_merge_list sequence"
-    - "!include_dir_merge_named mapping"
-    - "!include_dir_named mapping"
-    - "!secret scalar"
-  
-  schemas:
-    # Disable schema validation for Home Assistant files
-    "": ["*.yaml", "*.yml"]
-  
-  validate: false
-  completion: true
-  schemaStore:
-    enable: false
+extends: default
+
+rules:
+  line-length:
+    max: 120
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']
+  comments:
+    min-spaces-from-content: 1
+  document-start: disable
+
+ignore: |
+  .git/
+  .vscode/
+  .storage/
+  tts/
+  www/community/
+  custom_components/
+  esphome/
+  image/
