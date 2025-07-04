@@ -4,7 +4,9 @@
         "*.yml": "home-assistant",
         ".yamllint.yml": "yaml"
     },
-    "yaml.schemas": {},
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/home-assistant/core/dev/homeassistant/helpers/config_validation.py": ["*.yaml", "*.yml"]
+    },
     "yaml.customTags": [
         "!input scalar",
         "!input sequence", 
@@ -27,11 +29,24 @@
     "homeassistant.ignoreCertificates": false,
     "homeassistant.enableCodeActions": true,
     "homeassistant.enableSnippets": true,
+    "homeassistant.enableIncludes": true,
+    "homeassistant.enableCompletion": true,
     
     "[home-assistant]": {
         "editor.defaultFormatter": "keesschollaart.vscode-home-assistant",
         "editor.formatOnSave": false,
-        "yaml.validate": false
+        "yaml.validate": false,
+        "yaml.customTags": [
+            "!input scalar",
+            "!input sequence", 
+            "!input mapping",
+            "!include scalar",
+            "!include_dir_list sequence",
+            "!include_dir_merge_list sequence",
+            "!include_dir_merge_named mapping", 
+            "!include_dir_named mapping",
+            "!secret scalar"
+        ]
     },
     
     "[yaml]": {
