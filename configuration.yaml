@@ -166,16 +166,22 @@ mqtt:
       retain: false
       
   button:
-    - unique_id: duck_door_open
+    - unique_id: open_duck_door
       name: "Open Duck Door"
       command_topic: "duck/door/command"
       payload_press: "clockwise"
       qos: 1
 
-    - unique_id: duck_door_close
-      name: "Close Duck Door"
+    - unique_id: close_duck_door
+      name: "Close Duck Door" 
       command_topic: "duck/door/command"
       payload_press: "counterclockwise"
+      qos: 1
+      
+    - unique_id: duck_door_stop
+      name: "Duck Door Emergency Stop"
+      command_topic: "duck/door/command"
+      payload_press: "stop"
       qos: 1
       
       
@@ -318,6 +324,18 @@ mqtt:
       device_class: connectivity
       qos: 1
 
+    - name: Duck Door Limit Switch
+      unique_id: duck_door_limit_switch
+      state_topic: "duck/door/limit_switch"
+      payload_on: "triggered"
+      payload_off: "not_triggered"
+      device_class: door
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
+      retain: false
+
     - name: Beer Elevator Moving
       unique_id: beer_elevator_moving
       state_topic: "beer_elevator/state"
@@ -346,18 +364,36 @@ template:
 
   # Duck-Door-position template binary-sensor
   - binary_sensor:
-      - name: Duck Door Position
-        unique_id: duck_door_position
+      - name: Duck Door State
+        unique_id: duck_door_state
         device_class: door
         state: >
-          {% if is_state('sensor.duck_door_status', 'limit_reached') %}
+          {% set limit_switch = states('binary_sensor.duck_door_limit_switch') %}
+          {% if limit_switch == 'on' %}
             off
-          {% elif is_state('button.duck_door_close', 'on') %}
-            on
-          {% elif is_state('button.duck_door_open', 'on') %}
+          {% elif limit_switch == 'off' %}
             on
           {% else %}
-            {{ is_state('sensor.duck_door_status', 'rotating_cw') }}
+            unknown
+          {% endif %}
+        availability: >
+          {{ states('binary_sensor.duck_door_online') == 'on' }}
+
+      - name: Duck Door Safety Status
+        unique_id: duck_door_safety_status
+        device_class: safety
+        state: >
+          {% set online = is_state('binary_sensor.duck_door_online', 'on') %}
+          {% set limit = is_state('binary_sensor.duck_door_limit_switch', 'on') %}
+          {% set status = states('sensor.duck_door_status') %}
+          {% if not online %}
+            off
+          {% elif status == 'limit_reached' and limit %}
+            on
+          {% elif 'rotating' in status %}
+            off
+          {% else %}
+            on
           {% endif %}
           
  
