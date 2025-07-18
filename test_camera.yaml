@@ -1,0 +1,14 @@
+# Test camera configuration
+input_number:
+  test_camera_brightness:
+    name: "Test Camera Brightness"
+    min: -2
+    max: 2
+    step: 1
+    initial: 0
+    icon: mdi:brightness-6
+
+rest_command:
+  test_camera_brightness:
+    url: "http://192.168.68.110/brightness?value={{ value }}"
+    method: GET

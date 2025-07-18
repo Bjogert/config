@@ -1,11 +1,15 @@
 {
     "files.associations": {
-        "*.yaml": "home-assistant",
+        "*.yaml": "yaml",
         "*.yml": "home-assistant",
         ".yamllint.yml": "yaml"
     },
     "yaml.schemas": {
-        "https://raw.githubusercontent.com/home-assistant/core/dev/homeassistant/helpers/config_validation.py": ["*.yaml", "*.yml"]
+        "https://raw.githubusercontent.com/home-assistant/core/dev/homeassistant/helpers/config_validation.py": [
+            "*.yaml",
+            "*.yml",
+            "file:///c%3A/Users/robert/config/configuration.yaml"
+        ]
     },
     "yaml.customTags": [
         "!input scalar",

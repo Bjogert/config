@@ -42,27 +42,6 @@
     action: switch.turn_on
     data: {}
   mode: single
-- id: '1729273270186'
-  alias: Badtunnan är varm
-  description: Skickar meddelanden när badtunnan är varm.
-  triggers:
-  - entity_id: sensor.hot_tub_temperature
-    above: 37.5
-    for: 00:03:00
-    trigger: numeric_state
-  conditions:
-  - condition: template
-    value_template: '{{ states(''sensor.hot_tub_temperature'')|float > 37.5 }}'
-  actions:
-  - data:
-      message: Dags att hoppa i badet!
-      title: Badi Baaadi!!
-    action: notify.mobile_app_julias_telefon
-  - data:
-      message: Badtunnan är varm!!
-      title: Hoppa i badet!
-    action: notify.mobile_app_telefonen
-  mode: single
 - id: '1729416452692'
   alias: Försök att stänga hönshuset
   triggers:
@@ -128,7 +107,6 @@
     target:
       entity_id:
       - light.tanda_vanligt
-      - light.matbord_2
   mode: single
 - id: '1730560201543'
   alias: 'Toggle ljuskronan '
@@ -411,47 +389,6 @@
       payload: '{{ states(''input_number.beer_elevator_speed'') | int }}'
     action: mqtt.publish
   mode: single
-- id: '1747062275232'
-  alias: Uppdatera totala steg
-  description: Skickar nytt totalSteps till ESP32 via MQTT
-  triggers:
-  - entity_id: input_number.beer_elevator_total_steps
-    trigger: state
-  conditions: []
-  actions:
-  - data:
-      topic: beer_elevator/config/steps
-      payload: '{{ states(''input_number.beer_elevator_total_steps'') | int }}'
-    action: mqtt.publish
-  mode: single
-- id: '1747062290705'
-  alias: Uppdatera extra steg
-  description: Skickar nytt extraSteps till ESP32 via MQTT
-  triggers:
-  - entity_id: input_number.beer_elevator_extra_steps
-    trigger: state
-  conditions: []
-  actions:
-  - data:
-      topic: beer_elevator/config/extra_steps
-      payload: '{{ states(''input_number.beer_elevator_extra_steps'') | int }}'
-    action: mqtt.publish
-  mode: single
-- id: '1747062764810'
-  alias: Beräkna och skicka totala steg med offset
-  description: Använder offset-värdet för att räkna ut totala steg från 35083
-  triggers:
-  - entity_id: input_number.beer_elevator_offset
-    trigger: state
-  conditions: []
-  actions:
-  - variables:
-      total: '{{ 35083 + (states(''input_number.beer_elevator_offset'') | int) }}'
-  - data:
-      topic: beer_elevator/config/steps
-      payload: '{{ total }}'
-    action: mqtt.publish
-  mode: single
 - id: '1747074152038'
   alias: Uppdatera hissacceleration
   description: Skickar det nya accel-värdet till ESP32 via MQTT
@@ -530,44 +467,6 @@
       message: Ankorna hade varit i säkerhet nu.. om de var kvar...
     action: notify.mobile_app_telefonen
   mode: single
-- id: '1748182423860'
-  alias: Duck Door Closed Detection
-  description: Sets the door state to closed when limit switch is triggered
-  triggers:
-  - topic: duck/door/status
-    payload: limit_reached
-    trigger: mqtt
-  conditions: []
-  actions:
-  - data: {}
-    target:
-      entity_id: input_boolean.duck_door_is_open
-    action: input_boolean.turn_off
-  - data:
-      value: Stängd
-    target:
-      entity_id: input_text.duck_door_position_text
-    action: input_text.set_value
-  mode: single
-- id: '1748182448670'
-  alias: Duck Door Opening Detection
-  description: Sets the door state to open when opening starts
-  triggers:
-  - topic: duck/door/status
-    payload: rotating_cw
-    trigger: mqtt
-  conditions: []
-  actions:
-  - data: {}
-    target:
-      entity_id: input_boolean.duck_door_is_open
-    action: input_boolean.turn_on
-  - data:
-      value: Öppen
-    target:
-      entity_id: input_text.duck_door_position_text
-    action: input_text.set_value
-  mode: single
 - id: '1748798806300'
   alias: "\U0001F414 Notis när hönshuset är stängt (offline-trigger)"
   description: 'Skickar en notis när ESP32 publicerar "offline" på chickendoor/status,
@@ -584,3 +483,4 @@
       message: "\U0001F414 Hönsen är i säkerhet!"
     action: notify.mobile_app_telefonen
   mode: single
+
