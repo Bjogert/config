@@ -32,3 +32,13 @@ image/
 
 # Core dumps
 core.*
+
+# Secrets and sensitive configuration
+secrets.yaml
+!secrets.yaml.example
+
+# Home Assistant generated files
+known_devices.yaml
+ip_bans.yaml
+.google.token
+.spotify.token

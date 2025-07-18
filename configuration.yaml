@@ -1,3 +1,13 @@
+# Home Assistant Configuration
+# Author: Robert & Julia
+# Last Updated: 2025-01-18
+# Description: Main configuration for smart home automation system
+#              including duck door control, beer elevator, and lighting automation
+
+# ================================
+# SYSTEM CONFIGURATION
+# ================================
+
 # Loads default set of integrations. Do not remove.
 default_config:
 
@@ -5,9 +15,14 @@ default_config:
 frontend:
   themes: !include_dir_merge_named themes
 
+# YAML file includes for better organization
 automation: !include automations.yaml  # Automations are handled in automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+# ================================
+# SHELL COMMANDS
+# ================================
 
 # Shell command to start kiosk mode
 shell_command:
@@ -15,6 +30,11 @@ shell_command:
   vlc_status: 'echo "status" | nc 192.168.68.112 4212 > /config/vlc_status.txt'
   restart_vlc: 'echo "add https://http-live.sr.se/p4goteborg-mp3-192" | nc 192.168.68.112 4212'
 
+# ================================
+# INPUT ENTITIES
+# ================================
+
+# Text input entities for storing dynamic values
 input_text:
   aktiv_radiokanal:
     name: "Aktiv Radiokanal"
@@ -26,7 +46,7 @@ input_text:
     name: "Last Active Scene"
     initial: ""
 
-
+# Number input entities for device control
 input_number:
   beer_elevator_speed:
     name: Hisshastighet
@@ -72,6 +92,10 @@ input_number:
     step: 0.01
     mode: slider
 
+# ================================
+# TEXT-TO-SPEECH CONFIGURATION
+# ================================
+
 # Text-to-Speech settings
 tts:
   - platform: google_translate
@@ -79,6 +103,10 @@ tts:
     cache: true
     cache_dir: /config/tts
     time_memory: 300
+
+# ================================
+# ENTITY CUSTOMIZATION
+# ================================
 
 homeassistant:
   customize:
@@ -136,6 +164,10 @@ homeassistant:
       device_class: temperature
       
 
+# ================================
+# BOOLEAN TOGGLES
+# ================================
+
 # Input Booleans to track button press
 input_boolean:
   confirmation_active:
@@ -151,6 +183,10 @@ input_boolean:
     icon: mdi:gate    
     
 
+# ================================
+# MQTT INTEGRATION
+# ================================
+
 # Combined MQTT configuration
 mqtt:
   broker: localhost
@@ -159,6 +195,10 @@ mqtt:
   password: !secret mqtt_password
   discovery: true
   discovery_prefix: homeassistant
+  
+  # ================================
+  # MQTT SWITCHES
+  # ================================
   
   switch:
     - name: "Chickendoor Control"
@@ -176,6 +216,10 @@ mqtt:
       optimistic: false
       retain: false
       
+  # ================================
+  # MQTT BUTTONS
+  # ================================
+  
   button:
     - unique_id: open_duck_door
       name: "Open Duck Door"
@@ -202,6 +246,10 @@ mqtt:
       payload_press: "1"
       qos: 0
       
+  # ================================
+  # MQTT NUMBERS
+  # ================================
+  
   number:
     - unique_id: duck_door_rotation_count
       name: "Duck Door Rotation Count"
@@ -217,6 +265,9 @@ mqtt:
       payload_available:   "online"
       payload_not_available: "offline"      
 
+  # ================================
+  # MQTT SENSORS
+  # ================================
       
   sensor:
     - name: "ESP32 Temperature 1"
@@ -324,6 +375,10 @@ mqtt:
     - name: "Chickendoor Status"
       state_topic: "chickendoor/status"
   
+  # ================================
+  # MQTT BINARY SENSORS
+  # ================================
+  
   binary_sensor:
     - name: Duck Door Online
       unique_id: duck_door_online
@@ -361,6 +416,10 @@ mqtt:
       device_class: door
 
 
+
+# ================================
+# TEMPLATE ENTITIES
+# ================================
 
 template:
   # the Wi-Fi status sensor you already added
