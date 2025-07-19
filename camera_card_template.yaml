@@ -1,0 +1,85 @@
+# LilyGo Camera Control Card (Raw YAML for Dashboard)
+# Copy and paste this into your Lovelace dashboard in raw configuration editor
+
+type: vertical-stack
+cards:
+  # Camera Quality Controls
+  - type: entities
+    title: 📸 LilyGo Camera Controls
+    show_header_toggle: false
+    entities:
+      - entity: number.lilygo_camera_quality
+        name: Image Quality (1-63)
+        icon: mdi:quality-high
+      - entity: number.lilygo_camera_brightness  
+        name: Brightness (-2 to 2)
+        icon: mdi:brightness-6
+      - entity: number.lilygo_camera_contrast
+        name: Contrast (-2 to 2) 
+        icon: mdi:contrast
+      - entity: number.lilygo_camera_saturation
+        name: Saturation (-2 to 2)
+        icon: mdi:palette
+      - entity: number.lilygo_camera_frequency
+        name: Frequency (10-25 MHz)
+        icon: mdi:sine-wave
+
+  # Camera Flip/Mirror Controls
+  - type: entities
+    title: 🔄 Camera Orientation
+    show_header_toggle: false
+    entities:
+      - entity: switch.lilygo_camera_vflip
+        name: Vertical Flip
+        icon: mdi:flip-vertical
+      - entity: switch.lilygo_camera_hmirror
+        name: Horizontal Mirror
+        icon: mdi:flip-horizontal
+      - entity: switch.lilygo_screen_flip
+        name: Screen Flip (OLED)
+        icon: mdi:phone-rotate-portrait
+
+  # Quick Presets
+  - type: horizontal-stack
+    cards:
+      - type: button
+        name: Indoor
+        icon: mdi:home
+        tap_action:
+          action: call-service
+          service: script.camera_indoor_preset
+      - type: button
+        name: Outdoor
+        icon: mdi:weather-sunny
+        tap_action:
+          action: call-service
+          service: script.camera_outdoor_preset
+      - type: button
+        name: Night
+        icon: mdi:weather-night
+        tap_action:
+          action: call-service
+          service: script.camera_night_preset
+      - type: button
+        name: Reset
+        icon: mdi:refresh
+        tap_action:
+          action: call-service
+          service: script.camera_reset_defaults
+
+  # Camera Status
+  - type: glance
+    title: 📊 Status  
+    columns: 2
+    entities:
+      - entity: sensor.lilygo_camera_status
+        name: Camera
+      - entity: sensor.lilygo_camera_settings
+        name: Settings
+
+  # Info Card
+  - type: markdown
+    content: |
+      **📡 Status Feedback:** Device publishes back to status topics  
+      **🎯 Real-time Updates:** Shows actual device state in HA  
+      **⚙️ LilyGo:** Your device publishes responses to status topics!

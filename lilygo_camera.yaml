@@ -1,0 +1,137 @@
+# LilyGo Camera Control Dashboard
+# Controls for LilyGo T-Camera S3 devices
+
+title: LilyGo Camera Controls
+views:
+  - title: Camera Controls
+    cards:
+      # Camera Quality Controls
+      - type: entities
+        title: 📸 Camera Quality Settings
+        entities:
+          - entity: number.lilygo_camera_quality
+            name: Image Quality
+            icon: mdi:quality-high
+          - entity: number.lilygo_camera_brightness
+            name: Brightness
+            icon: mdi:brightness-6
+          - entity: number.lilygo_camera_contrast
+            name: Contrast
+            icon: mdi:contrast
+          - entity: number.lilygo_camera_saturation
+            name: Saturation
+            icon: mdi:palette
+          - entity: number.lilygo_camera_frequency
+            name: Frequency (MHz)
+            icon: mdi:sine-wave
+
+      # Camera Flip/Mirror Controls
+      - type: entities
+        title: 🔄 Camera Orientation
+        entities:
+          - entity: switch.lilygo_camera_vflip
+            name: Vertical Flip
+            icon: mdi:flip-vertical
+          - entity: switch.lilygo_camera_hmirror
+            name: Horizontal Mirror  
+            icon: mdi:flip-horizontal
+          - entity: switch.lilygo_screen_flip
+            name: Screen Flip (OLED)
+            icon: mdi:phone-rotate-portrait
+
+      # Camera Status & Information
+      - type: entities
+        title: 📊 Camera Status
+        entities:
+          - entity: sensor.lilygo_camera_status
+            name: Camera Status
+            icon: mdi:camera
+          - entity: sensor.lilygo_camera_settings
+            name: Settings Status
+            icon: mdi:camera-settings
+
+      # Quick Camera Controls (Glance Card)
+      - type: glance
+        title: 🎯 Quick Controls
+        columns: 3
+        entities:
+          - entity: number.lilygo_camera_quality
+            name: Quality
+            tap_action:
+              action: more-info
+          - entity: number.lilygo_camera_brightness  
+            name: Brightness
+            tap_action:
+              action: more-info
+          - entity: switch.lilygo_camera_vflip
+            name: V-Flip
+            tap_action:
+              action: toggle
+          - entity: switch.lilygo_camera_hmirror
+            name: H-Mirror
+            tap_action:
+              action: toggle
+          - entity: number.lilygo_camera_contrast
+            name: Contrast
+            tap_action:
+              action: more-info
+          - entity: number.lilygo_camera_saturation
+            name: Saturation
+            tap_action:
+              action: more-info
+
+      # Camera Presets (Custom Button Card)
+      - type: horizontal-stack
+        cards:
+          - type: button
+            name: Indoor Preset
+            icon: mdi:home
+            tap_action:
+              action: call-service
+              service: script.camera_indoor_preset
+            hold_action:
+              action: more-info
+          - type: button
+            name: Outdoor Preset  
+            icon: mdi:weather-sunny
+            tap_action:
+              action: call-service
+              service: script.camera_outdoor_preset
+            hold_action:
+              action: more-info
+          - type: button
+            name: Night Preset
+            icon: mdi:weather-night
+            tap_action:
+              action: call-service
+              service: script.camera_night_preset
+            hold_action:
+              action: more-info
+
+      # Advanced Settings Guide
+      - type: markdown
+        content: |
+          ## 🔧 Camera Settings Guide
+          
+          **Quality (1-63):** Lower = Better quality, Higher = Smaller file size  
+          **Brightness (-2 to 2):** Adjust image brightness  
+          **Contrast (-2 to 2):** Adjust image contrast  
+          **Saturation (-2 to 2):** Adjust color intensity  
+          **Frequency (10-25 MHz):** Camera frequency setting  
+          
+          **Flip Controls:**
+          - **Vertical Flip:** Flip image upside down
+          - **Horizontal Mirror:** Mirror image left/right
+          - **Screen Flip:** Rotate OLED display
+          
+          ## 📡 MQTT Command Topics
+          
+          Commands are sent to these topics:
+          - `camera/quality/set` - Image quality (1-63)
+          - `camera/brightness/set` - Brightness (-2 to 2)  
+          - `camera/contrast/set` - Contrast (-2 to 2)
+          - `camera/saturation/set` - Saturation (-2 to 2)
+          - `camera/frequency/set` - Frequency (10-25)
+          - `camera/vflip/set` - Vertical flip (0/1)
+          - `camera/hmirror/set` - Horizontal mirror (0/1)
+          - `screen/flip/set` - Screen flip (0/1)
