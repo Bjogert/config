@@ -1,6 +1,41 @@
 Dark Pastel:
   modes:
     dark:
+      # ============================================================================
+      # CENTRALIZED COLOR PALETTE - Change these values to theme the entire system
+      # ============================================================================
+      
+      # Primary Earthy Color Palette (RGB values without 'rgb()' wrapper)
+      earthy-orange-rgb: '165, 120, 45'        # Primary accent/orange
+      earthy-green-rgb: '62, 89, 52'           # Primary green/blue replacement
+      earthy-brown-rgb: '123, 75, 54'          # Rich brown
+      earthy-red-rgb: '173, 107, 75'           # Warm red/pink
+      earthy-beige-rgb: '221, 203, 183'        # Light cream/yellow
+      earthy-grey-rgb: '130, 137, 110'         # Neutral grey
+      
+      # Brightness Scale for Lights (based on earthy-orange)
+      light-100-rgb: '165, 120, 45'            # 100% brightness
+      light-80-rgb: '140, 100, 35'             # 80% brightness  
+      light-60-rgb: '115, 80, 25'              # 60% brightness
+      light-40-rgb: '90, 60, 15'               # 40% brightness
+      light-20-rgb: '65, 40, 10'               # 20% brightness
+      
+      # Background Colors (HEX values)
+      bg-primary: '#151310'                     # Main background
+      bg-secondary: '#362d1dff'                   # Card background
+      bg-tertiary: '#2b2718ff'                  # Card background with alpha
+      
+      # Icon Colors (HEX values)
+      icon-primary: '#8a7356'                    # Default icon color (warm brown)
+      icon-secondary: '#c4a882'                  # Secondary icon color (warm beige)
+      icon-orange: '#97570eff'                   # Orange icon color (earthy orange)
+      icon-disabled: '#1e1513ff'                 # Disabled/unavailable icon color (dark gray)
+      icon-contrast: '#8c8c8c'                   # Better contrast for switches/toggles
+      
+      # ============================================================================
+      # FONTS
+      # ============================================================================
+      
       # Fonts
       primary-font-family: 'Raleway,sans-serif'
       paper-font-common-base_-_font-family: 'var(--primary-font-family)'
@@ -13,16 +48,15 @@ Dark Pastel:
       ha-card-header-font-family: 'var(--primary-font-family)'
 
       # Text
-      text-color: '#ffffff'
+      text-color: '#adb090ff'
       primary-text-color: 'var(--text-color)'
       text-primary-color: 'var(--text-color)'
-      secondary-text-color: '#bac0c6'
-      text-medium-light-color: '#a0a2a8'
-      text-medium-color: '#80828a'
-      disabled-text-color: '#626569'
+      secondary-text-color: '#c6c2baff'
+      text-medium-light-color: '#a8a7a0ff'
+      text-medium-color: '#8a8680ff'
+      disabled-text-color: 'var(--icon-disabled)'
       text-light-primary-color: 'var(--text-color)'
       text-accent-color: '#0d0a07'
-      mdc-theme-on-secondary: 'var(--text-accent-color)'
 
       # Text Fields and Dropdowns
       mdc-text-field-fill-color: 'var(--background-color)'
@@ -45,44 +79,56 @@ Dark Pastel:
       code-editor-background-color: '#1c1c1c'
       codemirror-property: 'var(--accent-color)'
 
+      # ============================================================================
+      # MAIN COLORS
+      # ============================================================================
+      
       # Main Colors
-      app-header-background-color: 'var(--background-color)'
+      app-header-background-color: 'var(--bg-primary)'
       header-height: '48px'
-      accent-color: 'rgb(var(--mush-rgb-orange))'
+      accent-color: 'rgb(var(--earthy-orange-rgb))'
       accent-medium-color: 'var(--accent-color)'
       primary-color: 'var(--accent-color)'
       dark-primary-color: 'var(--accent-color)'
       light-primary-color: 'var(--disabled-text-color)'
-      paper-card-background-color: 'var(--background-color)'
+      paper-card-background-color: 'var(--bg-primary)'
 
       # Background
-      background-color: '#131313'
-      primary-background-color: 'var(--background-color)'
-      background-color-2: '#4B4B4B'
+      background-color: 'var(--bg-primary)'
+      primary-background-color: 'var(--bg-primary)'
+      background-color-2: 'var(--bg-secondary)'
       secondary-background-color: '"none"'
-      markdown-code-background-color: 'var(--background-color)'
+      markdown-code-background-color: 'var(--bg-primary)'
       material-background-color: 'var(--paper-listbox-background-color)'
       material-secondary-background-color: 'var(--ha-card-background)'
       clear-background-color: 'var(--accent-color)'
 
+      # ============================================================================
+      # CARD & DIALOG COLORS
+      # ============================================================================
+      
       # Card
       card-background-color: 'var(--ha-card-background)'
-      ha-card-background: '#1F1F1F'
+      ha-card-background: 'var(--bg-tertiary)'
       ha-card-box-shadow: '0px 2px 4px 0px rgba(0,0,0,0.16)'
-      ha-card-border-radius: '5px'
+      ha-card-border-radius: '1px'
       border-radius: 'var(--ha-card-border-radius)'
-      ha-card-border-color: 'rgba(0,0,0,0)'
-      ha-card-border-width: '0'
+      ha-card-border-color: 'rgba(255, 216, 60, 0.08)'
+      ha-card-border-width: '0.5px'
       ha-card-header-color: 'var(--primary-text-color)'
 
       # Dialog
       ha-dialog-border-radius: 'var(--ha-card-border-radius)'
 
+      # ============================================================================
+      # ICON COLORS
+      # ============================================================================
+      
       # Icons
-      paper-item-icon-color: '#ebebeb'
+      paper-item-icon-color: 'var(--icon-primary)'
       paper-item-icon-active-color: 'var(--accent-color)'
-      paper-item-selected_-_background-color: 'var(--background-color)'
-      icon-color: 'var(--text-color)'
+      paper-item-selected_-_background-color: 'var(--bg-primary)'
+      icon-color: 'var(--icon-primary)'
 
       # RGB States
       rgb-state-default-color: '253, 203, 110'
@@ -90,9 +136,14 @@ Dark Pastel:
 
       # State Colors
       state-active-color: 'var(--state-orange-color)'
-      state-red-color: 'rgb(var(--mush-rgb-red))'
+      state-red-color: 'rgb(var(--mush-rgb-deep-orange))'
       state-green-color: 'rgb(var(--mush-rgb-green))'
       state-orange-color: 'rgb(var(--mush-rgb-orange))'
+      state-blue-color: 'rgb(var(--mush-rgb-blue))'
+      state-cyan-color: 'rgb(var(--mush-rgb-cyan))'
+      state-teal-color: 'rgb(var(--mush-rgb-teal))'
+      state-indigo-color: 'rgb(var(--mush-rgb-indigo))'
+      state-light-blue-color: 'rgb(var(--mush-rgb-light-blue))'
       state-alarm_control_panel-armed_away-color: 'var(--state-green-color)'
       state-alarm_control_panel-armed_custom_bypass-color: 'var(--state-green-color)'
       state-alarm_control_panel-armed_home-color: 'var(--state-green-color)'
@@ -130,7 +181,6 @@ Dark Pastel:
       state-group-active-color: 'var(--accent-color)'
       state-humidifier-active-color: 'var(--accent-color)'
       state-input_boolean-active-color: 'var(--accent-color)'
-      state-light-active-color: 'var(--accent-color)'
       state-lock-jammed-color: 'var(--state-red-color)'
       state-lock-locked-color: 'var(--accent-color)'
       state-lock-pending-color: 'var(--state-orange-color)'
@@ -149,13 +199,17 @@ Dark Pastel:
       state-sensor-battery-low-color: 'var(--state-red-color)'
       state-sensor-battery-medium-color: 'var(--state-orange-color)'
 
+      # ============================================================================
+      # SIDEBAR COLORS
+      # ============================================================================
+      
       # Sidebar
-      sidebar-background-color: 'var(--background-color)'
-      sidebar-icon-color: '#7b7d80'
+      sidebar-background-color: 'var(--bg-primary)'
+      sidebar-icon-color: 'var(--icon-secondary)'
       sidebar-selected-icon-color: 'var(--accent-color)'
       sidebar-selected-text-color: 'var(--text-color)'
       paper-listbox-background-color: 'var(--sidebar-background-color)'
-      divider-color: 'var(--background-color)'
+      divider-color: 'var(--bg-primary)'
 
       # Sliders
       paper-slider-knob-color: 'var(--accent-color)'
@@ -167,21 +221,20 @@ Dark Pastel:
       paper-slider-disabled-active-color: 'var(--disabled-text-color)'
       paper-slider-disabled-secondary-color: 'var(--disabled-text-color)'
 
-      # Toggle:
+      # Toggle: (Fixed contrast for better visibility)
       paper-toggle-button-checked-bar-color: 'var(--accent-color)'
-      mdc-theme-primary: 'var(--accent-color)'
       paper-toggle-button-checked-ink-color: 'var(--accent-color)'
-      paper-toggle-button-unchecked-button-color: 'var(--disabled-text-color)'
-      paper-toggle-button-unchecked-bar-color: 'var(--disabled-text-color)'
-      paper-toggle-button-unchecked-ink-color: 'var(--disabled-text-color)'
+      paper-toggle-button-unchecked-button-color: '#8c8c8c'
+      paper-toggle-button-unchecked-bar-color: '#8c8c8c'
+      paper-toggle-button-unchecked-ink-color: '#8c8c8c'
 
-      # Switch
+      # Switch (Fixed contrast for better visibility)
       switch-unchecked-color: '#8c8c8c'
       switch-checked-button-color: 'var(--accent-color)'
-      switch-unchecked-track-color: 'var(--background-color-2)'
-      switch-checked-track-color: 'var(--background-color-2)'
+      switch-unchecked-track-color: '#4a4a4a'
+      switch-checked-track-color: '#1a1410'
       switch-checked-color: 'var(--paper-toggle-button-checked-button-color)'
-      switch-unchecked-button-color: 'var(--disabled-text-color)'
+      switch-unchecked-button-color: '#8c8c8c'
 
       # Radio Button
       paper-radio-button-checked-color: 'var(--accent-color)'
@@ -255,28 +308,113 @@ Dark Pastel:
       valetudo-map-floor-color: 'var(--switch-unchecked-color)'
       valetudo-map-wall-color: 'var(--label-badge-red)'
 
+      # ============================================================================
+      # MUSHROOM COLORS - All using centralized palette
+      # ============================================================================
+      
       # Mushroom
       mush-spacing: '8px'
       mush-icon-border-radius: 'var(--ha-card-border-radius)'
       mush-control-border-radius: 'var(--ha-card-border-radius)'
       mush-chip-border-radius: 'var(--ha-card-border-radius)'
 
-      # Mushroom colors
-      mush-rgb-red: '252, 135, 126'
-      mush-rgb-pink: '249, 137, 175'
-      mush-rgb-purple: '210, 177, 230'
-      mush-rgb-deep-purple:  '161, 140, 199'
-      mush-rgb-indigo: '134, 147, 217'
-      mush-rgb-blue: '140, 180, 255'
-      mush-rgb-light-blue: '128, 214, 255'
-      mush-rgb-cyan: '132, 220, 216'
-      mush-rgb-teal: '114, 172, 160'
-      mush-rgb-green: '151, 212, 146'
-      mush-rgb-light-green:  '191, 234, 175'
-      mush-rgb-lime: '207, 229, 155'
-      mush-rgb-yellow: '255, 251, 125'
-      mush-rgb-amber: '245, 219, 126'
-      mush-rgb-orange: '236, 190, 125'
-      mush-rgb-deep-orange:  '239, 165, 121'
-      mush-rgb-brown: '189, 169, 162'
-      mush-rgb-blue-grey: '174, 190, 198'
+      # Mushroom colors - all mapped to our centralized palette
+      mush-rgb-red: 'var(--earthy-red-rgb)'
+      mush-rgb-pink: 'var(--earthy-red-rgb)'
+      mush-rgb-purple: 'var(--earthy-brown-rgb)'
+      mush-rgb-deep-purple: 'var(--earthy-brown-rgb)'
+      mush-rgb-indigo: 'var(--earthy-green-rgb)'
+      mush-rgb-blue: 'var(--earthy-green-rgb)'
+      mush-rgb-light-blue: 'var(--earthy-green-rgb)'
+      mush-rgb-cyan: 'var(--earthy-green-rgb)'
+      mush-rgb-teal: 'var(--earthy-green-rgb)'
+      mush-rgb-green: 'var(--earthy-green-rgb)'
+      mush-rgb-light-green: 'var(--earthy-green-rgb)'
+      mush-rgb-lime: 'var(--earthy-green-rgb)'
+      mush-rgb-yellow: 'var(--earthy-beige-rgb)'
+      mush-rgb-amber: 'var(--earthy-beige-rgb)'
+      mush-rgb-orange: 'var(--earthy-orange-rgb)'
+      mush-rgb-deep-orange: 'var(--earthy-orange-rgb)'
+      mush-rgb-brown: 'var(--earthy-brown-rgb)'
+      mush-rgb-blue-grey: 'var(--earthy-grey-rgb)'
+
+      # ============================================================================
+      # CUSTOM CARD COLOR OVERRIDES - All using centralized palette
+      # ============================================================================
+      
+      # Custom Card Color Overrides
+      card-mod-theme: 'Dark Pastel'
+      
+      # Button Card and Custom Card Colors
+      button-card-color-auto: 'rgb(var(--earthy-green-rgb))'
+      button-card-color-off: 'rgb(var(--earthy-grey-rgb))'
+      button-card-color-on: 'rgb(var(--earthy-orange-rgb))'
+      
+      # Material Design Colors (for custom cards)
+      material-blue-500: 'rgb(var(--earthy-green-rgb))'
+      material-blue-600: 'rgb(var(--earthy-green-rgb))'
+      material-blue-700: 'rgb(var(--earthy-green-rgb))'
+      material-orange-500: 'rgb(var(--earthy-orange-rgb))'
+      material-orange-600: 'rgb(var(--earthy-orange-rgb))'
+      material-orange-700: 'rgb(var(--earthy-orange-rgb))'
+      
+      # Standard Home Assistant Button Colors
+      ha-button-background-color: 'var(--ha-card-background)'
+      ha-button-text-color: 'var(--primary-text-color)'
+      
+      # MDC (Material Design Components) Colors for native buttons
+      mdc-theme-primary: 'rgb(var(--earthy-green-rgb))'
+      mdc-theme-on-primary: 'var(--primary-text-color)'
+      mdc-theme-secondary: 'rgb(var(--earthy-orange-rgb))'
+      mdc-theme-on-secondary: 'var(--primary-text-color)'
+      
+      # Home Assistant specific button states
+      state-icon-color: 'var(--paper-item-icon-color)'
+      state-icon-active-color: 'rgb(var(--earthy-green-rgb))'
+      
+      # Override blue colors specifically for icons
+      blue-color: 'rgb(var(--earthy-green-rgb))'
+      light-blue-color: 'rgb(var(--earthy-green-rgb))'
+      indigo-color: 'rgb(var(--earthy-green-rgb))'
+      cyan-color: 'rgb(var(--earthy-green-rgb))'
+      teal-color: 'rgb(var(--earthy-green-rgb))'
+      
+      # Additional Mushroom and Custom Card Overrides
+      # Light/Lamp specific colors
+      state-light-color: 'rgb(var(--earthy-orange-rgb))'
+      state-light-active-color: 'rgb(var(--earthy-orange-rgb))'
+      state-light-on-color: 'rgb(var(--earthy-orange-rgb))'
+      
+      # Light brightness scale using our centralized brightness values
+      light-color-max: 'rgb(var(--light-100-rgb))'      # 100% = earthy orange
+      light-color-bright: 'rgb(var(--light-80-rgb))'    # 80% = darker earthy orange
+      light-color-medium: 'rgb(var(--light-60-rgb))'    # 60% = medium earthy orange
+      light-color-dim: 'rgb(var(--light-40-rgb))'       # 40% = dim earthy orange
+      light-color-low: 'rgb(var(--light-20-rgb))'       # 20% = very dim earthy orange
+      
+      # Override the default brightness colors Home Assistant uses
+      rgb-state-light-color: 'var(--earthy-orange-rgb)'     # Max brightness RGB
+      
+      # Override yellow/bright colors used for lights at full brightness
+      yellow-color: 'rgb(var(--earthy-orange-rgb))'
+      amber-color: 'rgb(var(--earthy-orange-rgb))'
+      
+      # More comprehensive icon color overrides
+      icon-color-on: 'rgb(var(--earthy-orange-rgb))'
+      icon-color-off: 'var(--icon-disabled)'
+      icon-color-unavailable: 'var(--icon-disabled)'
+      
+      # Domain-specific colors
+      state-climate-color: 'rgb(var(--earthy-green-rgb))'
+      state-media_player-color: 'rgb(var(--earthy-green-rgb))'
+      state-sensor-color: 'rgb(var(--earthy-green-rgb))'
+      
+      # More MDC theme colors
+      mdc-theme-surface: 'var(--ha-card-background)'
+      mdc-theme-on-surface: 'var(--primary-text-color)'
+      mdc-theme-text-primary-on-background: 'var(--primary-text-color)'
+      
+      # Additional Material colors that cards might use
+      material-blue-a200: 'rgb(var(--earthy-green-rgb))'
+      material-blue-a400: 'rgb(var(--earthy-green-rgb))'
+      material-blue-a700: 'rgb(var(--earthy-green-rgb))'
