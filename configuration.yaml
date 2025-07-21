@@ -120,6 +120,11 @@ tts:
 
 homeassistant:
   customize:
+    sensor.hot_tub_temperature:
+      state_class: measurement
+      unit_of_measurement: "°C"
+      device_class: temperature
+
     sensor.esp32_temperature_1:
       friendly_name: "Hönshuset"
       state_class: measurement
@@ -194,376 +199,320 @@ input_boolean:
     
 
 # ================================
-# MQTT DEVICES
+# MQTT CONFIGURATION
 # ================================
 
-# MQTT Switches
-switch:
-  # ================================
-  # BASIC SWITCHES
-  # ================================
-  
-  - platform: mqtt
-    name: "Chickendoor Control"
-    state_topic: "chickendoor/status"
-    command_topic: "chickendoor/control"
-    payload_on: "close"
-    payload_off: "close"
-    state_on: "door closed"
-    state_off: "door opened"
-    
-  - platform: mqtt
-    name: "Underbaren"
-    command_topic: "beer_elevator/command"
-    payload_on: "Up"
-    payload_off: "Down"
-    optimistic: false
-    retain: false
+# Combined MQTT configuration
+mqtt:
+  switch:
+    - name: "Chickendoor Control"
+      state_topic: "chickendoor/status"
+      command_topic: "chickendoor/control"
+      payload_on: "close"
+      payload_off: "close"
+      state_on: "door closed"
+      state_off: "door opened"
       
-  # ================================
-  # CAMERA CONTROL SWITCHES  
-  # ================================
+    - name: "Underbaren"
+      command_topic: "beer_elevator/command"
+      payload_on: "Up"
+      payload_off: "Down"
+      optimistic: false
+      retain: false
+      
+    # ================================
+    # CAMERA CONTROL SWITCHES  
+    # ================================
+    
+    - name: "Camera Vertical Flip"
+      unique_id: "lilygo_camera_vflip"
+      state_topic: "camera/vflip/status"
+      command_topic: "camera/vflip/set"
+      payload_on: "0"     # Note: Reversed logic for camera
+      payload_off: "1"
+      state_on: "false"   # When camera reports false, HA shows ON
+      state_off: "true"   # When camera reports true, HA shows OFF
+      value_template: "{{ value_json.vflip }}"
+      icon: "mdi:flip-vertical"
+      
+    - name: "Camera Horizontal Mirror"
+      unique_id: "lilygo_camera_hmirror"
+      state_topic: "camera/hmirror/status"
+      command_topic: "camera/hmirror/set"
+      payload_on: "1"
+      payload_off: "0"
+      state_on: "true"
+      state_off: "false"
+      value_template: "{{ value_json.hmirror }}"
+      icon: "mdi:flip-horizontal"
+      
+    - name: "Screen Flip (OLED)"
+      unique_id: "lilygo_screen_flip"
+      state_topic: "screen/flip/status"
+      command_topic: "screen/flip/set"
+      payload_on: "1"
+      payload_off: "0"
+      state_on: "true"
+      state_off: "false"
+      value_template: "{{ value_json.screen_flip }}"
+      icon: "mdi:phone-rotate-portrait"
+      
+  button:
+    - unique_id: duck_door_open
+      name: "Open Duck Door"
+      command_topic: "duck/door/command"
+      payload_press: "clockwise"
+      qos: 1
+
+    - unique_id: duck_door_close
+      name: "Close Duck Door"
+      command_topic: "duck/door/command"
+      payload_press: "counterclockwise"
+      qos: 1
+      
+    - unique_id: beer_elevator_set_home
+      name: "Nollställ Hemläge"
+      command_topic: "beer_elevator/set_home"
+      payload_press: "1"
+      qos: 0      
+      
+    - unique_id: duck_door_stop
+      name: "Duck Door Emergency Stop"
+      command_topic: "duck/door/command"
+      payload_press: "stop"
+      qos: 1      
+
+  number:
+    - unique_id: duck_door_rotation_count
+      name: "Duck Door Rotation Count"
+      state_topic:   "duck/door/rotation_count"
+      command_topic: "duck/door/rotation_count/set"
+      min: 1
+      max: 50
+      step: 1
+      mode: box
+      unit_of_measurement: "revs"
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available:   "online"
+      payload_not_available: "offline"      
+
+    # ================================
+    # LILYGO CAMERA CONTROLS
+    # ================================
+    
+    - name: "Camera Quality"
+      unique_id: "lilygo_camera_quality"
+      state_topic: "camera/quality/status"
+      command_topic: "camera/quality/set"
+      min: 1
+      max: 63
+      step: 1
+      mode: slider
+      unit_of_measurement: ""
+      icon: "mdi:quality-high"
+      value_template: "{{ value_json.quality | default(10) }}"
+
+    - name: "Camera Brightness"
+      unique_id: "lilygo_camera_brightness"
+      state_topic: "camera/brightness/status"
+      command_topic: "camera/brightness/set"
+      min: -2
+      max: 2
+      step: 1
+      mode: slider
+      icon: "mdi:brightness-6"
+      value_template: "{{ value_json.brightness | default(0) }}"
+
+    - name: "Camera Contrast"
+      unique_id: "lilygo_camera_contrast"
+      state_topic: "camera/contrast/status"
+      command_topic: "camera/contrast/set"
+      min: -2
+      max: 2
+      step: 1
+      mode: slider
+      icon: "mdi:contrast"
+      value_template: "{{ value_json.contrast | default(0) }}"
+
+    - name: "Camera Saturation"
+      unique_id: "lilygo_camera_saturation"
+      state_topic: "camera/saturation/status"
+      command_topic: "camera/saturation/set"
+      min: -2
+      max: 2
+      step: 1
+      mode: slider
+      icon: "mdi:palette"
+      value_template: "{{ value_json.saturation | default(0) }}"
+
+    - name: "Camera Frequency"
+      unique_id: "lilygo_camera_frequency"
+      state_topic: "camera/frequency/status"
+      command_topic: "camera/frequency/set"
+      min: 10
+      max: 25
+      step: 1
+      mode: slider
+      unit_of_measurement: "MHz"
+      icon: "mdi:sine-wave"
+      value_template: "{{ value_json.frequency_mhz | default(20) }}"      
+
+  sensor:
+    - name: "ESP32 Temperature 1"
+      state_topic: "home/esp32_1/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 1"
+      state_topic: "home/esp32_1/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Temperature 2"
+      state_topic: "home/esp32_2/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 2"
+      state_topic: "home/esp32_2/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Temperature 3"
+      state_topic: "home/esp32_3/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 3"
+      state_topic: "home/esp32_3/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Temperature 4"
+      state_topic: "home/esp32_4/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+
+    - name: "ESP32 Humidity 4"
+      state_topic: "home/esp32_4/humidity"
+      unit_of_measurement: "%"
+      value_template: "{{ value | float | round(0) }}"
+      device_class: "humidity"
+      state_class: measurement
+      expire_after: 1200
+      
+    - name: "ESP32 Temperature 5"
+      state_topic: "home/esp32_5/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+      
+    - name: "ESP32 Temperature 7"
+      state_topic: "home/esp32_7/temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ value | float | round(1) }}"
+      device_class: "temperature"
+      state_class: measurement
+      expire_after: 1200
+      
+    - name: "Beer Elevator Position"
+      state_topic: "beer_elevator/position"
+      value_template: "{{ value }}"
+      icon: mdi:elevator
+
+    - name: "Beer Elevator State"
+      state_topic: "beer_elevator/state"
+      icon: mdi:elevator
+
+    - name: "Beer Elevator Acceleration (ACK)"
+      state_topic: "beer_elevator/config/acceleration"
+      unit_of_measurement: "steps/s²"
+      
+    - unique_id: duck_door_status
+      name: "Duck Door Status"
+      state_topic: "duck/door/status"
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"   
   
-  - platform: mqtt
-    name: "Camera Vertical Flip"
-    unique_id: "lilygo_camera_vflip"
-    state_topic: "camera/vflip/status"
-    command_topic: "camera/vflip/set"
-    payload_on: "0"     # Note: Reversed logic for camera
-    payload_off: "1"
-    state_on: "false"   # When camera reports false, HA shows ON
-    state_off: "true"   # When camera reports true, HA shows OFF
-    value_template: "{{ value_json.vflip }}"
-    icon: "mdi:flip-vertical"
+    - name: "Chickendoor Status"
+      state_topic: "chickendoor/status"      
+      
+    # ================================
+    # CAMERA SENSORS
+    # ================================
     
-  - platform: mqtt
-    name: "Camera Horizontal Mirror"
-    unique_id: "lilygo_camera_hmirror"
-    state_topic: "camera/hmirror/status"
-    command_topic: "camera/hmirror/set"
-    payload_on: "1"
-    payload_off: "0"
-    state_on: "true"
-    state_off: "false"
-    value_template: "{{ value_json.hmirror }}"
-    icon: "mdi:flip-horizontal"
-    
-  - platform: mqtt
-    name: "Screen Flip (OLED)"
-    unique_id: "lilygo_screen_flip"
-    state_topic: "screen/flip/status"
-    command_topic: "screen/flip/set"
-    payload_on: "1"
-    payload_off: "0"
-    state_on: "true"
-    state_off: "false"
-    value_template: "{{ value_json.screen_flip }}"
-    icon: "mdi:phone-rotate-portrait"
-
-# ================================
-# MQTT BUTTONS
-# ================================
-
-button:
-  - platform: mqtt
-    unique_id: open_duck_door
-    name: "Open Duck Door"
-    command_topic: "duck/door/command"
-    payload_press: "clockwise"
-    qos: 1
-
-  - platform: mqtt
-    unique_id: close_duck_door
-    name: "Close Duck Door" 
-    command_topic: "duck/door/command"
-    payload_press: "counterclockwise"
-    qos: 1
-    
-  - platform: mqtt
-    unique_id: duck_door_stop
-    name: "Duck Door Emergency Stop"
-    command_topic: "duck/door/command"
-    payload_press: "stop"
-    qos: 1
-    
-  - platform: mqtt
-    unique_id: beer_elevator_set_home
-    name: "Nollställ Hemläge"
-    command_topic: "beer_elevator/set_home"
-    payload_press: "1"
-    qos: 0
-# ================================
-# MQTT NUMBERS
-# ================================
-
-number:
-  - platform: mqtt
-    unique_id: duck_door_rotation_count
-    name: "Duck Door Rotation Count"
-    state_topic: "duck/door/rotation_count"
-    command_topic: "duck/door/rotation_count/set"
-    min: 1
-    max: 50
-    step: 1
-    mode: box
-    unit_of_measurement: "revs"
-    qos: 1
-    availability_topic: "duck/door/availability"
-    payload_available: "online"
-    payload_not_available: "offline"
-
-  # ================================
-  # LILYGO CAMERA CONTROLS
-  # ================================
+    - name: "Camera Settings"
+      unique_id: "lilygo_camera_settings"
+      state_topic: "camera/settings/status"
+      value_template: "{{ value_json.status | default('unknown') }}"
+      icon: "mdi:camera-settings"
+      
+    - name: "Camera Status"
+      unique_id: "lilygo_camera_status"  
+      state_topic: "camera/status"
+      icon: "mdi:camera"
+      value_template: "{{ value_json.status | default('unknown') }}"      
   
-  - platform: mqtt
-    name: "Camera Quality"
-    unique_id: "lilygo_camera_quality"
-    state_topic: "camera/quality/status"
-    command_topic: "camera/quality/set"
-    min: 1
-    max: 63
-    step: 1
-    mode: slider
-    unit_of_measurement: ""
-    icon: "mdi:quality-high"
-    value_template: "{{ value_json.quality | default(10) }}"
+  binary_sensor:
+    - name: Duck Door Online
+      unique_id: duck_door_online
+      state_topic: "duck/door/availability"
+      payload_on:  "online"
+      payload_off: "offline"
+      device_class: connectivity
+      qos: 1
 
-  - platform: mqtt
-    name: "Camera Brightness"
-    unique_id: "lilygo_camera_brightness"
-    state_topic: "camera/brightness/status"
-    command_topic: "camera/brightness/set"
-    min: -2
-    max: 2
-    step: 1
-    mode: slider
-    icon: "mdi:brightness-6"
-    value_template: "{{ value_json.brightness | default(0) }}"
+    - name: Duck Door Limit Switch
+      unique_id: duck_door_limit_switch
+      state_topic: "duck/door/limit_switch"
+      payload_on: "triggered"
+      payload_off: "not_triggered"
+      device_class: door
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
 
-  - platform: mqtt
-    name: "Camera Contrast"
-    unique_id: "lilygo_camera_contrast"
-    state_topic: "camera/contrast/status"
-    command_topic: "camera/contrast/set"
-    min: -2
-    max: 2
-    step: 1
-    mode: slider
-    icon: "mdi:contrast"
-    value_template: "{{ value_json.contrast | default(0) }}"
-
-  - platform: mqtt
-    name: "Camera Saturation"
-    unique_id: "lilygo_camera_saturation"
-    state_topic: "camera/saturation/status"
-    command_topic: "camera/saturation/set"
-    min: -2
-    max: 2
-    step: 1
-    mode: slider
-    icon: "mdi:palette"
-    value_template: "{{ value_json.saturation | default(0) }}"
-
-  - platform: mqtt
-    name: "Camera Frequency"
-    unique_id: "lilygo_camera_frequency"
-    state_topic: "camera/frequency/status"
-    command_topic: "camera/frequency/set"
-    min: 10
-    max: 25
-    step: 1
-    mode: slider
-    unit_of_measurement: "MHz"
-    icon: "mdi:sine-wave"
-    value_template: "{{ value_json.frequency_mhz | default(20) }}"      
-
-  # ================================
-# ================================
-# MQTT SENSORS
-# ================================
-
-sensor:
-  - platform: mqtt
-    name: "ESP32 Temperature 1"
-    state_topic: "home/esp32_1/temperature"
-    unit_of_measurement: "°C"
-    value_template: "{{ value | float | round(1) }}"
-    device_class: "temperature"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Humidity 1"
-    state_topic: "home/esp32_1/humidity"
-    unit_of_measurement: "%"
-    value_template: "{{ value | float | round(0) }}"
-    device_class: "humidity"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Temperature 2"
-    state_topic: "home/esp32_2/temperature"
-    unit_of_measurement: "°C"
-    value_template: "{{ value | float | round(1) }}"
-    device_class: "temperature"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Humidity 2"
-    state_topic: "home/esp32_2/humidity"
-    unit_of_measurement: "%"
-    value_template: "{{ value | float | round(0) }}"
-    device_class: "humidity"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Temperature 3"
-    state_topic: "home/esp32_3/temperature"
-    unit_of_measurement: "°C"
-    value_template: "{{ value | float | round(1) }}"
-    device_class: "temperature"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Humidity 3"
-    state_topic: "home/esp32_3/humidity"
-    unit_of_measurement: "%"
-    value_template: "{{ value | float | round(0) }}"
-    device_class: "humidity"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Temperature 4"
-    state_topic: "home/esp32_4/temperature"
-    unit_of_measurement: "°C"
-    value_template: "{{ value | float | round(1) }}"
-    device_class: "temperature"
-    state_class: measurement
-    expire_after: 1200
-
-  - platform: mqtt
-    name: "ESP32 Humidity 4"
-    state_topic: "home/esp32_4/humidity"
-    unit_of_measurement: "%"
-    value_template: "{{ value | float | round(0) }}"
-    device_class: "humidity"
-    state_class: measurement
-    expire_after: 1200
-    
-  - platform: mqtt
-    name: "ESP32 Temperature 5"
-    state_topic: "home/esp32_5/temperature"
-    unit_of_measurement: "°C"
-    value_template: "{{ value | float | round(1) }}"
-    device_class: "temperature"
-    state_class: measurement
-    expire_after: 1200
-    
-  - platform: mqtt
-    name: "ESP32 Temperature 7"
-    state_topic: "home/esp32_7/temperature"
-    unit_of_measurement: "°C"
-    value_template: "{{ value | float | round(1) }}"
-    device_class: "temperature"
-    state_class: measurement
-    expire_after: 1200
-    
-  - platform: mqtt
-    name: "Beer Elevator Position"
-    state_topic: "beer_elevator/position"
-    value_template: "{{ value }}"
-    icon: mdi:elevator
-
-  - platform: mqtt
-    name: "Beer Elevator State"
-    state_topic: "beer_elevator/state"
-    icon: mdi:elevator
-
-  - platform: mqtt
-    name: "Beer Elevator Acceleration (ACK)"
-    state_topic: "beer_elevator/config/acceleration"
-    unit_of_measurement: "steps/s²"
-    
-  # ================================
-  # CAMERA SENSORS
-  # ================================
+    - name: Beer Elevator Moving
+      unique_id: beer_elevator_moving
+      state_topic: "beer_elevator/state"
+      payload_on: "moving_up"
+      payload_off: "idle"
+      device_class: moving
+      off_delay: 5
   
-  - platform: mqtt
-    name: "Camera Settings"
-    unique_id: "lilygo_camera_settings"
-    state_topic: "camera/settings/status"
-    value_template: "{{ value_json.status | default('unknown') }}"
-    icon: "mdi:camera-settings"
-    
-  - platform: mqtt
-    name: "Camera Status"
-    unique_id: "lilygo_camera_status"  
-    state_topic: "camera/status"
-    icon: "mdi:camera"
-    value_template: "{{ value_json.status | default('unknown') }}"
-    
-  - platform: mqtt
-    unique_id: duck_door_status
-    name: "Duck Door Status"
-    state_topic: "duck/door/status"
-    qos: 1
-    availability_topic: "duck/door/availability"
-    payload_available: "online"
-    payload_not_available: "offline"   
-
-  - platform: mqtt
-    name: "Chickendoor Status"
-    state_topic: "chickendoor/status"
-
-# ================================
-# MQTT BINARY SENSORS
-# ================================
-
-binary_sensor:
-  - platform: mqtt
-    name: Duck Door Online
-    unique_id: duck_door_online
-    state_topic: "duck/door/availability"
-    payload_on:  "online"
-    payload_off: "offline"
-    device_class: connectivity
-    qos: 1
-
-  - platform: mqtt
-    name: Duck Door Limit Switch
-    unique_id: duck_door_limit_switch
-    state_topic: "duck/door/limit_switch"
-    payload_on: "triggered"
-    payload_off: "not_triggered"
-    device_class: door
-    qos: 1
-    availability_topic: "duck/door/availability"
-    payload_available: "online"
-    payload_not_available: "offline"
-    retain: false
-
-  - platform: mqtt
-    name: Beer Elevator Moving
-    unique_id: beer_elevator_moving
-    state_topic: "beer_elevator/state"
-    payload_on: "moving_up"
-    payload_off: "idle"
-    device_class: moving
-    off_delay: 5
-
-  - platform: mqtt
-    name: Beer Elevator Limit Switch
-    unique_id: beer_elevator_limit
-    state_topic: "beer_elevator/limit_switch"
-    payload_on: "down"
-    payload_off: "up"
-    device_class: door
+    - name: Beer Elevator Limit Switch
+      unique_id: beer_elevator_limit
+      state_topic: "beer_elevator/limit_switch"
+      payload_on: "down"
+      payload_off: "up"
+      device_class: door
 
 
 
@@ -580,85 +529,25 @@ template:
           {{ 'Connected' if is_state('binary_sensor.duck_door_online','on')
              else 'Disconnected' }}
 
-  # Duck door position based on limit switch (simple logic)
+  # Duck-Door-position template binary-sensor
   - binary_sensor:
       - name: Duck Door Position
         unique_id: duck_door_position
         device_class: door
         state: >
-          {% set limit_switch = states('binary_sensor.duck_door_limit_switch') %}
-          {% if limit_switch == 'on' %}
+          {% if is_state('sensor.duck_door_status', 'limit_reached') %}
             off
-          {% else %}
+          {% elif is_state('button.duck_door_close', 'on') %}
             on
-          {% endif %}
-        availability: >
-          {{ states('binary_sensor.duck_door_online') == 'on' }}
-
-      - name: Duck Door Position 2
-        unique_id: duck_door_position_2
-        device_class: door
-        state: >
-          {% set limit_switch = states('binary_sensor.duck_door_limit_switch') %}
-          {% if limit_switch == 'on' %}
-            off
-          {% else %}
-            on
-          {% endif %}
-        availability: >
-          {{ states('binary_sensor.duck_door_online') == 'on' }}
-
-  # Duck-Door-position template binary-sensor
-  - binary_sensor:
-      - name: Duck Door State
-        unique_id: duck_door_state
-        device_class: door
-        state: >
-          {% set limit_switch = states('binary_sensor.duck_door_limit_switch') %}
-          {% if limit_switch == 'on' %}
-            off
-          {% elif limit_switch == 'off' %}
+          {% elif is_state('button.duck_door_open', 'on') %}
             on
           {% else %}
-            unknown
-          {% endif %}
-        availability: >
-          {{ states('binary_sensor.duck_door_online') == 'on' }}
-
-      - name: Duck Door Safety Status
-        unique_id: duck_door_safety_status
-        device_class: safety
-        state: >
-          {% set online = is_state('binary_sensor.duck_door_online', 'on') %}
-          {% set limit = is_state('binary_sensor.duck_door_limit_switch', 'on') %}
-          {% set status = states('sensor.duck_door_status') %}
-          {% if not online %}
-            off
-          {% elif status == 'limit_reached' and limit %}
-            on
-          {% elif 'rotating' in status %}
-            off
-          {% else %}
-            on
+            {{ is_state('sensor.duck_door_status', 'rotating_cw') }}
           {% endif %}
           
- 
       - name: "UnderBaren Limit Switch"
         unique_id: underbaren_limit_switch
         device_class: door
         state: >
           {{ is_state('binary_sensor.beer_elevator_limit_switch', 'off') }}
-
-# ================================
-# LOVELACE DASHBOARDS
-# ================================
-
-# Optional: Create a dashboard card for LilyGo Camera
-lovelace:
-  dashboards:
-    lilygo-camera:
-      mode: yaml
-      title: LilyGo Camera
-      filename: lilygo_camera.yaml
-
 
