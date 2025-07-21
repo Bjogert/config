@@ -73,7 +73,8 @@
         ".storage": true,
         "tts": true,
         "image": true,
-        ".yamllint.yml": true
+        ".yamllint.yml": true,
+        "custom_components/**/*.py": true
     },
     
     "files.watcherExclude": {
