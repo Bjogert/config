@@ -239,7 +239,6 @@ mqtt:
     # ================================
     
     - name: "Camera Vertical Flip"
-      unique_id: "lilygo_camera_vflip"
       state_topic: "camera/vflip/status"
       command_topic: "camera/vflip/set"
       payload_on: "0"     # Note: Reversed logic for camera
@@ -250,7 +249,6 @@ mqtt:
       icon: "mdi:flip-vertical"
       
     - name: "Camera Horizontal Mirror"
-      unique_id: "lilygo_camera_hmirror"
       state_topic: "camera/hmirror/status"
       command_topic: "camera/hmirror/set"
       payload_on: "1"
@@ -261,7 +259,6 @@ mqtt:
       icon: "mdi:flip-horizontal"
       
     - name: "Screen Flip (OLED)"
-      unique_id: "lilygo_screen_flip"
       state_topic: "screen/flip/status"
       command_topic: "screen/flip/set"
       payload_on: "1"
@@ -316,7 +313,6 @@ mqtt:
     # ================================
     
     - name: "Camera Quality"
-      unique_id: "lilygo_camera_quality"
       state_topic: "camera/quality/status"
       command_topic: "camera/quality/set"
       min: 1
@@ -328,7 +324,6 @@ mqtt:
       value_template: "{{ value_json.quality | default(10) }}"
 
     - name: "Camera Brightness"
-      unique_id: "lilygo_camera_brightness"
       state_topic: "camera/brightness/status"
       command_topic: "camera/brightness/set"
       min: -2
@@ -339,7 +334,6 @@ mqtt:
       value_template: "{{ value_json.brightness | default(0) }}"
 
     - name: "Camera Contrast"
-      unique_id: "lilygo_camera_contrast"
       state_topic: "camera/contrast/status"
       command_topic: "camera/contrast/set"
       min: -2
@@ -350,7 +344,6 @@ mqtt:
       value_template: "{{ value_json.contrast | default(0) }}"
 
     - name: "Camera Saturation"
-      unique_id: "lilygo_camera_saturation"
       state_topic: "camera/saturation/status"
       command_topic: "camera/saturation/set"
       min: -2
@@ -361,7 +354,6 @@ mqtt:
       value_template: "{{ value_json.saturation | default(0) }}"
 
     - name: "Camera Frequency"
-      unique_id: "lilygo_camera_frequency"
       state_topic: "camera/frequency/status"
       command_topic: "camera/frequency/set"
       min: 10
@@ -491,13 +483,11 @@ mqtt:
     # ================================
     
     - name: "Camera Settings"
-      unique_id: "lilygo_camera_settings"
       state_topic: "camera/settings/status"
       value_template: "{{ value_json.status | default('unknown') }}"
       icon: "mdi:camera-settings"
       
     - name: "Camera Status"
-      unique_id: "lilygo_camera_status"  
       state_topic: "camera/status"
       icon: "mdi:camera"
       value_template: "{{ value_json.status | default('unknown') }}"      

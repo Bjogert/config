@@ -46,30 +46,14 @@
   alias: Försök att stänga hönshuset
   triggers:
   - entity_id: automation.chickendoor_close_at_sundown
-    to: 'on'
+    to: 'running'
     trigger: state
   actions:
-  - wait_for_trigger:
-    - topic: chickendoor/status
-      payload: door closed
-      trigger: mqtt
-    timeout: 00:05:00
-    continue_on_timeout: true
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: '{{ wait.trigger is not none }}'
-      sequence:
-      - data:
-          message: Hönshuset har stängt.
-        action: notify.mobile_app_telefonen
-    - conditions:
-      - condition: template
-        value_template: '{{ wait.trigger is none }}'
-      sequence:
-      - data:
-          message: 'Fel: Hönshuset stängdes inte!'
-        action: notify.mobile_app_telefonen
+  - delay: "00:02:00"  # Wait 2 minutes for door to close
+  - data:
+      message: "🐔 Hönshuset borde vara stängt nu!"
+      title: "Chicken Door"
+    action: notify.mobile_app_telefonen
   mode: single
 - id: '1730535760731'
   alias: Tända Knapp
