@@ -484,3 +484,53 @@
     action: notify.mobile_app_telefonen
   mode: single
 
+- id: badtunnan_availability_notification
+  alias: "🌡️ Badtunnan Temp - Online/Offline Notification"
+  description: 'Sends notification when Badtunnan Temp sensor goes online or offline, limited to 2 notifications per day'
+  triggers:
+  - entity_id: sensor.esp32_temperature_7
+    trigger: state
+    to: "unavailable"
+  - entity_id: sensor.esp32_temperature_7
+    trigger: state
+    from: "unavailable"
+  conditions:
+  - condition: numeric_state
+    entity_id: input_number.badtunnan_notification_count
+    below: 2
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.esp32_temperature_7
+        state: "unavailable"
+      sequence:
+      - data:
+          message: "🌡️ Badtunnan Temp sensor är OFFLINE! 📴"
+          title: "Sensor Offline"
+        action: notify.mobile_app_telefonen
+    default:
+    - data:
+        message: "🌡️ Badtunnan Temp sensor är tillbaka ONLINE! ✅"
+        title: "Sensor Online"
+      action: notify.mobile_app_telefonen
+  - action: input_number.increment
+    target:
+      entity_id: input_number.badtunnan_notification_count
+  mode: single
+
+- id: reset_badtunnan_notification_counter
+  alias: "🔄 Reset Badtunnan Notification Counter"
+  description: 'Resets the daily notification counter at midnight'
+  triggers:
+  - at: '00:00:00'
+    trigger: time
+  conditions: []
+  actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.badtunnan_notification_count
+    data:
+      value: 0
+  mode: single
+
