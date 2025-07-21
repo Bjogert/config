@@ -438,15 +438,24 @@ mqtt:
       device_class: "temperature"
       state_class: measurement
       expire_after: 1200
+      availability_topic: "home/esp32_7/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
       
     - name: "Beer Elevator Position"
       state_topic: "beer_elevator/position"
       value_template: "{{ value }}"
       icon: mdi:elevator
+      availability_topic: "beer_elevator/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
 
     - name: "Beer Elevator State"
       state_topic: "beer_elevator/state"
       icon: mdi:elevator
+      availability_topic: "beer_elevator/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
 
     - name: "Beer Elevator Acceleration (ACK)"
       state_topic: "beer_elevator/config/acceleration"
