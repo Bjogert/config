@@ -333,7 +333,14 @@
   - target:
       entity_id: input_text.last_active_scene
     data:
-      value: '{{ trigger.event.data.service_data.entity_id.split(''.'')[1] }}'
+      value: >-
+        {% if trigger.event.data.service_data.entity_id is string %}
+          {{ trigger.event.data.service_data.entity_id.split('.')[1] }}
+        {% elif trigger.event.data.service_data.entity_id is iterable %}
+          {{ trigger.event.data.service_data.entity_id[0].split('.')[1] }}
+        {% else %}
+          unknown
+        {% endif %}
     action: input_text.set_value
   mode: single
 - id: '1743797920755'
@@ -412,44 +419,83 @@
   mode: single
 - id: '1748016333344'
   alias: Open Duck Door at Sunrise
-  description: ''
+  description: 'Opens duck door 30 minutes before sunrise using new MQTT command structure'
   triggers:
   - event: sunrise
     offset: -00:30:00
     trigger: sun
-  conditions: []
+  conditions: 
+  - condition: state
+    entity_id: sensor.duck_door_status
+    state: 'closed'
   actions:
   - data:
       topic: duck/door/command
-      payload: clockwise
+      payload: open
     action: mqtt.publish
+  - delay: '00:00:02'
+  - data:
+      message: "🦆 Duck door opened at sunrise - {{ now().strftime('%H:%M') }}"
+    action: notify.mobile_app_telefonen
   mode: single
 - id: '1748016366837'
   alias: Close Duck Door at Sunset
-  description: ''
+  description: 'Closes duck door 1 hour after sunset using new MQTT command structure'
   triggers:
   - event: sunset
     offset: +01:00:00
     trigger: sun
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: sensor.duck_door_status
+    state: 'open'
   actions:
   - data:
       topic: duck/door/command
-      payload: counterclockwise
+      payload: close
     action: mqtt.publish
+  - delay: '00:00:02'
+  - data:
+      message: "🦆 Duck door closed at sunset - {{ now().strftime('%H:%M') }}"
+    action: notify.mobile_app_telefonen
   mode: single
 - id: '1748016432843'
-  alias: "\U0001F986 Notis när Duck Door stängs"
-  description: Skickar en notis när duck door når limit-switch (stängd position).
+  alias: "🦆 Duck Door Status Notifications"
+  description: 'Sends notifications for duck door status changes using new sensor structure'
   triggers:
-  - entity_id: binary_sensor.duck_door_position
-    to: 'off'
+  - entity_id: sensor.duck_door_status
+    to: 'closed'
+    trigger: state
+  - entity_id: sensor.duck_door_status  
+    to: 'open'
+    trigger: state
+  - entity_id: sensor.duck_door_status
+    to: 'error'
     trigger: state
   conditions: []
   actions:
-  - data:
-      message: Ankorna hade varit i säkerhet nu.. om de var kvar...
-    action: notify.mobile_app_telefonen
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'closed' }}"
+      sequence:
+      - data:
+          message: "🦆 Duck door is now CLOSED - Position: {{ states('sensor.duck_door_position') }}%"
+        action: notify.mobile_app_telefonen
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'open' }}"
+      sequence:
+      - data:
+          message: "🦆 Duck door is now OPEN - Position: {{ states('sensor.duck_door_position') }}%"
+        action: notify.mobile_app_telefonen
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'error' }}"
+      sequence:
+      - data:
+          message: "⚠️ DUCK DOOR ERROR - Check immediately!"
+        action: notify.mobile_app_telefonen
   mode: single
 - id: '1748798806300'
   alias: "\U0001F414 Notis när hönshuset är stängt (offline-trigger)"
@@ -514,6 +560,56 @@
   - action: input_number.set_value
     target:
       entity_id: input_number.badtunnan_notification_count
+    data:
+      value: 0
+  mode: single
+
+- id: duck_door_availability_notification
+  alias: "🦆 Duck Door - Online/Offline Notification"
+  description: 'Sends notification when Duck Door controller goes online or offline, limited to 2 notifications per day'
+  triggers:
+  - entity_id: sensor.duck_door_status
+    to: 'unavailable'
+    trigger: state
+  - entity_id: sensor.duck_door_status
+    from: 'unavailable'
+    trigger: state
+  conditions:
+  - condition: numeric_state
+    entity_id: input_number.duck_door_notification_count
+    below: 2
+  actions:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'unavailable' }}"
+      sequence:
+      - data:
+          message: "🔴 Duck Door Controller OFFLINE - Last seen: {{ trigger.from_state.last_changed.strftime('%H:%M') }}"
+        action: notify.mobile_app_telefonen
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.from_state.state == 'unavailable' }}"
+      sequence:
+      - data:
+          message: "🟢 Duck Door Controller ONLINE - Status: {{ trigger.to_state.state }}"
+        action: notify.mobile_app_telefonen
+  - action: input_number.increment
+    target:
+      entity_id: input_number.duck_door_notification_count
+  mode: single
+
+- id: reset_duck_door_notification_counter
+  alias: "🔄 Reset Duck Door Notification Counter"
+  description: 'Resets the daily notification counter at midnight'
+  triggers:
+  - at: '00:00:00'
+    trigger: time
+  conditions: []
+  actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.duck_door_notification_count
     data:
       value: 0
   mode: single

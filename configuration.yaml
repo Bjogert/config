@@ -110,6 +110,14 @@ input_number:
     step: 1
     mode: box
 
+  duck_door_notification_count:
+    name: "Duck Door Daily Notification Count"
+    initial: 0
+    min: 0
+    max: 10
+    step: 1
+    mode: box
+
 # ================================
 # TEXT-TO-SPEECH CONFIGURATION
 # ================================
@@ -245,7 +253,7 @@ mqtt:
       payload_off: "1"
       state_on: "false"   # When camera reports false, HA shows ON
       state_off: "true"   # When camera reports true, HA shows OFF
-      value_template: "{{ value_json.vflip }}"
+      value_template: "{{ value | string }}"
       icon: "mdi:flip-vertical"
       
     - name: "Camera Horizontal Mirror"
@@ -255,7 +263,7 @@ mqtt:
       payload_off: "0"
       state_on: "true"
       state_off: "false"
-      value_template: "{{ value_json.hmirror }}"
+      value_template: "{{ value | string }}"
       icon: "mdi:flip-horizontal"
       
     - name: "Screen Flip (OLED)"
@@ -265,21 +273,27 @@ mqtt:
       payload_off: "0"
       state_on: "true"
       state_off: "false"
-      value_template: "{{ value_json.screen_flip }}"
+      value_template: "{{ value | string }}"
       icon: "mdi:phone-rotate-portrait"
       
   button:
     - unique_id: duck_door_open
       name: "Open Duck Door"
       command_topic: "duck/door/command"
-      payload_press: "clockwise"
+      payload_press: "open"
       qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
 
     - unique_id: duck_door_close
       name: "Close Duck Door"
       command_topic: "duck/door/command"
-      payload_press: "counterclockwise"
+      payload_press: "close"
       qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
       
     - unique_id: beer_elevator_set_home
       name: "Nollställ Hemläge"
@@ -291,21 +305,33 @@ mqtt:
       name: "Duck Door Emergency Stop"
       command_topic: "duck/door/command"
       payload_press: "stop"
-      qos: 1      
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
+      
+    - unique_id: duck_door_home
+      name: "Duck Door Home Position"
+      command_topic: "duck/door/position/set"
+      payload_press: "home"
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"      
 
   number:
     - unique_id: duck_door_rotation_count
-      name: "Duck Door Rotation Count"
-      state_topic:   "duck/door/rotation_count"
+      name: "Duck Door Duration Setting"
+      state_topic: "duck/door/rotation_count"
       command_topic: "duck/door/rotation_count/set"
       min: 1
-      max: 50
+      max: 75
       step: 1
       mode: box
-      unit_of_measurement: "revs"
+      unit_of_measurement: "seconds"
       qos: 1
       availability_topic: "duck/door/availability"
-      payload_available:   "online"
+      payload_available: "online"
       payload_not_available: "offline"      
 
     # ================================
@@ -473,7 +499,18 @@ mqtt:
       qos: 1
       availability_topic: "duck/door/availability"
       payload_available: "online"
-      payload_not_available: "offline"   
+      payload_not_available: "offline"
+      device_class: "enum"
+      options: ["stopped", "opening", "closing", "closed", "open", "error"]
+    - unique_id: duck_door_position
+      name: "Duck Door Position"
+      state_topic: "duck/door/position"
+      qos: 1
+      availability_topic: "duck/door/availability"
+      payload_available: "online"
+      payload_not_available: "offline"
+      device_class: "enum"
+      options: ["open", "closed", "moving", "unknown"]
   
     - name: "Chickendoor Status"
       state_topic: "chickendoor/status"      
@@ -542,22 +579,7 @@ template:
           {{ 'Connected' if is_state('binary_sensor.duck_door_online','on')
              else 'Disconnected' }}
 
-  # Duck-Door-position template binary-sensor
   - binary_sensor:
-      - name: Duck Door Position
-        unique_id: duck_door_position
-        device_class: door
-        state: >
-          {% if is_state('sensor.duck_door_status', 'limit_reached') %}
-            off
-          {% elif is_state('button.duck_door_close', 'on') %}
-            on
-          {% elif is_state('button.duck_door_open', 'on') %}
-            on
-          {% else %}
-            {{ is_state('sensor.duck_door_status', 'rotating_cw') }}
-          {% endif %}
-          
       - name: "UnderBaren Limit Switch"
         unique_id: underbaren_limit_switch
         device_class: door
