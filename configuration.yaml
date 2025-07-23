@@ -236,11 +236,17 @@ mqtt:
       state_off: "ready"
       optimistic: false
       retain: false
+
+    - name: "Chicken Door Emergency Stop"
+      command_topic: "chickendoor/emergency"
+      payload_on: "ON"
+      payload_off: "OFF"
+      icon: mdi:stop-circle
       
     - name: "Underbaren"
       command_topic: "beer_elevator/command"
-      payload_on: "Up"
-      payload_off: "Down"
+      payload_on: "up"
+      payload_off: "down"
       optimistic: false
       retain: false
       
@@ -336,6 +342,33 @@ mqtt:
       payload_not_available: "offline"      
 
   number:
+    # ================================
+    # CHICKEN DOOR CONTROLS
+    # ================================
+    
+    - name: "Chicken Door Steps"
+      command_topic: "chickendoor/steps"
+      state_topic: "chickendoor/steps"
+      min: 500
+      max: 25000
+      step: 100
+      mode: box
+      icon: "mdi:counter"
+      unit_of_measurement: "steps"
+      retain: true
+
+    - name: "Chicken Door Speed"
+      unique_id: chicken_door_speed
+      state_topic: "chickendoor/speed"
+      command_topic: "chickendoor/speed"
+      min: 10
+      max: 200
+      step: 5
+      mode: box
+      unit_of_measurement: "steps/sec"
+      icon: "mdi:speedometer"
+      retain: true
+
     - unique_id: duck_door_rotation_count
       name: "Duck Door Duration Setting"
       state_topic: "duck/door/rotation_count"
@@ -498,20 +531,21 @@ mqtt:
       state_topic: "beer_elevator/position"
       value_template: "{{ value }}"
       icon: mdi:elevator
-      availability_topic: "beer_elevator/availability"
-      payload_available: "online"
-      payload_not_available: "offline"
 
     - name: "Beer Elevator State"
       state_topic: "beer_elevator/state"
       icon: mdi:elevator
-      availability_topic: "beer_elevator/availability"
-      payload_available: "online"
-      payload_not_available: "offline"
 
     - name: "Beer Elevator Acceleration (ACK)"
       state_topic: "beer_elevator/config/acceleration"
       unit_of_measurement: "steps/s²"
+      
+    - name: "UnderBaren Status"
+      unique_id: underbaren_status
+      state_topic: "beer_elevator/state"
+      icon: mdi:elevator
+      device_class: "enum"
+      options: ["down", "up", "moving_extra_up", "moving_extra_down", "down_warning", "down_extra", "home_set", "down_emergency_reset", "up_emergency_reset"]
       
     # ================================
     # CHICKEN DOOR SENSORS
@@ -521,7 +555,7 @@ mqtt:
       state_topic: "chickendoor/status"
       icon: "mdi:door-sliding"
       device_class: "enum"
-      options: ["ready", "closing", "offline"]
+      options: ["ready", "closing", "emergency_stop", "steps_updated", "offline"]
       
     - name: "Chicken Door Uptime"
       state_topic: "chickendoor/heartbeat"
@@ -586,6 +620,13 @@ mqtt:
       off_delay: 90
       device_class: connectivity
       value_template: "{{ 'ON' if value else 'OFF' }}"
+
+    - name: "Chicken Door Connection"
+      unique_id: chicken_door_connection
+      state_topic: "chickendoor/heartbeat"
+      off_delay: 90     # Consider offline after 90 seconds without heartbeat
+      device_class: connectivity
+      value_template: "{{ 'ON' if value is defined and value != '' else 'OFF' }}" 
       
     # ================================
     # DUCK DOOR MONITORING

@@ -22,7 +22,7 @@ Dark Pastel:
       
       # Background Colors (HEX values)
       bg-primary: '#151310'                     # Main background
-      bg-secondary: '#362d1dff'                   # Card background
+      bg-secondary: '#413522ff'                   # Card background
       bg-tertiary: '#2b2718ff'                  # Card background with alpha
       
       # Icon Colors (HEX values)
