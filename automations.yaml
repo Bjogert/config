@@ -29,29 +29,37 @@
       brightness_pct: 100
   mode: single
 - id: close_chickendoor_sundown
-  alias: "\U0001F414 Chickendoor Close at Sundown"
-  description: Automatically runs the chickendoor program at sundown.
+  alias: "🐔 Auto Close Chicken Door at Sundown"
+  description: 'Automatically closes chicken door 15 minutes after sunset using new MQTT system'
   triggers:
   - event: sunset
     offset: +00:15:00
     trigger: sun
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: sensor.chicken_door_status
+    state: 'ready'
   actions:
-  - target:
-      entity_id: switch.chickendoor_control
-    action: switch.turn_on
-    data: {}
+  - data:
+      topic: chickendoor/control
+      payload: close
+    action: mqtt.publish
+  - delay: '00:00:02'
+  - data:
+      message: "🐔 Chicken door closing sequence started at {{ now().strftime('%H:%M') }}"
+    action: notify.mobile_app_telefonen
   mode: single
 - id: '1729416452692'
-  alias: Försök att stänga hönshuset
+  alias: "🐔 Chicken Door Manual Trigger Notification"
+  description: 'Sends notification when chicken door button is pressed manually'
   triggers:
-  - entity_id: automation.chickendoor_close_at_sundown
-    to: 'running'
+  - entity_id: button.close_chicken_door
     trigger: state
+  conditions: []
   actions:
-  - delay: "00:02:00"  # Wait 2 minutes for door to close
+  - delay: "00:00:02"
   - data:
-      message: "🐔 Hönshuset borde vara stängt nu!"
+      message: "🐔 Chicken door manually triggered - Closing sequence started"
       title: "Chicken Door"
     action: notify.mobile_app_telefonen
   mode: single
@@ -480,14 +488,14 @@
         value_template: "{{ trigger.to_state.state == 'closed' }}"
       sequence:
       - data:
-          message: "🦆 Duck door is now CLOSED - Position: {{ states('sensor.duck_door_position') }}%"
+          message: "🦆 Duck door is now CLOSED - Position: {{ states('sensor.duck_door_position') }}"
         action: notify.mobile_app_telefonen
     - conditions:
       - condition: template
         value_template: "{{ trigger.to_state.state == 'open' }}"
       sequence:
       - data:
-          message: "🦆 Duck door is now OPEN - Position: {{ states('sensor.duck_door_position') }}%"
+          message: "🦆 Duck door is now OPEN - Position: {{ states('sensor.duck_door_position') }}"
         action: notify.mobile_app_telefonen
     - conditions:
       - condition: template
@@ -498,19 +506,58 @@
         action: notify.mobile_app_telefonen
   mode: single
 - id: '1748798806300'
-  alias: "\U0001F414 Notis när hönshuset är stängt (offline-trigger)"
-  description: 'Skickar en notis när ESP32 publicerar "offline" på chickendoor/status,
-    vilket indikerar att dörren just stängts.
-
-    '
+  alias: "🐔 Chicken Door Status Notifications"
+  description: 'Sends notifications for chicken door status changes and completion'
   triggers:
-  - topic: chickendoor/status
-    payload: offline
-    trigger: mqtt
+  - entity_id: sensor.chicken_door_status
+    to: 'closing'
+    trigger: state
+  - entity_id: sensor.chicken_door_status
+    to: 'ready'
+    from: 'closing'
+    trigger: state
+  - entity_id: sensor.chicken_door_status
+    to: 'offline'
+    trigger: state
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'closing' }}"
+      sequence:
+      - data:
+          message: "🐔 Chicken door is now CLOSING - Motor sequence active"
+        action: notify.mobile_app_telefonen
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'ready' and trigger.from_state.state == 'closing' }}"
+      sequence:
+      - data:
+          message: "🐔 Chicken door sequence COMPLETE - Hens are safe! 🛡️"
+        action: notify.mobile_app_telefonen
+    - conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'offline' }}"
+      sequence:
+      - data:
+          message: "⚠️ Chicken door controller OFFLINE - Check immediately!"
+        action: notify.mobile_app_telefonen
+  mode: single
+
+- id: chicken_door_offline_alert
+  alias: "🐔 Chicken Door Offline Alert"
+  description: 'Alert when chicken door controller is offline for extended period'
+  triggers:
+  - entity_id: binary_sensor.chicken_door_online
+    to: 'off'
+    for: '00:02:00'
+    trigger: state
   conditions: []
   actions:
   - data:
-      message: "\U0001F414 Hönsen är i säkerhet!"
+      message: "🔴 Chicken Door Controller OFFLINE for 2+ minutes - Last heartbeat: {{ states('sensor.chicken_door_uptime_hours') }}h ago"
+      title: "Chicken Door Alert"
     action: notify.mobile_app_telefonen
   mode: single
 

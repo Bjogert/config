@@ -232,8 +232,10 @@ mqtt:
       command_topic: "chickendoor/control"
       payload_on: "close"
       payload_off: "close"
-      state_on: "door closed"
-      state_off: "door opened"
+      state_on: "closing"
+      state_off: "ready"
+      optimistic: false
+      retain: false
       
     - name: "Underbaren"
       command_topic: "beer_elevator/command"
@@ -277,6 +279,20 @@ mqtt:
       icon: "mdi:phone-rotate-portrait"
       
   button:
+    # ================================
+    # CHICKEN DOOR CONTROL
+    # ================================
+    
+    - unique_id: chicken_door_close
+      name: "Close Chicken Door"
+      command_topic: "chickendoor/control"
+      payload_press: "close"
+      icon: "mdi:door"
+      
+    # ================================
+    # DUCK DOOR CONTROL
+    # ================================
+
     - unique_id: duck_door_open
       name: "Open Duck Door"
       command_topic: "duck/door/command"
@@ -391,6 +407,10 @@ mqtt:
       value_template: "{{ value_json.frequency_mhz | default(20) }}"      
 
   sensor:
+    # ================================
+    # ESP32 TEMPERATURE SENSORS
+    # ================================
+    
     - name: "ESP32 Temperature 1"
       state_topic: "home/esp32_1/temperature"
       unit_of_measurement: "°C"
@@ -493,6 +513,34 @@ mqtt:
       state_topic: "beer_elevator/config/acceleration"
       unit_of_measurement: "steps/s²"
       
+    # ================================
+    # CHICKEN DOOR SENSORS
+    # ================================
+    
+    - name: "Chicken Door Status"
+      state_topic: "chickendoor/status"
+      icon: "mdi:door-sliding"
+      device_class: "enum"
+      options: ["ready", "closing", "offline"]
+      
+    - name: "Chicken Door Uptime"
+      state_topic: "chickendoor/heartbeat"
+      unit_of_measurement: "s"
+      device_class: "duration"
+      value_template: "{{ value | int }}"
+      expire_after: 120
+      
+    - name: "Chicken Door Uptime Hours"
+      state_topic: "chickendoor/heartbeat"  
+      unit_of_measurement: "h"
+      device_class: "duration"
+      value_template: "{{ (value | int / 3600) | round(1) }}"
+      expire_after: 120
+      
+    # ================================
+    # DUCK DOOR SENSORS
+    # ================================
+
     - unique_id: duck_door_status
       name: "Duck Door Status"
       state_topic: "duck/door/status"
@@ -512,9 +560,6 @@ mqtt:
       device_class: "enum"
       options: ["open", "closed", "moving", "unknown"]
   
-    - name: "Chickendoor Status"
-      state_topic: "chickendoor/status"      
-      
     # ================================
     # CAMERA SENSORS
     # ================================
@@ -530,6 +575,22 @@ mqtt:
       value_template: "{{ value_json.status | default('unknown') }}"      
   
   binary_sensor:
+    # ================================
+    # CHICKEN DOOR MONITORING
+    # ================================
+    
+    - name: "Chicken Door Online"
+      unique_id: chicken_door_online
+      state_topic: "chickendoor/heartbeat"
+      payload_on: ".*"
+      off_delay: 90
+      device_class: connectivity
+      value_template: "{{ 'ON' if value else 'OFF' }}"
+      
+    # ================================
+    # DUCK DOOR MONITORING
+    # ================================
+
     - name: Duck Door Online
       unique_id: duck_door_online
       state_topic: "duck/door/availability"
