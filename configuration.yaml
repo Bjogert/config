@@ -349,9 +349,9 @@ mqtt:
     - name: "Chicken Door Steps"
       command_topic: "chickendoor/steps"
       state_topic: "chickendoor/steps"
-      min: 500
+      min: 100
       max: 25000
-      step: 100
+      step: 10
       mode: box
       icon: "mdi:counter"
       unit_of_measurement: "steps"
@@ -361,13 +361,29 @@ mqtt:
       unique_id: chicken_door_speed
       state_topic: "chickendoor/speed"
       command_topic: "chickendoor/speed"
-      min: 10
-      max: 200
-      step: 5
+      min: 100
+      max: 5000
+      step: 10
       mode: box
       unit_of_measurement: "steps/sec"
       icon: "mdi:speedometer"
       retain: true
+
+    - name: "Chicken Door Backward Steps"
+      unique_id: "chicken_door_backward_steps"
+      state_topic: "chickendoor/backsteps"
+      command_topic: "chickendoor/backsteps"
+      min: 100
+      max: 25000
+      step: 10
+      mode: box
+      unit_of_measurement: "steps"
+      icon: "mdi:backup-restore"
+      retain: true
+
+    # ================================
+    # DUCK DOOR CONTROLS
+    # ================================
 
     - unique_id: duck_door_rotation_count
       name: "Duck Door Duration Setting"

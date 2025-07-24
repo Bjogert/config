@@ -1,5 +1,5 @@
 - id: '1728191012280'
-  alias: Sol Av
+  alias: Utebelysning av vid soluppgång
   description: ''
   triggers:
   - event: sunrise
@@ -11,9 +11,14 @@
       - light.utelampan
     action: light.turn_off
     data: {}
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.r10_0_2
   mode: single
 - id: '1728191068268'
-  alias: Sol På
+  alias: Utebelysning på vid solnedgång
   description: ''
   triggers:
   - event: sunset
@@ -27,6 +32,11 @@
     data:
       kelvin: 2853
       brightness_pct: 100
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.r10_0_2
   mode: single
 - id: close_chickendoor_sundown
   alias: "🐔 Auto Close Chicken Door at Sundown"
