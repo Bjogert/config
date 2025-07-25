@@ -17,7 +17,7 @@ views:
           action: call-service
           service: camera.snapshot
           service_data:
-            entity_id: camera.lilygo_camera
+            entity_id: camera.kamera_2
             filename: /config/www/camera_snapshot.jpg
       - type: entities
         title: 📸 Camera Quality Settings

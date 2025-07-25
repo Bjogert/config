@@ -39,8 +39,8 @@
       entity_id: switch.r10_0_2
   mode: single
 - id: close_chickendoor_sundown
-  alias: "🐔 Auto Close Chicken Door at Sundown"
-  description: 'Automatically closes chicken door 15 minutes after sunset using new MQTT system'
+  alias: "🐔 Stäng Hönsluckan vid Solnedgång"
+  description: 'Stänger hönsluckan automatiskt 15 minuter efter solnedgång med nytt MQTT-system'
   triggers:
   - event: sunset
     offset: +00:15:00
@@ -56,21 +56,7 @@
     action: mqtt.publish
   - delay: '00:00:02'
   - data:
-      message: "🐔 Chicken door closing sequence started at {{ now().strftime('%H:%M') }}"
-    action: notify.mobile_app_telefonen
-  mode: single
-- id: '1729416452692'
-  alias: "🐔 Chicken Door Manual Trigger Notification"
-  description: 'Sends notification when chicken door button is pressed manually'
-  triggers:
-  - entity_id: button.close_chicken_door
-    trigger: state
-  conditions: []
-  actions:
-  - delay: "00:00:02"
-  - data:
-      message: "🐔 Chicken door manually triggered - Closing sequence started"
-      title: "Chicken Door"
+      message: "🐔 Hönsluckan stängs nu kl {{ now().strftime('%H:%M') }}"
     action: notify.mobile_app_telefonen
   mode: single
 - id: '1730535760731'
@@ -435,13 +421,12 @@
       payload: '{{ states(''input_number.beer_elevator_extra_steps_down'') | int }}'
     action: mqtt.publish
   mode: single
-- id: '1748016333344'
-  alias: Open Duck Door at Sunrise
-  description: 'Opens duck door 30 minutes before sunrise using new MQTT command structure'
+- id: 'duck_door_open_morning'
+  alias: "🦆 Öppna Ankluckan kl 08:00"
+  description: 'Öppnar ankluckan kl 08:00 varje morgon'
   triggers:
-  - event: sunrise
-    offset: -00:30:00
-    trigger: sun
+  - at: '08:00:00'
+    trigger: time
   conditions: 
   - condition: state
     entity_id: sensor.duck_door_status
@@ -453,33 +438,35 @@
     action: mqtt.publish
   - delay: '00:00:02'
   - data:
-      message: "🦆 Duck door opened at sunrise - {{ now().strftime('%H:%M') }}"
+      message: "🦆 Ankluckan öppnades kl 08:00 - {{ now().strftime('%H:%M') }}"
     action: notify.mobile_app_telefonen
   mode: single
-- id: '1748016366837'
-  alias: Close Duck Door at Sunset
-  description: 'Closes duck door 1 hour after sunset using new MQTT command structure'
+- id: 'duck_door_auto_close_after_chicken'
+  alias: "🦆 Stäng Ankluckan Efter Hönsluckan"
+  description: 'Stänger ankluckan 16 minuter efter att hönsluckan stängts framgångsrikt'
   triggers:
-  - event: sunset
-    offset: +01:00:00
-    trigger: sun
+  - entity_id: sensor.chicken_door_status
+    to: 'ready'
+    from: 'closing'
+    trigger: state
   conditions:
   - condition: state
     entity_id: sensor.duck_door_status
     state: 'open'
   actions:
+  - delay: '00:16:00'
   - data:
       topic: duck/door/command
       payload: close
     action: mqtt.publish
   - delay: '00:00:02'
   - data:
-      message: "🦆 Duck door closed at sunset - {{ now().strftime('%H:%M') }}"
+      message: "🦆 Ankluckan stängs 5 minuter efter hönsluckan - {{ now().strftime('%H:%M') }}"
     action: notify.mobile_app_telefonen
   mode: single
 - id: '1748016432843'
-  alias: "🦆 Duck Door Status Notifications"
-  description: 'Sends notifications for duck door status changes using new sensor structure'
+  alias: "🦆 Ankluckan - Statusnotifieringar"
+  description: 'Skickar notifieringar för ankluckans statusändringar och fel'
   triggers:
   - entity_id: sensor.duck_door_status
     to: 'closed'
@@ -498,77 +485,51 @@
         value_template: "{{ trigger.to_state.state == 'closed' }}"
       sequence:
       - data:
-          message: "🦆 Duck door is now CLOSED - Position: {{ states('sensor.duck_door_position') }}"
+          message: "🦆 Ankluckan STÄNGD framgångsrikt - Position: {{ states('sensor.duck_door_position') }}"
         action: notify.mobile_app_telefonen
     - conditions:
       - condition: template
         value_template: "{{ trigger.to_state.state == 'open' }}"
       sequence:
       - data:
-          message: "🦆 Duck door is now OPEN - Position: {{ states('sensor.duck_door_position') }}"
+          message: "🦆 Ankluckan ÖPPNAD framgångsrikt - Position: {{ states('sensor.duck_door_position') }}"
         action: notify.mobile_app_telefonen
     - conditions:
       - condition: template
         value_template: "{{ trigger.to_state.state == 'error' }}"
       sequence:
       - data:
-          message: "⚠️ DUCK DOOR ERROR - Check immediately!"
+          message: "⚠️ ANKLUCKA FEL - Kontrollera omedelbart! Status: fel"
         action: notify.mobile_app_telefonen
   mode: single
 - id: '1748798806300'
-  alias: "🐔 Chicken Door Status Notifications"
-  description: 'Sends notifications for chicken door status changes and completion'
+  alias: "🐔 Hönsluckan - Endast Viktiga Notifieringar"
+  description: 'Skickar notifieringar endast när luckan stängs framgångsrikt eller misslyckas med att stängas'
   triggers:
-  - entity_id: sensor.chicken_door_status
-    to: 'closing'
-    trigger: state
   - entity_id: sensor.chicken_door_status
     to: 'ready'
     from: 'closing'
     trigger: state
   - entity_id: sensor.chicken_door_status
-    to: 'offline'
+    to: 'emergency_stop'
     trigger: state
   conditions: []
   actions:
   - choose:
     - conditions:
       - condition: template
-        value_template: "{{ trigger.to_state.state == 'closing' }}"
-      sequence:
-      - data:
-          message: "🐔 Chicken door is now CLOSING - Motor sequence active"
-        action: notify.mobile_app_telefonen
-    - conditions:
-      - condition: template
         value_template: "{{ trigger.to_state.state == 'ready' and trigger.from_state.state == 'closing' }}"
       sequence:
       - data:
-          message: "🐔 Chicken door sequence COMPLETE - Hens are safe! 🛡️"
+          message: "🐔 Hönsluckan STÄNGD framgångsrikt - Hönorna är säkra! 🛡️"
         action: notify.mobile_app_telefonen
     - conditions:
       - condition: template
-        value_template: "{{ trigger.to_state.state == 'offline' }}"
+        value_template: "{{ trigger.to_state.state == 'emergency_stop' }}"
       sequence:
       - data:
-          message: "⚠️ Chicken door controller OFFLINE - Check immediately!"
+          message: "⚠️ HÖNSLUCKAN MISSLYCKADES ATT STÄNGAS - Nödstopp aktiverat!"
         action: notify.mobile_app_telefonen
-  mode: single
-
-- id: chicken_door_offline_alert
-  alias: "🐔 Chicken Door Offline Alert"
-  description: 'Alert when chicken door controller is offline for extended period'
-  triggers:
-  - entity_id: binary_sensor.chicken_door_online
-    to: 'off'
-    for: '00:02:00'
-    trigger: state
-  conditions: []
-  actions:
-  - data:
-      message: "🔴 Chicken Door Controller OFFLINE for 2+ minutes - Last heartbeat: {{ states('sensor.chicken_door_uptime_hours') }}h ago"
-      title: "Chicken Door Alert"
-    action: notify.mobile_app_telefonen
   mode: single
 
 - id: badtunnan_availability_notification
@@ -619,41 +580,6 @@
       entity_id: input_number.badtunnan_notification_count
     data:
       value: 0
-  mode: single
-
-- id: duck_door_availability_notification
-  alias: "🦆 Duck Door - Online/Offline Notification"
-  description: 'Sends notification when Duck Door controller goes online or offline, limited to 2 notifications per day'
-  triggers:
-  - entity_id: sensor.duck_door_status
-    to: 'unavailable'
-    trigger: state
-  - entity_id: sensor.duck_door_status
-    from: 'unavailable'
-    trigger: state
-  conditions:
-  - condition: numeric_state
-    entity_id: input_number.duck_door_notification_count
-    below: 2
-  actions:
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: "{{ trigger.to_state.state == 'unavailable' }}"
-      sequence:
-      - data:
-          message: "🔴 Duck Door Controller OFFLINE - Last seen: {{ trigger.from_state.last_changed.strftime('%H:%M') }}"
-        action: notify.mobile_app_telefonen
-    - conditions:
-      - condition: template
-        value_template: "{{ trigger.from_state.state == 'unavailable' }}"
-      sequence:
-      - data:
-          message: "🟢 Duck Door Controller ONLINE - Status: {{ trigger.to_state.state }}"
-        action: notify.mobile_app_telefonen
-  - action: input_number.increment
-    target:
-      entity_id: input_number.duck_door_notification_count
   mode: single
 
 - id: reset_duck_door_notification_counter
