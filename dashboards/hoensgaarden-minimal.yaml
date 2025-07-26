@@ -1,0 +1,152 @@
+# ================================
+# 🐔 HÖNSGÅRDEN DASHBOARD - MINIMAL VERSION
+# ================================
+# Uses only existing entities - no chicken RFID entities
+
+title: 🐔 Hönsgården
+views:
+  # ================================
+  # MAIN OVERVIEW VIEW
+  # ================================
+  - title: Översikt
+    path: overview
+    icon: mdi:view-dashboard
+    cards:
+      # Title Card
+      - type: markdown
+        content: |
+          # 🐔 Hönsgården
+          ## Chicken Monitoring Dashboard
+          
+          Welcome to your chicken monitoring system! 
+          
+          Currently showing existing entities only. When your ESP32 RFID system comes online, 
+          all the chicken monitoring sensors will appear here.
+        
+      # Available Entities - Basic counters
+      - type: entities
+        title: "📊 Chicken Counters (Ready to Use)"
+        entities:
+          - entity: input_number.daily_chicken_visits
+            name: "Daily Chicken Visits"
+            icon: mdi:counter
+          - entity: input_number.weekly_chicken_visits
+            name: "Weekly Chicken Visits"
+            icon: mdi:calendar-week
+          - entity: input_text.daily_chicken_champion
+            name: "Daily Champion"
+            icon: mdi:trophy
+          - entity: input_text.weekly_chicken_champion
+            name: "Weekly Champion"
+            icon: mdi:crown
+          - entity: input_text.current_nest_occupant
+            name: "Current Nest Occupant"
+            icon: mdi:bird
+
+      # System Status
+      - type: markdown
+        content: |
+          ## 🔄 System Status
+          
+          **Dashboard Status:** ✅ Active  
+          **Configuration:** ✅ Loaded  
+          **RFID System:** ⏳ Waiting for ESP32  
+          **Data Storage:** ✅ Configured (1 year retention)  
+          
+          ### Next Steps:
+          1. ✅ Dashboard created
+          2. ✅ Long-term data storage configured  
+          3. ⏳ Start ESP32 RFID system
+          4. ⏳ Install Mushroom Cards from HACS
+          5. ⏳ Add chicken photos to /config/www/chickens/
+
+  # ================================
+  # SETUP GUIDE VIEW
+  # ================================
+  - title: Setup Guide
+    path: setup
+    icon: mdi:cog
+    cards:
+      - type: markdown
+        content: |
+          # 🔧 Setup Guide
+          
+          ## What's Ready:
+          - ✅ **Dashboard framework** - This dashboard is working!
+          - ✅ **Long-term data storage** - Configured for 1 year retention
+          - ✅ **Input entities** - Counters and text fields are ready
+          - ✅ **Automations** - Chicken monitoring automations are loaded
+          
+          ## What's Missing (Normal):
+          - ⏳ **ESP32 RFID system** - Not publishing MQTT data yet
+          - ⏳ **MQTT sensors** - Will appear when ESP32 comes online
+          - ⏳ **Custom cards** - Install from HACS for better UI
+          
+          ## Install Required HACS Cards:
+          
+          1. Go to **HACS > Frontend**
+          2. Search and install: **"Mushroom Cards"**
+          3. Search and install: **"ApexCharts Card"**
+          4. Restart Home Assistant
+          5. Switch to full dashboard version
+          
+          ## Add Chicken Photos:
+          
+          1. Add photos to: `/config/www/chickens/`
+          2. Use these exact filenames:
+             - `lady_kluck.jpg`
+             - `ronny.jpg`
+             - `ada.jpg`
+             - `ms_foster.jpg`
+             - `kiwi.jpg`
+             - `skrik.jpg`
+             - `panik.jpg`
+             - `gastrid.jpg`
+             - `chick1_2025.jpg` through `chick6_2025.jpg`
+          
+          ## ESP32 RFID System:
+          
+          When your ESP32 starts publishing to these MQTT topics, 
+          the sensors will automatically appear:
+          
+          - `chickens/nest1/status`
+          - `chickens/nest1/occupant`  
+          - `chickens/visits`
+          - `chickens/leaderboard`
+          - `chickens/system/status`
+
+  # ================================
+  # TEST VIEW  
+  # ================================
+  - title: Test Entities
+    path: test
+    icon: mdi:test-tube
+    cards:
+      - type: markdown
+        content: |
+          # 🧪 Entity Testing
+          
+          Test the entities that are currently available:
+          
+      - type: entities
+        title: "Input Number Entities"
+        entities:
+          - input_number.daily_chicken_visits
+          - input_number.weekly_chicken_visits
+          - input_number.duck_door_notification_count
+          - input_number.badtunnan_notification_count
+          
+      - type: entities  
+        title: "Input Text Entities"
+        entities:
+          - input_text.daily_chicken_champion
+          - input_text.weekly_chicken_champion
+          - input_text.current_nest_occupant
+          - input_text.last_active_scene
+          
+      - type: entities
+        title: "Other Existing Entities"
+        entities:
+          - input_boolean.duck_door_is_open
+          - sensor.duck_door_status
+          - sensor.chicken_door_status

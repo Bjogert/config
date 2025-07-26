@@ -57,7 +57,7 @@ lovelace:
       title: 🐔 Hönsgården
       icon: mdi:bird
       show_in_sidebar: true
-      filename: dashboards/hoensgaarden.yaml
+      filename: dashboards/hoensgaarden-minimal.yaml
     camera-controls:
       mode: yaml  
       title: 📹 Camera Controls
