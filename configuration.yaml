@@ -20,15 +20,17 @@ recorder:
   purge_keep_days: 365  # Keep data for 1 year
   include:
     entities:
-      # Chicken RFID monitoring entities - keep for full year
-      - sensor.nest_1_status
-      - sensor.nest_1_occupant
-      - sensor.current_visit_duration
-      - sensor.chicken_visits_log
-      - sensor.chicken_leaderboard
-      - sensor.chicken_system_status
-      - binary_sensor.nest_1_occupied
-      - binary_sensor.chicken_system_online
+      # Chicken RFID monitoring entities - commented out until ESP32 system is ready
+      # - sensor.nest_1_status
+      # - sensor.nest_1_occupant
+      # - sensor.current_visit_duration
+      # - sensor.chicken_visits_log
+      # - sensor.chicken_leaderboard
+      # - sensor.chicken_system_status
+      # - binary_sensor.nest_1_occupied
+      # - binary_sensor.chicken_system_online
+      
+      # Chicken input helpers - will be created manually via UI
       - input_number.daily_chicken_visits
       - input_number.weekly_chicken_visits
       - input_text.daily_chicken_champion
@@ -40,7 +42,7 @@ recorder:
       - camera
       - weather
     entities:
-      - sensor.uptime
+      # - sensor.uptime  # Commented out - entity doesn't exist
 
 # Load frontend themes from the themes folder
 frontend:
@@ -103,15 +105,7 @@ input_text:
   last_active_scene:
     name: "Last Active Scene"
     initial: ""
-  daily_chicken_champion:
-    name: "Daily Chicken Champion"
-    initial: ""
-  weekly_chicken_champion:
-    name: "Weekly Chicken Champion"
-    initial: ""
-  current_nest_occupant:
-    name: "Current Nest Occupant"
-    initial: "empty"
+  # Chicken monitoring inputs are created manually via UI to avoid conflicts
 
 # Number input entities for device control
 input_number:
@@ -175,25 +169,7 @@ input_number:
     step: 1
     mode: box
 
-  # ================================
-  # CHICKEN MONITORING COUNTERS
-  # ================================
-  
-  daily_chicken_visits:
-    name: "Daily Chicken Visits Total"
-    initial: 0
-    min: 0
-    max: 200
-    step: 1
-    mode: box
-    
-  weekly_chicken_visits:
-    name: "Weekly Chicken Visits Total"
-    initial: 0
-    min: 0
-    max: 1400
-    step: 1
-    mode: box
+  # Chicken monitoring counters are created manually via UI to avoid conflicts
 
 # ================================
 # TEXT-TO-SPEECH CONFIGURATION
