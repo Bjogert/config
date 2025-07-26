@@ -54,7 +54,7 @@ frontend:
 lovelace:
   mode: storage
   dashboards:
-    hoensgaarden:
+    hoensgaarden-dashboard:
       mode: yaml
       title: 🐔 Hönsgården
       icon: mdi:bird

@@ -14,10 +14,10 @@ primary_info: name
 secondary_info: state
 tap_action:
   action: navigate
-  navigation_path: "/hoensgaarden/overview"
+  navigation_path: "/hoensgaarden-dashboard/overview"
 hold_action:
   action: navigate
-  navigation_path: "/hoensgaarden/chicken-profiles"
+  navigation_path: "/hoensgaarden-dashboard/chicken-profiles"
 card_mod:
   style: |
     ha-card {
