@@ -698,7 +698,7 @@ mqtt:
     - name: "Current Visit Duration"
       unique_id: current_visit_duration
       state_topic: "chickens/nest1/duration"
-      unit_of_measurement: "seconds"
+      unit_of_measurement: "s"
       device_class: "duration"
       icon: "mdi:timer"
       
