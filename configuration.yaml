@@ -678,7 +678,7 @@ mqtt:
       value_template: "{{ value_json.status | default('unknown') }}"      
 
     # ================================
-    # CHICKEN RFID MONITORING SYSTEM
+    # CHICKEN RFID MONITORING SYSTEM - ENHANCED
     # ================================
     
     - name: "Nest 1 Status"
@@ -708,6 +708,13 @@ mqtt:
       value_template: "{{ value_json.chicken_name | default('No visits') }}"
       json_attributes_topic: "chickens/visits"
       icon: "mdi:clipboard-list"
+      
+    - name: "Chicken Changes"
+      unique_id: chicken_changes
+      state_topic: "chickens/changes"
+      value_template: "{{ value_json.event | default('No changes') }}"
+      json_attributes_topic: "chickens/changes"
+      icon: "mdi:swap-horizontal"
       
     - name: "Chicken Leaderboard"
       unique_id: chicken_leaderboard

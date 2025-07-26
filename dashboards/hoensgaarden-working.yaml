@@ -1,0 +1,116 @@
+# ================================
+# 🐔 HÖNSGÅRDEN - WORKING VERSION
+# ================================
+# Uses only entities that actually exist in your Home Assistant
+# This dashboard will work immediately without errors
+
+title: 🐔 Hönsgården
+path: overview
+theme: default
+background: var(--lovelace-background)
+
+views:
+  - title: "📊 Overview"
+    path: overview
+    type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: entity
+            entity: input_text.current_nest_occupant
+            name: "🥚 Current Nest Occupant"
+            icon: mdi:bird
+            
+          - type: entity  
+            entity: input_number.daily_chicken_visits
+            name: "📊 Daily Visits"
+            icon: mdi:counter
+            
+          - type: entity
+            entity: input_number.weekly_chicken_visits  
+            name: "📈 Weekly Visits"
+            icon: mdi:chart-line
+            
+          - type: entity
+            entity: input_text.daily_chicken_champion
+            name: "🏆 Daily Champion"
+            icon: mdi:trophy
+            
+          - type: entity
+            entity: input_text.weekly_chicken_champion
+            name: "👑 Weekly Champion" 
+            icon: mdi:crown
+
+      - title: "🐔 Chicken Management"
+        type: grid
+        cards:
+          - type: entities
+            title: "📝 Input Helpers Status"
+            entities:
+              - input_number.daily_chicken_visits
+              - input_number.weekly_chicken_visits
+              - input_text.daily_chicken_champion
+              - input_text.weekly_chicken_champion
+              - input_text.current_nest_occupant
+
+          - type: markdown
+            content: |
+              ## 🚀 System Status
+              
+              **✅ Working:**
+              - Input helpers created
+              - Dashboard loaded
+              - Configuration valid
+              
+              **⏳ Pending:**
+              - ESP32 RFID system setup
+              - MQTT sensor data
+              - Chicken automations activation
+              
+              **🎯 Next Steps:**
+              1. Install HACS custom cards
+              2. Set up ESP32 RFID hardware
+              3. Uncomment automations
+              4. Add chicken photos
+
+  - title: "⚙️ Setup Guide"
+    path: setup
+    type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: |
+              # 🐔 Hönsgården Setup Guide
+              
+              ## ✅ Completed Steps
+              - [x] Created 5 input helpers
+              - [x] Dashboard configuration loaded
+              - [x] Fixed entity validation errors
+              
+              ## 🔧 Required HACS Cards
+              Install these custom cards for full functionality:
+              
+              1. **Mushroom Cards**
+                 - Go to HACS > Frontend
+                 - Search "Mushroom"
+                 - Install "Mushroom Cards"
+              
+              2. **ApexCharts Card**
+                 - Search "ApexCharts"
+                 - Install for statistics charts
+              
+              ## 📱 ESP32 RFID Setup
+              When ready to add chicken tracking:
+              
+              1. Flash ESP32 with RFID code
+              2. Configure MQTT topics: `chickens/*`
+              3. Uncomment automations in `automations.yaml`
+              4. Test with MQTT Explorer
+              
+              ## 📸 Add Chicken Photos
+              Place photos in `/config/www/chickens/`:
+              - `lady_kluck.jpg`
+              - `ronny.jpg`
+              - `ada.jpg`
+              - etc.

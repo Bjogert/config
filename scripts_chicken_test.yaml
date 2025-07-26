@@ -1,0 +1,67 @@
+# ================================
+# 🐔 MANUAL CHICKEN TESTING SCRIPT
+# ================================
+# Use this to manually test chicken updates until ESP32 RFID is ready
+
+# Test automation - manually trigger to update nest occupant
+test_update_chicken:
+  alias: "🐔 Test Update Nest Occupant"
+  sequence:
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.current_nest_occupant
+      data:
+        value: "Lady Kluck"
+    - action: input_number.increment
+      target:
+        entity_id: input_number.daily_chicken_visits
+    - action: notify.mobile_app_telefonen
+      data:
+        message: "🐔 Test: Lady Kluck is now in the nest! Daily visits: {{ states('input_number.daily_chicken_visits') }}"
+
+# Test ESP32 simulation - exactly like your ESP32 output
+test_ronny_enters:
+  alias: "🐔 Simulate: Ronny Enters Nest"
+  sequence:
+    - action: mqtt.publish
+      data:
+        topic: "chickens/nest1/occupant"
+        payload: "Ronny"
+    - action: mqtt.publish
+      data:
+        topic: "chickens/nest1/status"
+        payload: '{"status":"occupied","timestamp":{{ now().timestamp() }},"occupant":"Ronny"}'
+
+test_chick_change:
+  alias: "🐔 Simulate: Chicken Change to Chick_2_2025"
+  sequence:
+    - action: mqtt.publish
+      data:
+        topic: "chickens/nest1/occupant"
+        payload: "Chick_2_2025"
+    - action: mqtt.publish
+      data:
+        topic: "chickens/visits"
+        payload: '{"chicken_name":"Ronny","chicken_number":2,"duration":4,"timestamp":{{ now().timestamp() }},"date":"2025-07-26"}'
+    - action: mqtt.publish
+      data:
+        topic: "chickens/nest1/status"
+        payload: '{"status":"occupied","timestamp":{{ now().timestamp() }},"occupant":"Chick_2_2025"}'
+
+# Cycle through different chickens for testing
+cycle_test_chickens:
+  alias: "🔄 Cycle Test Chickens"
+  sequence:
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.current_nest_occupant
+      data:
+        value: >
+          {% set chickens = ['Lady Kluck', 'Ronny', 'Ada', 'Ms.Foster', 'Kiwi'] %}
+          {% set current = states('input_text.current_nest_occupant') %}
+          {% set index = chickens.index(current) if current in chickens else -1 %}
+          {% set next_index = (index + 1) % chickens|length %}
+          {{ chickens[next_index] }}
+    - action: input_number.increment
+      target:
+        entity_id: input_number.daily_chicken_visits
