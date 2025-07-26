@@ -1,0 +1,535 @@
+# ================================
+# 🐔 HÖNSGÅRDEN DASHBOARD
+# ================================
+# Swedish Chicken Monitoring Dashboard
+# Features: Individual chicken profiles, leaderboards, productivity tracking
+# Created: 2025-01-26
+
+title: 🐔 Hönsgården
+views:
+  # ================================
+  # MAIN OVERVIEW VIEW
+  # ================================
+  - title: Översikt
+    path: overview
+    icon: mdi:view-dashboard
+    cards:
+      # Current Status Card
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: 🐔 Hönsgården Live Status
+            subtitle: Realtidsövervakning av våra hönor
+          
+          # Current Nest Occupant - Large Display
+          - type: conditional
+            conditions:
+              - entity: sensor.nest_1_occupant
+                state_not: "unknown"
+              - entity: sensor.nest_1_occupant  
+                state_not: "empty"
+            card:
+              type: custom:mushroom-entity-card
+              entity: sensor.nest_1_occupant
+              name: 🥚 Aktuell höna i boet
+              icon: mdi:bird
+              icon_color: orange
+              layout: horizontal
+              primary_info: name
+              secondary_info: state
+              tap_action:
+                action: navigate
+                navigation_path: "/hoensgaarden/chicken-profile"
+          
+          # Empty Nest Display
+          - type: conditional
+            conditions:
+              - entity: sensor.nest_1_occupant
+                state: "empty"
+            card:
+              type: custom:mushroom-entity-card
+              entity: sensor.nest_1_occupant
+              name: 🏠 Boet är tomt
+              icon: mdi:home-variant-outline
+              icon_color: grey
+              layout: horizontal
+              
+      # System Status Grid
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          # Nest Status
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.nest_1_occupied
+            name: Bostatus
+            icon: mdi:home-variant
+            icon_color: "{{ 'green' if is_state('binary_sensor.nest_1_occupied', 'on') else 'grey' }}"
+            
+          # System Online Status  
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.chicken_system_online
+            name: RFID System
+            icon: mdi:radar
+            icon_color: "{{ 'green' if is_state('binary_sensor.chicken_system_online', 'on') else 'red' }}"
+            
+          # Daily Visits Counter
+          - type: custom:mushroom-entity-card
+            entity: input_number.daily_chicken_visits
+            name: Besök idag
+            icon: mdi:counter
+            icon_color: blue
+            
+          # Current Visit Duration
+          - type: custom:mushroom-entity-card
+            entity: sensor.current_visit_duration
+            name: Aktuell session
+            icon: mdi:timer
+            icon_color: orange
+
+      # Daily Leaderboard
+      - type: custom:mushroom-title-card
+        title: 🏆 Dagens Rankning
+        subtitle: Vilken höna är mest produktiv idag?
+        
+      - type: custom:apexcharts-card
+        header:
+          show: true
+          title: "📊 Daglig Produktivitet"
+          show_states: true
+        now:
+          show: true
+          label: Nu
+        series:
+          - entity: input_number.daily_chicken_visits
+            name: "Totala besök"
+            color: orange
+            show:
+              legend_value: true
+        graph_span: 1d
+        
+      # Quick Stats Grid
+      - type: grid
+        columns: 3
+        square: true
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: input_text.daily_chicken_champion
+            name: Dagens Champion
+            icon: mdi:trophy
+            icon_color: gold
+            
+          - type: custom:mushroom-entity-card  
+            entity: input_number.weekly_chicken_visits
+            name: Veckans besök
+            icon: mdi:calendar-week
+            icon_color: green
+            
+          - type: custom:mushroom-entity-card
+            entity: input_text.weekly_chicken_champion
+            name: Veckans Champion
+            icon: mdi:crown
+            icon_color: purple
+
+  # ================================
+  # INDIVIDUAL CHICKEN PROFILES
+  # ================================
+  - title: Hönsprofilr
+    path: chicken-profiles
+    icon: mdi:bird
+    cards:
+      - type: custom:mushroom-title-card
+        title: 🐔 Våra Hönor
+        subtitle: Klicka på en höna för att se hennes profil
+        
+      # Chicken Profile Grid - Each chicken gets their own card
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          # Lady Kluck
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Lady Kluck
+            icon: mdi:bird
+            icon_color: pink
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/lady-kluck"
+              
+          # Ronny  
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Ronny
+            icon: mdi:bird
+            icon_color: red
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/ronny"
+              
+          # Ada
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Ada
+            icon: mdi:bird
+            icon_color: blue
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/ada"
+              
+          # Ms.Foster
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Ms.Foster
+            icon: mdi:bird
+            icon_color: green
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/ms-foster"
+              
+          # Kiwi
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Kiwi
+            icon: mdi:bird
+            icon_color: lime
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/kiwi"
+              
+          # Skrik
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Skrik
+            icon: mdi:bird
+            icon_color: orange
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/skrik"
+              
+          # Panik
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Panik
+            icon: mdi:bird
+            icon_color: yellow
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/panik"
+              
+          # Gästrid
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Gästrid
+            icon: mdi:bird
+            icon_color: purple
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/gastrid"
+              
+          # Chick_1_2025
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Chick 1 2025
+            icon: mdi:bird
+            icon_color: amber
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/chick1-2025"
+              
+          # Chick_2_2025
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Chick 2 2025
+            icon: mdi:bird
+            icon_color: cyan
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/chick2-2025"
+              
+          # Chick_3_2025
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Chick 3 2025
+            icon: mdi:bird
+            icon_color: teal
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/chick3-2025"
+              
+          # Chick_4_2025
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Chick 4 2025
+            icon: mdi:bird
+            icon_color: indigo
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/chick4-2025"
+              
+          # Chick_5_2025
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Chick 5 2025
+            icon: mdi:bird
+            icon_color: deep-purple
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/chick5-2025"
+              
+          # Chick_6_2025
+          - type: custom:mushroom-person-card
+            entity: input_text.current_nest_occupant
+            name: Chick 6 2025
+            icon: mdi:bird
+            icon_color: pink
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: "/hoensgaarden/chick6-2025"
+
+  # ================================
+  # STATISTICS & ANALYTICS VIEW
+  # ================================
+  - title: Statistik
+    path: statistics
+    icon: mdi:chart-line
+    cards:
+      - type: custom:mushroom-title-card
+        title: 📊 Hönsgårdens Statistik
+        subtitle: Långsiktig analys och trender
+        
+      # Long-term Trends
+      - type: custom:apexcharts-card
+        header:
+          show: true
+          title: "📈 Månadsvis Produktivitetstrend"
+        series:
+          - entity: input_number.daily_chicken_visits
+            name: "Dagliga besök"
+            color: orange
+            show:
+              legend_value: true
+        graph_span: 30d
+        
+      # Weekly Comparison  
+      - type: custom:apexcharts-card
+        header:
+          show: true
+          title: "📅 Veckojämförelse"
+        series:
+          - entity: input_number.weekly_chicken_visits
+            name: "Veckobesök"
+            color: green
+            show:
+              legend_value: true
+        graph_span: 4w
+        
+      # Champion History (This would need custom template sensors)
+      - type: entities
+        title: 🏆 Championhistorik
+        entities:
+          - entity: input_text.daily_chicken_champion
+            name: Dagens Champion
+            icon: mdi:trophy
+          - entity: input_text.weekly_chicken_champion  
+            name: Veckans Champion
+            icon: mdi:crown
+            
+      # System Performance
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.chicken_system_status
+            name: Systemstatus
+            icon: mdi:radar
+            
+          - type: custom:mushroom-entity-card
+            entity: sensor.chicken_visits_log
+            name: Senaste händelse
+            icon: mdi:clipboard-list
+
+  # ================================
+  # INDIVIDUAL CHICKEN PROFILE VIEWS
+  # ================================
+  
+  # Lady Kluck Profile
+  - title: Lady Kluck
+    path: lady-kluck
+    icon: mdi:bird
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: 🐔 Lady Kluck
+            subtitle: "RFID Tag: LADY_KLUCK | Färg: Rosa"
+            
+          # Profile Picture Placeholder
+          - type: picture
+            image: /local/chickens/lady_kluck.jpg
+            alternative_text: Lady Kluck
+            aspect_ratio: "16:9"
+            tap_action:
+              action: none
+              
+          # Individual Stats (These would need template sensors per chicken)
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.current_visit_duration
+                name: Senaste session
+                icon: mdi:timer
+                icon_color: pink
+                
+              - type: custom:mushroom-entity-card
+                entity: input_number.daily_chicken_visits
+                name: Besök idag
+                icon: mdi:counter
+                icon_color: pink
+                
+          # Personal Achievement Section
+          - type: custom:mushroom-title-card
+            title: 🏆 Lady Klucks Prestationer
+            subtitle: Personlig statistik och rekord
+            
+          - type: entities
+            title: 📊 Personlig Statistik
+            entities:
+              - entity: sensor.nest_1_occupant
+                name: Senast i boet
+                icon: mdi:clock
+              - entity: sensor.current_visit_duration
+                name: Genomsnittlig session
+                icon: mdi:timer-outline
+                
+  # Ronny Profile  
+  - title: Ronny
+    path: ronny
+    icon: mdi:bird
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: 🐔 Ronny
+            subtitle: "RFID Tag: RONNY | Färg: Röd"
+            
+          # Profile Picture Placeholder
+          - type: picture
+            image: /local/chickens/ronny.jpg
+            alternative_text: Ronny
+            aspect_ratio: "16:9"
+            tap_action:
+              action: none
+              
+          # Individual Stats
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.current_visit_duration
+                name: Senaste session
+                icon: mdi:timer
+                icon_color: red
+                
+              - type: custom:mushroom-entity-card
+                entity: input_number.daily_chicken_visits
+                name: Besök idag
+                icon: mdi:counter
+                icon_color: red
+
+  # Ada Profile
+  - title: Ada
+    path: ada
+    icon: mdi:bird
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: 🐔 Ada
+            subtitle: "RFID Tag: ADA | Färg: Blå"
+            
+          # Profile Picture Placeholder
+          - type: picture
+            image: /local/chickens/ada.jpg
+            alternative_text: Ada
+            aspect_ratio: "16:9"
+            tap_action:
+              action: none
+
+  # Add similar profile views for all other chickens...
+  # (Ms.Foster, Kiwi, Skrik, Panik, Gästrid, Chick_1-6_2025)
+  
+  # ================================
+  # SYSTEM MONITORING VIEW
+  # ================================
+  - title: System
+    path: system-monitoring
+    icon: mdi:cog
+    cards:
+      - type: custom:mushroom-title-card
+        title: ⚙️ Systemövervakning
+        subtitle: RFID-system och teknikstatus
+        
+      # System Status Overview
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.chicken_system_online
+            name: RFID System
+            icon: mdi:radar
+            icon_color: "{{ 'green' if is_state('binary_sensor.chicken_system_online', 'on') else 'red' }}"
+            
+          - type: custom:mushroom-entity-card
+            entity: sensor.chicken_system_status
+            name: Systemstatus
+            icon: mdi:check-circle
+            
+      # MQTT Data Flow
+      - type: entities
+        title: 📡 MQTT Dataflöde
+        entities:
+          - entity: sensor.nest_1_status
+            name: Boststatus
+            icon: mdi:home-variant
+          - entity: sensor.nest_1_occupant
+            name: Aktuell occupant
+            icon: mdi:bird
+          - entity: sensor.chicken_visits_log
+            name: Besökslogg
+            icon: mdi:clipboard-list
+          - entity: sensor.chicken_leaderboard
+            name: Leaderboard data
+            icon: mdi:trophy
+            
+      # Raw Data Display
+      - type: custom:mushroom-title-card
+        title: 🔍 Rådata
+        subtitle: Teknisk information för felsökning
+        
+      - type: entities
+        title: Debug Information
+        entities:
+          - entity: sensor.nest_1_status
+            name: Nest Status JSON
+          - entity: sensor.chicken_leaderboard
+            name: Leaderboard JSON

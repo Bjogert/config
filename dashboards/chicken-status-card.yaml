@@ -1,0 +1,26 @@
+# ================================
+# 🐔 CHICKEN STATUS CARD FOR MAIN DASHBOARD
+# ================================
+# Small card showing current nest occupant
+# Copy and paste this into your main dashboard
+
+type: custom:mushroom-entity-card
+entity: sensor.nest_1_occupant
+name: 🥚 I boet nu
+icon: mdi:bird
+icon_color: orange
+layout: horizontal
+primary_info: name
+secondary_info: state
+tap_action:
+  action: navigate
+  navigation_path: "/hoensgaarden/overview"
+hold_action:
+  action: navigate
+  navigation_path: "/hoensgaarden/chicken-profiles"
+card_mod:
+  style: |
+    ha-card {
+      --card-primary-color: var(--primary-text-color);
+      --card-secondary-color: var(--secondary-text-color);
+    }

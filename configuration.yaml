@@ -11,11 +11,59 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+# ================================
+# LONG-TERM DATA STORAGE
+# ================================
+
+# Extended data retention for chicken monitoring
+recorder:
+  purge_keep_days: 365  # Keep data for 1 year
+  include:
+    entities:
+      # Chicken RFID monitoring entities - keep for full year
+      - sensor.nest_1_status
+      - sensor.nest_1_occupant
+      - sensor.current_visit_duration
+      - sensor.chicken_visits_log
+      - sensor.chicken_leaderboard
+      - sensor.chicken_system_status
+      - binary_sensor.nest_1_occupied
+      - binary_sensor.chicken_system_online
+      - input_number.daily_chicken_visits
+      - input_number.weekly_chicken_visits
+      - input_text.daily_chicken_champion
+      - input_text.weekly_chicken_champion
+      - input_text.current_nest_occupant
+  exclude:
+    # Keep database smaller by excluding less important entities
+    domains:
+      - camera
+      - weather
+    entities:
+      - sensor.uptime
+
 # Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
     - /hacsfiles/material-you-utilities/material-you-utilities.min.js
+
+# Lovelace dashboards configuration
+lovelace:
+  mode: storage
+  dashboards:
+    hoensgaarden:
+      mode: yaml
+      title: 🐔 Hönsgården
+      icon: mdi:bird
+      show_in_sidebar: true
+      filename: dashboards/hoensgaarden.yaml
+    camera-controls:
+      mode: yaml  
+      title: 📹 Camera Controls
+      icon: mdi:camera
+      show_in_sidebar: true
+      filename: ui-lovelace.yaml
 
 # Custom panels for Material You Utilities
 panel_custom:
@@ -55,6 +103,15 @@ input_text:
   last_active_scene:
     name: "Last Active Scene"
     initial: ""
+  daily_chicken_champion:
+    name: "Daily Chicken Champion"
+    initial: ""
+  weekly_chicken_champion:
+    name: "Weekly Chicken Champion"
+    initial: ""
+  current_nest_occupant:
+    name: "Current Nest Occupant"
+    initial: "empty"
 
 # Number input entities for device control
 input_number:
@@ -115,6 +172,26 @@ input_number:
     initial: 0
     min: 0
     max: 10
+    step: 1
+    mode: box
+
+  # ================================
+  # CHICKEN MONITORING COUNTERS
+  # ================================
+  
+  daily_chicken_visits:
+    name: "Daily Chicken Visits Total"
+    initial: 0
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    
+  weekly_chicken_visits:
+    name: "Weekly Chicken Visits Total"
+    initial: 0
+    min: 0
+    max: 1400
     step: 1
     mode: box
 
@@ -623,6 +700,52 @@ mqtt:
       state_topic: "camera/status"
       icon: "mdi:camera"
       value_template: "{{ value_json.status | default('unknown') }}"      
+
+    # ================================
+    # CHICKEN RFID MONITORING SYSTEM
+    # ================================
+    
+    - name: "Nest 1 Status"
+      unique_id: nest_1_status
+      state_topic: "chickens/nest1/status"
+      value_template: "{{ value_json.status | default('unknown') }}"
+      json_attributes_topic: "chickens/nest1/status"
+      icon: "mdi:home-variant"
+      device_class: "enum"
+      options: ["empty", "occupied", "multiple"]
+      
+    - name: "Nest 1 Occupant"
+      unique_id: nest_1_occupant
+      state_topic: "chickens/nest1/occupant"
+      icon: "mdi:bird"
+      
+    - name: "Current Visit Duration"
+      unique_id: current_visit_duration
+      state_topic: "chickens/nest1/duration"
+      unit_of_measurement: "seconds"
+      device_class: "duration"
+      icon: "mdi:timer"
+      
+    - name: "Chicken Visits Log"
+      unique_id: chicken_visits_log
+      state_topic: "chickens/visits"
+      value_template: "{{ value_json.chicken_name | default('No visits') }}"
+      json_attributes_topic: "chickens/visits"
+      icon: "mdi:clipboard-list"
+      
+    - name: "Chicken Leaderboard"
+      unique_id: chicken_leaderboard
+      state_topic: "chickens/leaderboard"
+      value_template: "{{ value_json.updated | default(0) }}"
+      json_attributes_topic: "chickens/leaderboard"
+      icon: "mdi:trophy"
+      
+    - name: "Chicken System Status"
+      unique_id: chicken_system_status
+      state_topic: "chickens/system/status"
+      icon: "mdi:radar"
+      device_class: "enum"
+      options: ["online", "offline", "error"]
   
   binary_sensor:
     # ================================
@@ -682,6 +805,23 @@ mqtt:
       payload_off: "up"
       device_class: door
 
+    # ================================
+    # CHICKEN MONITORING SYSTEM
+    # ================================
+    
+    - name: "Nest 1 Occupied"
+      unique_id: nest_1_occupied
+      state_topic: "chickens/nest1/status"
+      value_template: "{{ 'ON' if value_json.status == 'occupied' or value_json.status == 'multiple' else 'OFF' }}"
+      device_class: occupancy
+      
+    - name: "Chicken System Online"
+      unique_id: chicken_system_online
+      state_topic: "chickens/system/status"
+      payload_on: "online"
+      payload_off: "offline"
+      device_class: connectivity
+
 
 
 # ================================
@@ -696,6 +836,90 @@ template:
         state: >
           {{ 'Connected' if is_state('binary_sensor.duck_door_online','on')
              else 'Disconnected' }}
+
+      # ================================
+      # INDIVIDUAL CHICKEN STATISTICS
+      # ================================
+      
+      # Lady Kluck Individual Stats
+      - name: "Lady Kluck Daily Visits"
+        unique_id: lady_kluck_daily_visits
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {{ visits | selectattr('chicken_name', 'eq', 'Lady Kluck') | 
+             selectattr('timestamp', 'gt', now().strftime('%Y-%m-%d 00:00:00')) | list | length }}
+        icon: mdi:counter
+        
+      - name: "Lady Kluck Total Visits"
+        unique_id: lady_kluck_total_visits
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {{ visits | selectattr('chicken_name', 'eq', 'Lady Kluck') | list | length }}
+        icon: mdi:sigma
+        
+      - name: "Lady Kluck Last Visit"
+        unique_id: lady_kluck_last_visit
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {% set lady_visits = visits | selectattr('chicken_name', 'eq', 'Lady Kluck') | list %}
+          {% if lady_visits %}
+            {{ lady_visits[-1].timestamp }}
+          {% else %}
+            Aldrig
+          {% endif %}
+        icon: mdi:clock-outline
+        
+      # Ronny Individual Stats
+      - name: "Ronny Daily Visits"
+        unique_id: ronny_daily_visits
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {{ visits | selectattr('chicken_name', 'eq', 'Ronny') | 
+             selectattr('timestamp', 'gt', now().strftime('%Y-%m-%d 00:00:00')) | list | length }}
+        icon: mdi:counter
+        
+      - name: "Ronny Total Visits"
+        unique_id: ronny_total_visits
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {{ visits | selectattr('chicken_name', 'eq', 'Ronny') | list | length }}
+        icon: mdi:sigma
+        
+      # Ada Individual Stats
+      - name: "Ada Daily Visits"
+        unique_id: ada_daily_visits
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {{ visits | selectattr('chicken_name', 'eq', 'Ada') | 
+             selectattr('timestamp', 'gt', now().strftime('%Y-%m-%d 00:00:00')) | list | length }}
+        icon: mdi:counter
+        
+      - name: "Ada Total Visits"
+        unique_id: ada_total_visits
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {{ visits | selectattr('chicken_name', 'eq', 'Ada') | list | length }}
+        icon: mdi:sigma
+        
+      # Weekly Champion Calculator
+      - name: "Weekly Top Performer"
+        unique_id: weekly_top_performer
+        state: >
+          {% set visits = state_attr('sensor.chicken_visits_log', 'visits') or [] %}
+          {% set week_start = (now() - timedelta(days=now().weekday())).strftime('%Y-%m-%d 00:00:00') %}
+          {% set weekly_visits = visits | selectattr('timestamp', 'gt', week_start) | list %}
+          {% set chickens = ['Lady Kluck', 'Ronny', 'Ada', 'Ms.Foster', 'Kiwi', 'Skrik', 'Panik', 'Gästrid', 'Chick_1_2025', 'Chick_2_2025', 'Chick_3_2025', 'Chick_4_2025', 'Chick_5_2025', 'Chick_6_2025'] %}
+          {% set counts = namespace(data={}) %}
+          {% for chicken in chickens %}
+            {% set count = weekly_visits | selectattr('chicken_name', 'eq', chicken) | list | length %}
+            {% set counts.data = dict(counts.data, **{chicken: count}) %}
+          {% endfor %}
+          {% if counts.data %}
+            {{ counts.data | dictsort(false, 'value') | last | first }}
+          {% else %}
+            Ingen data
+          {% endif %}
+        icon: mdi:crown
 
   - binary_sensor:
       - name: "UnderBaren Limit Switch"

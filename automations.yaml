@@ -438,7 +438,7 @@
     action: mqtt.publish
   - delay: '00:00:02'
   - data:
-      message: "🦆 Ankluckan öppnades kl 08:00 - {{ now().strftime('%H:%M') }}"
+      message: "🦆 Ankluckan öppnas nu kl {{ now().strftime('%H:%M') }}"
     action: notify.mobile_app_telefonen
   mode: single
 - id: 'duck_door_auto_close_after_chicken'
@@ -495,12 +495,20 @@
           message: "🦆 Ankluckan ÖPPNAD framgångsrikt - Position: {{ states('sensor.duck_door_position') }}"
         action: notify.mobile_app_telefonen
     - conditions:
-      - condition: template
-        value_template: "{{ trigger.to_state.state == 'error' }}"
+      - condition: and
+        conditions:
+        - condition: template
+          value_template: "{{ trigger.to_state.state == 'error' }}"
+        - condition: numeric_state
+          entity_id: input_number.duck_door_notification_count
+          below: 2
       sequence:
       - data:
           message: "⚠️ ANKLUCKA FEL - Kontrollera omedelbart! Status: fel"
         action: notify.mobile_app_telefonen
+      - action: input_number.increment
+        target:
+          entity_id: input_number.duck_door_notification_count
   mode: single
 - id: '1748798806300'
   alias: "🐔 Hönsluckan - Endast Viktiga Notifieringar"
@@ -534,11 +542,12 @@
 
 - id: badtunnan_availability_notification
   alias: "🌡️ Badtunnan Temp - Online/Offline Notification"
-  description: 'Sends notification when Badtunnan Temp sensor goes online or offline, limited to 2 notifications per day'
+  description: 'Sends notification when Badtunnan Temp sensor goes online or offline, limited to 2 notifications per day. Offline notifications delayed by 15 minutes.'
   triggers:
   - entity_id: sensor.esp32_temperature_7
     trigger: state
     to: "unavailable"
+    for: "00:15:00"
   - entity_id: sensor.esp32_temperature_7
     trigger: state
     from: "unavailable"
@@ -554,7 +563,7 @@
         state: "unavailable"
       sequence:
       - data:
-          message: "🌡️ Badtunnan Temp sensor är OFFLINE! 📴"
+          message: "🌡️ Badtunnan Temp sensor är OFFLINE i 15+ minuter! 📴"
           title: "Sensor Offline"
         action: notify.mobile_app_telefonen
     default:
@@ -595,5 +604,127 @@
       entity_id: input_number.duck_door_notification_count
     data:
       value: 0
+  mode: single
+
+# ================================
+# CHICKEN MONITORING AUTOMATIONS
+# ================================
+
+- id: track_chicken_visits
+  alias: "🐔 Track Chicken Nest Visits"
+  description: 'Updates counters and logs when chickens visit the nest'
+  triggers:
+  - entity_id: sensor.chicken_visits_log
+    trigger: state
+  conditions:
+  - condition: template
+    value_template: "{{ trigger.to_state.state != 'No visits' and trigger.to_state.state != 'unknown' }}"
+  actions:
+  - action: input_number.increment
+    target:
+      entity_id: input_number.daily_chicken_visits
+  - action: input_number.increment
+    target:
+      entity_id: input_number.weekly_chicken_visits
+  - action: input_text.set_value
+    target:
+      entity_id: input_text.current_nest_occupant
+    data:
+      value: "{{ trigger.to_state.state }}"
+  - data:
+      message: "🐔 {{ trigger.to_state.state }} just visited the nest! Total visits today: {{ states('input_number.daily_chicken_visits') | int }}"
+    action: notify.mobile_app_telefonen
+  mode: single
+
+- id: update_nest_occupant
+  alias: "🐔 Update Current Nest Occupant"
+  description: 'Tracks who is currently in the nest'
+  triggers:
+  - entity_id: sensor.nest_1_occupant
+    trigger: state
+  conditions: []
+  actions:
+  - action: input_text.set_value
+    target:
+      entity_id: input_text.current_nest_occupant
+    data:
+      value: "{{ trigger.to_state.state if trigger.to_state.state != 'unknown' else 'empty' }}"
+  mode: single
+
+- id: announce_daily_chicken_champion
+  alias: "🏆 Announce Daily Chicken Champion"
+  description: 'Announces the most productive chicken at 6 PM'
+  triggers:
+  - at: '18:00:00'
+    trigger: time
+  conditions:
+  - condition: numeric_state
+    entity_id: input_number.daily_chicken_visits
+    above: 0
+  actions:
+  - action: notify.mobile_app_telefonen
+    data:
+      message: "🏆 Dagens Hönschampion: {{ state_attr('sensor.chicken_leaderboard', 'leaderboard')[0].name if state_attr('sensor.chicken_leaderboard', 'leaderboard') else 'Ingen aktivitet idag' }}! Totalt {{ states('input_number.daily_chicken_visits') }} besök idag."
+      title: "🐔 Daglig Hönsrapport"
+  mode: single
+
+- id: reset_daily_chicken_counters
+  alias: "🔄 Reset Daily Chicken Counters"
+  description: 'Resets daily chicken visit counters at midnight'
+  triggers:
+  - at: '00:00:00'
+    trigger: time
+  conditions: []
+  actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.daily_chicken_visits
+    data:
+      value: 0
+  - action: input_text.set_value
+    target:
+      entity_id: input_text.daily_chicken_champion
+    data:
+      value: ""
+  mode: single
+
+- id: reset_weekly_chicken_counters
+  alias: "🔄 Reset Weekly Chicken Counters"
+  description: 'Resets weekly chicken visit counters on Monday at midnight'
+  triggers:
+  - at: '00:00:00'
+    trigger: time
+  conditions:
+  - condition: time
+    weekday:
+    - mon
+  actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.weekly_chicken_visits
+    data:
+      value: 0
+  - action: input_text.set_value
+    target:
+      entity_id: input_text.weekly_chicken_champion
+    data:
+      value: ""
+  mode: single
+
+- id: chicken_productivity_alert
+  alias: "📊 Chicken Productivity Alert"
+  description: 'Alert if chicken activity is unusually low'
+  triggers:
+  - at: '12:00:00'
+    trigger: time
+  conditions:
+  - condition: numeric_state
+    entity_id: input_number.daily_chicken_visits
+    below: 5
+  actions:
+  - action: notify.mobile_app_telefonen
+    data:
+      message: "📊 Låg hönsaktivitet idag: endast {{ states('input_number.daily_chicken_visits') }} besök så här långt. Kolla så allt är okej med hönorna!"
+      title: "🐔 Produktivitetsvarning"
   mode: single
 
