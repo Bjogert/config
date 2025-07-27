@@ -1,10 +1,32 @@
-# Minimal Home Assistant Configuration
-# Emergency recovery configuration
+# Home Assistant Configuration
+# Author: Robert & Julia
+# Last Updated: 2025-01-18
+# Description: Main configuration for smart home automation system
+#              including duck door control, beer elevator, and lighting automation
 
+# ================================
+# SYSTEM CONFIGURATION
+# ================================
+
+# Loads default set of integrations. Do not remove.
 default_config:
 
-# Basic automations
-automation: !include automations.yaml
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/material-you-utilities/material-you-utilities.min.js
+
+# Custom panels for Material You Utilities
+panel_custom:
+  - name: material-you-panel
+    url_path: material-you-configuration
+    sidebar_title: Material You Utilities
+    sidebar_icon: mdi:material-design
+    module_url: /hacsfiles/material-you-utilities/material-you-utilities.min.js
+
+# YAML file includes for better organization
+automation: !include automations.yaml  # Automations are handled in automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
