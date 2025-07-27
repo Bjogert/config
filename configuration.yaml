@@ -1,12 +1,7 @@
-# Minimal Home Assistant Configuration
-# Emergency recovery configuration
+# Absolute minimal Home Assistant Configuration
+# Emergency recovery - ONLY the essentials
 
 default_config:
-
-# Basic automations
-automation: !include automations.yaml
-script: !include scripts.yaml
-scene: !include scenes.yaml
 
 # ================================
 # SHELL COMMANDS
